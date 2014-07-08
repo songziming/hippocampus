@@ -1,2 +1,4 @@
-hippocampus
+Hippocampus
 ===========
+
+A web application.
