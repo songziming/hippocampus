@@ -1,8 +1,132 @@
 body{
 	margin: 0px;
+	background-color: #ddd !important;
 }
+
+
+
+
 #header{
+	position: relative;
+	width:101%;
+	background-color: #339933;
+	height:50px;
+	color:#eee;
+	line-height: 50px;
+	font-size: 14px;
+	z-index: 100 !important;
+}
+#weather{
+	position: relative;
+	margin-left: 140px;
+}
+#user-info{
+	position: relative;
+	margin-right: 100px;
+}
+#user-name{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+#user-name ul{
+	position: relative;
+	padding-left: 10px;
+	list-style-type:none; 
+	cursor: pointer;
+	text-align: center;
+	z-index: 100 !important;
+}
+
+
+#up:hover{
+	color:#6699CC;
+}
+#user-name ul:first-child{
+	border-radius: 5px 0px 0px 5px;
+}
+#user-name li{
+	position: relative;
+	line-height: 2em !important;
+	width: auto;
+	visibility: hidden;
+	background: #338822;
+	z-index: 100 !important;
+}
+#user-name li:hover{
+	color:#99CC99;
+}
+.hr{
+	margin: auto;
+	text-align: center;
+	height: 0px;
+	width: 80%;
+	border-bottom: 1px solid #003300;
+}
+#user-name li span{
+	width:auto;
+	border-bottom: 1px solid #ccc;
+}
+.li-first{
+	margin-top: -10px;
+}
+#user-icon{
+	text-align: right;
+	padding-right: 0px;
+}
+.user-img{
+	width:32px;
+	border:2px solid #fff;
+}
+
+
+
+
+/*header end*/
+#container{
+	position: relative;
+	margin-top:3px !important;
+	height:550px;
+	width: 1000px;
+	padding-top: 10px;
+	margin: auto;
+	
+	z-index: 10 !important;
+}
+#main-icons{
+	position: relative;
+	z-index: 10 !important;
+	margin-top: -50px !important;
+	text-align: center;
+	box-shadow: 1px 1px 2px 2px #999;
+	background: #fff;
+}
+.icon-option{
+	position: relative;
+	z-index: 10 !important;
+	background: #9999CC;
+	margin: 10px;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	text-align: center;
+	color:#eee;
+	font-size: 16px;
+	cursor: pointer;
+	box-shadow: 0px 0px 3px 3px #999 inset;
+}
+.icon-option embed{
+	width: 90px;
+	height: 90px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+/*container end*/
+#footer{
+	position: absolute;
+	bottom: 0px;
 	width:100%;
-	background-color: #02DF82;
-	height:100px;
+	height: 20px;
+	color:#fff;
+	text-align: center;
+	font-size: 12px;
 }
