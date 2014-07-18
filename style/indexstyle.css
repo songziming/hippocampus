@@ -1,6 +1,6 @@
 body{
 	margin: 0px;
-	background-color: #ddd !important;
+	background-color: #eee !important;
 }
 
 
@@ -11,14 +11,15 @@ body{
 	width:101%;
 	background-color: #339933;
 	height:50px;
-	color:#eee;
+	color:#fff;
 	line-height: 50px;
 	font-size: 14px;
 	z-index: 100 !important;
 }
 #weather{
 	position: relative;
-	margin-left: 140px;
+	margin-left: -30px;
+	text-align: left !important;
 }
 #user-info{
 	position: relative;
@@ -85,48 +86,70 @@ body{
 #container{
 	position: relative;
 	margin-top:3px !important;
-	height:550px;
-	width: 1000px;
+	height:auto;
+	width: 900px;
 	padding-top: 10px;
 	margin: auto;
 	
 	z-index: 10 !important;
 }
 #main-icons{
+	left: 10px;
+	position: fixed !important;
+	width:90px;
+	top:50px;
+	padding-left: 15px;
 	position: relative;
-	z-index: 10 !important;
-	margin-top: -50px !important;
+	z-index: 1000 !important;
 	text-align: center;
 	box-shadow: 1px 1px 2px 2px #999;
-	background: #fff;
+	background: #eee;
 }
 .icon-option{
+	font-family:'Microsoft Yahei';
 	position: relative;
 	z-index: 10 !important;
-	background: #9999CC;
+	background: #eee;
 	margin: 10px;
-	display: inline-block;
-	width: 150px;
-	height: 150px;
+	width: 70px;
+	height: 70px;
 	text-align: center;
-	color:#eee;
+	color:#5d25d6;
 	font-size: 16px;
 	cursor: pointer;
-	box-shadow: 0px 0px 3px 3px #999 inset;
+	box-shadow: 1px 1px 1px 1px #0099cc ;
 }
-.icon-option embed{
-	width: 90px;
-	height: 90px;
-	margin-top: 20px;
+.icon-option:hover{
+	color:#009e2f;
+		box-shadow: 0px 0px 2px 2px #009e2f;
+
+}
+
+.icon-option img{
+	width: 50px;
+	height: 50px;
+	margin-top: 5px;
 	cursor: pointer;
 }
+.icon-option p{
+	color: inherit;
+	line-height: 0em;
+}
+
+#links-block,#msg-block,#clock-block,#custom-block{
+	margin-top: 20px;
+	position: relative;
+	min-height: 200px;
+	box-shadow: 1px 1px 2px 2px #999;
+}
+
 /*container end*/
 #footer{
-	position: absolute;
-	bottom: 0px;
+	position: relative;
+	margin-top:10px;
+	text-align: center;
 	width:100%;
 	height: 20px;
-	color:#fff;
-	text-align: center;
+	color:#666;
 	font-size: 12px;
 }

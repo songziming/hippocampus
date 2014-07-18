@@ -1,5 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" width="76" height="76" viewBox="0 0 76.00 76.00" enable-background="new 0 0 76.00 76.00" xml:space="preserve">
-	<path fill="#ff6600" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 21.5367,46.0076L 19.1286,56.4429L 17.5,54L 6.86297,54C 7.39373,55.0308 7.97418,56.0319 8.60115,57L 19,57L 19.4333,56.9L 29.3932,54.6016C 28.0768,50.6411 25.8696,47.0904 21.5367,46.0076 Z M 39,53L 69.4259,22.5741C 67.0871,17.8183 63.7005,13.6708 59.5673,10.4327L 31,39L 31,45L 39,45L 39,53 Z M 29,38L 57.8385,9.1615C 56.438,8.19625 54.9638,7.33038 53.4259,6.57407L 24,36L 24,38L 29,38 Z "/>
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 76 76" enable-background="new 0 0 76 76" xml:space="preserve">
+<path fill="#FF6600" d="M26.3,49.7L24.7,58L23.7,56h-6.9c0.3,0.8,0.7,1.6,1.1,2.4h6.8l0.3-0.1l6.5-1.8
+	C30.5,53.4,29.1,50.6,26.3,49.7z M37.6,55.2l19.8-24c-1.5-3.8-3.7-7-6.4-9.6L32.4,44.2v4.7h5.2V55.2z M31.1,43.4l18.8-22.8
+	c-0.9-0.8-1.9-1.4-2.9-2L27.9,41.8v1.6H31.1z"/>
 </svg>

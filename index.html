@@ -15,14 +15,22 @@
 </head>
 <body>
 	<div class="row" id="header">
-		<div class="col-md-3" id="weather">city:weather</div>
-		<div class="col-md-3 pull-right" id="user-info">
+		<div class="col-md-2 col-sm-2">
+			<img src="images/logo.png" width="40px" alt="hpcp"></img>
+			<span style="font-size:18px;font-family:Microsoft Yahei;">海马体</span>
+		</div>
+		<!-- <div class="col-md-1" style="">
+			
+		</div> -->
+		<div class="col-md-2 col-sm-2" id="weather">city:weather</div>
+		
+		<div class="col-md-3 col-sm-3 pull-right" id="user-info">
 			<div class="row">
-				<div class="col-md-4" id="user-icon">
+				<div class="col-md-4 col-sm-4" id="user-icon">
 					<img class="user-img" src="images/icon.jpg"/>
 				</div>
-				<div class="col-md-6" id="user-name" onmouseleave="remove_li()">
-					<ul><p id="up" onmouseover="load_li()" >username<span class="caret"></span></p>
+				<div class="col-md-6 col-sm-6" id="user-name" onmouseleave="remove_li()">
+					<ul><p id="up" onmouseover="load_li()" >UserName<span class="caret"></span></p>
 						<li class="li-first" id="user-center">user-center
 							<div class="hr"></div>
 						</li>
@@ -35,33 +43,58 @@
 			</div>
 		</div>
 	</div>
-	<div id="container">
-		<div class="col-md-10 col-md-offset-1" id="main-icons">
+	<div id="main-icons">
 			<div class="row" style="padding-top:10px;">
 				<div class="icon-option" id="links">
-					<embed src="images/link.svg" type="image/svg+xml"id="l-svg"/>
+					<img src="images/link.png" id="l-png"/>
 					<p>links</p>
 				</div>
 				<div class=" icon-option" id="msgs" >
-					<embed src="images/msg.svg" type="image/svg+xml"id="m-svg"/>
+					<img src="images/msg.png" id="m-png"/>
 					<p>messages</p>
 				</div>
 				<div class=" icon-option" id="clocks" >
-					<embed src="images/clock.svg" type="image/svg+xml"id="cl-svg"/>
+					<img src="images/clock.png" id="cl-png"/>
 					<p>clocks</p>
 				</div>
 				<div class="icon-option" id="custom">
-					<embed src="images/custom.svg" type="image/svg+xml" id="cu-svg"/>
+					<img src="images/custom.png" id="cu-png"/>
 					<p>customs</p>
 				</div>
 			</div>
+	</div>
+	
+
+	<div id="container" class="row">
+		
+		<div class="col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1" id="links-block">
+			<div class="row" style="text-align:center;">
+				<span>My Guidance Links</span>
+			</div>
+		</div>
+		<div class="col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1" id="msg-block" >
+			<div class="row" style="text-align:center;">
+				<span>My Messages</span>
+			</div>
+		</div>
+		<div class="col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1" id="clock-block">
+			<div class="row" style="text-align:center;">
+				<span>My Clocks</span>
+			</div>
+		</div>
+		<div class="col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1" id="custom-block">
+			<div class="row" style="text-align:center;">
+				<span>My Customs</span>
+			</div>
 		</div>
 	</div>
+
 	<script>
 	change_icon_color();
+	set_nav_position();
 	</script>
 	<div id="footer">
-		©2014 Baidu 使用百度前必读 京ICP证030173号
+		©2014 Hippocampus : Fork Me In GITHUB!
 	</div>
 	
 </body>
