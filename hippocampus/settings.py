@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Django settings for hippocampus project.
 
@@ -30,12 +32,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+#   'django.contrib.admin',
+#   'django.contrib.auth',
+#   'django.contrib.contenttypes',
+#   'django.contrib.sessions',
+#   'django.contrib.messages',
+#   'django.contrib.staticfiles',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,11 +56,17 @@ WSGI_APPLICATION = 'hippocampus.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+# 开发过程中，使用Python内置的SQLite数据库，因为MySQL的配置因人而异
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'django_db',
+        # 'USER': 'root',
+        # 'PASSWORD': 'root',
+        # 'HOST': 'localhost',
+
     }
 }
 
@@ -67,7 +75,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
