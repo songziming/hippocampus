@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-#   'django.contrib.admin',
+#   'django.contrib.admin', # django admin app, following 4 are dependencies
 #   'django.contrib.auth',
 #   'django.contrib.contenttypes',
 #   'django.contrib.sessions',
@@ -49,9 +49,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'hippocampus.urls'
+ROOT_URLCONF = 'hippocampus.urls'   # highest level mapping
 
 WSGI_APPLICATION = 'hippocampus.wsgi.application'
+
+# Session
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_HTTPONLY = True
 
 
 # Database

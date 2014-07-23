@@ -3,5 +3,5 @@ from user_system import views
 
 urlpatterns = patterns('',
     url(r'^register/', views.register, name='register'),
-    url(r'^$', views.default, name='default'),
+    url(r'^login/', views.login, name='login'),
 )
