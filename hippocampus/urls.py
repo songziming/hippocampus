@@ -10,5 +10,5 @@ urlpatterns = patterns('',
 
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^user_system/', include('user_system.urls')),
-    url(r'^$', 'user_system.views.login'),   # default goto login view
+    url(r'^$', 'user_system.views.default'),
 )

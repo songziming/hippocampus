@@ -6,13 +6,12 @@ from django.contrib.auth import authenticate, login as dlogin, logout
 # Create your views here.
 
 def default(request):
-    context = {
-        'list': [
-            {'text': '123'},
-            {'text': 'abc'},
-        ],
-    }
-    return render(request, 'user_system/default.html', context)
+    # check if current user is authenticated
+    if request.user.is_authenticated():
+        context = { 'username': request.user.username, }
+        return render(request, 'user_system/default.html', context)
+    else:
+        return HttpResponseRedirect('/user_system/login/')
 
 def register(request):
     return render(request, 'user_system/register.html', {})
