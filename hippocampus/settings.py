@@ -42,10 +42,10 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-#   'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', # session, auth
+    'django.middleware.common.CommonMiddleware',    # append slash
 #   'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # auth
 #   'django.contrib.messages.middleware.MessageMiddleware',
 #   'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -96,3 +96,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+# if the url doesn't end in `/`, django will redirect to the same url with `/`
+APPEND_SLASH = True
