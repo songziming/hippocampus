@@ -43,10 +43,10 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware', # session, auth
     'django.middleware.common.CommonMiddleware',    # append slash
-#   'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',  # auth
-#   'django.contrib.messages.middleware.MessageMiddleware',
-#   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'hippocampus.urls'   # highest level mapping
@@ -87,6 +87,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+AUTH_PROFILE_MODULE = 'user_system.models.UserProfile'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
