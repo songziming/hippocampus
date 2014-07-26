@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as dlogin, logout
+# from user_system.models import User
 
 # Create your views here.
 
