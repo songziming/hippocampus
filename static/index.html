@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>my index</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script type="text/javascript" src="script/jquery.min.js"></script>
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script src="script/header_ctrl.js" type="text/javascript"></script> 
+	<link rel="stylesheet" type="text/css" href="style/indexstyle.css">
+	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style/headerfooter.css">
+	
+</head>
+<body>
+	<div class="row" id="header">
+		<div class="col-md-2 col-sm-2">
+			<img src="images/logo.png" width="40px" alt="hpcp"></img>
+			<span style="font-size:18px;font-family:Microsoft Yahei;">海马体</span>
+		</div>
+		<!-- <div class="col-md-1" style="">
+			
+		</div> -->
+		<div class="col-md-2 col-sm-2" id="weather">city:weather</div>
+		
+		<div class="col-md-3 col-sm-3 pull-right" id="user-info">
+			<div class="row">
+				<div class="col-md-4 col-sm-4" id="user-icon">
+					<img class="user-img" src="images/icon.jpg"/>
+				</div>
+				<div class="col-md-6 col-sm-6" id="user-name" onmouseleave="remove_li()">
+					<ul><p id="up" onmouseover="load_li()" >UserName<span class="caret"></span></p>
+						<li class="li-first" id="user-center">user-center
+							<div class="hr"></div>
+						</li>
+						<li id="account-set">account-set
+							<div class="hr"></div>
+						</li >
+						<li id="logout"></span>logout</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="main-icons">
+			<div class="row" style="padding-top:10px;">
+				<div class="icon-option" id="links" >
+					<a href="#links-block"><img src="images/link.png" id="l-png"/>
+					<p>links</p>
+				</a>
+				</div>
+				<div class=" icon-option" id="msgs" >
+					<a href="#msg-block"><img src="images/msg.png" id="m-png"/>
+					<p>messages</p>
+				</a>
+				</div>
+				<div class=" icon-option" id="clocks" >
+					<a href="#clock-block"><img src="images/clock.png" id="cl-png"/>
+					<p>clocks</p>
+					</a>
+				</div>
+				<div class="icon-option" id="custom">
+					<a href="#custom-block">
+					<img src="images/custom.png" id="cu-png"/>
+					<p>customs</p>
+					</a>
+				</div>
+			</div>
+	</div>
+	
+
+	<div id="container" class="row">
+		
+		<div class="col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1"  id="links-block">
+			<div class="row" style="text-align:center;">
+				<span class="title1">My Guidance Links</span>
+			</div>
+		</div>
+		<div class="col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1" id="msg-block" >
+			<div class="row" style="text-align:center;">
+				<span class="title1">My Messages</span>
+			</div>
+		</div>
+		<div class="col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1" id="clock-block">
+			<div class="row" style="text-align:center;">
+				<span class="title1">My Clocks</span>
+			</div>
+		</div>
+		<div class="col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1" id="custom-block">
+			<div class="row" style="text-align:center;">
+				<span class="title1">My Customs</span>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	change_icon_color();
+	set_nav_position();
+	</script>
+	<div id="footer">
+		©2014 Hippocampus : Fork Me In GITHUB!
+	</div>
+	
+</body>
+</html>
