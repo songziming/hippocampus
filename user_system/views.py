@@ -21,14 +21,17 @@ def register(request):
     return render(request, 'user_system/register.html', {})
 
 def do_register(request):
-    # POSTed here
     data = {}
-    if ('username' in request.POST) and ('password' in request.POST):
-        user = User.objects.create_user(request.POST['username'], password=request.POST['password'])
-        profile = UserProfile(user=user)
-        data['status'] = 0
+    if request.method == 'POST':
+        if ('username' in request.POST) and ('password' in request.POST):
+            user = User.objects.create_user(request.POST['username'], password=request.POST['password'])
+            profile = UserProfile(user=user)
+            data['status'] = 0
+        else:
+            data['status'] = 1
     else:
         data['status'] = 1
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
 def login(request):
     return render(request, 'user_system/login.html', {})
