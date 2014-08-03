@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^settings/$', 'user_system.views.settings'),
 
     url(r'^do_register/$', 'user_system.views.do_register'),
+    url(r'^do_check_existence/$', 'user_system.views.do_check_existence'),
     url(r'^do_login/$', 'user_system.views.do_login'),
     url(r'^do_logout/$', 'user_system.views.do_logout'),
     url(r'^do_update_settings/$', 'user_system.views.do_update_settings'),

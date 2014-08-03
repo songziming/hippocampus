@@ -20,6 +20,27 @@ def default(request):
 def register(request):
     return render(request, 'user_system/register.html', {})
 
+def is_username_exist(name):
+    try:
+        u = User.objects.get(username=name)
+    except User.DoesNotExist:
+        return False
+    else:
+        return True
+
+
+def do_check_existence(request):
+    data = {}
+    if request.method == 'POST':
+        if 'username' in request.POST:
+            data['status'] = 0
+            data['exist'] = is_username_exist(request.POST['username'])
+        else:
+            data['status'] = 1
+    else:
+        data['status'] = 1
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
 def do_register(request):
     data = {}
     if request.method == 'POST':
