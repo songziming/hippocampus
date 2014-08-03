@@ -9,6 +9,17 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^user_system/', include('user_system.urls')),
-    url(r'^$', 'user_system.views.default'),
+
+    # user_system
+    url(r'^$', 'user_system.views.login'),
+    url(r'^register/$', 'user_system.views.register'),
+    url(r'^login/$', 'user_system.views.login'),
+    url(r'^default/$', 'user_system.views.default'),
+    url(r'^settings/$', 'user_system.views.settings'),
+
+    url(r'^do_register/$', 'user_system.views.do_register'),
+    url(r'^do_login/$', 'user_system.views.do_login'),
+    url(r'^do_logout/$', 'user_system.views.do_logout'),
+    url(r'^do_update_settings/$', 'user_system.views.do_update_settings'),
+    url(r'^do_update_preferences/$', 'user_system.views.do_update_preferences'),
 )

@@ -4,7 +4,8 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="/user_system/do_login/" method="post">
+    <form action="/do_login/" method="post">
+    {% csrf_token %}
         Username: <input type="text" name="username"> <br>
         Password: <input type="text" name="password"> <br>
         <input type="submit" value="Login">
