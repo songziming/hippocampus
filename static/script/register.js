@@ -1,83 +1,77 @@
-  
- function registAction() {
-		//Ajax登陆function
-            var agree = document.getElementById("agree").checked;
+function registAction() {
+    //Ajax登陆function
+    var agree = document.getElementById("agree").checked;
 
-            var email = document.getElementById("input-Email1").value;
-            var password = document.getElementById("password").value;
-            var password2 = document.getElementById("password2").value;
-            var username = document.getElementById("username").value;
+    var email = document.getElementById("input-Email1").value;
+    var password = document.getElementById("password").value;
+    var password2 = document.getElementById("password2").value;
+    var username = document.getElementById("username").value;
 
+    if (!isEmail(email)) {
+        show_wrong_window("邮件地址不合法！");
+        return false;
+    }
 
+    if (!agree) {
+        show_wrong_window("请先阅读用户协议！");
+        return false;
+    }
 
-            if (!isEmail(email)) {
-                show_wrong_window("邮件地址不合法！");
-                return false;
-            }
-	
-            if (!agree) {
-                show_wrong_window("请先阅读用户协议！");
-                return false;
-            }
+    // if (!isLengthLegal(password)) {
+    //     return false;
+    // };
 
-            // if (!isLengthLegal(password)) {
-            //     return false;
-            // };
+    if (password != password2) {
+        show_wrong_window("密码前后不相等，请重新确认！");
+        return false;
+    }
 
+    // password = hex_md5(password);
+    // password2 = hex_md5(password2);
+    var ajax = Ajax();
+    var form = new FormData();
+    form.append("email", email);
+    form.append("password", password);
+    form.append("username", username);
 
-
-            if (password != password2) {
-                show_wrong_window("密码前后不相等，请重新确认！");
-                return false;
-            }
-
-            // password = hex_md5(password);
-            // password2 = hex_md5(password2);
-            var ajax = Ajax();
-            var form = new FormData();
-            form.append("email", email);
-            form.append("password", password);
-            form.append("username", username);
-
-            ajax.onreadystatechange = function () {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                         var resText = ajax.responseText;
-                        $("#alerttext").html(resText);
-                        localStorage.setItem("hpcp_login", email);
-                         ajax.open("POST", "do_register", true);
-                         ajax.send(form);
-                        alert("注册成功\n\n点击确定进入登陆页面");
-                        // location.href = "../login/login.html";
-                        }
-                }
-
-            ajax.open("POST", "do_register", true);
-            ajax.send(form);
-
+    ajax.onreadystatechange = function() {
+    if (ajax.readyState == 4 && ajax.status == 200) {
+        var resText = ajax.responseText;
+        $("#alerttext").html(resText);
+        localStorage.setItem("hpcp_login", email);
+        ajax.open("POST", "/do_register/", true);
+        ajax.send(form);
+        alert("注册成功\n\n点击确定进入登陆页面");
+        // location.href = "../login/login.html";
         }
-
-function listen_email(){
-	//验证邮件地址并提示
-$("#input-Email1").blur(function () {
-            var email = document.getElementById("input-Email1").value;
-            isEmail(email);
-        });
+    }
+    ajax.open("POST", "/do_register/", true);
+    ajax.send(form);
 }
+
+function listen_email() {
+	//验证邮件地址并提示
+    $("#input-Email1").blur(function() {
+        var email = document.getElementById("input-Email1").value;
+        isEmail(email);
+    });
+}
+
 function isEmail(email) {
-            //判断邮件地址可用性
-            var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-            if (!myreg.test(email)) {
-                $("#input-email-remind").html('<img src="../../static/images/wrong.png" class="wrong"/><span style="color:red">请输入有效的Email！</span>');
+        //判断邮件地址可用性
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if (!myreg.test(email)) {
+            $("#input-email-remind").html('<img src="../../static/images/wrong.png" class="wrong"/><span style="color:red">请输入有效的Email！</span>');
 
-                return false;
-            }
-            $("#input-email-remind").html('<img src="../../static/images/ok.png" class="ok"/><span style="color:green;">邮箱可用</span>');
-            return true;
+            return false;
         }
+        $("#input-email-remind").html('<img src="../../static/images/ok.png" class="ok"/><span style="color:green;">邮箱可用</span>');
+        return true;
+    }
 
-        function message(str) {
-            document.getElementById("alertText").innerHTML = str;
-        }
+    function message(str) {
+        document.getElementById("alertText").innerHTML = str;
+    }
 
 function listen_username(){
 	//判断用户名可用性并提示
