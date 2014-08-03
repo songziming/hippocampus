@@ -26,8 +26,7 @@ def do_register(request):
     if ('username' in request.POST) and ('password' in request.POST):
         user = User.objects.create_user(request.POST['username'], password=request.POST['password'])
         profile = UserProfile(user=user)
-        # return HttpResponse("done")
-        return HttpResponseRedirect("/login/")
+        data['status'] = 0
     else:
         data['status'] = 1
 
