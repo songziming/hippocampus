@@ -32,22 +32,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-#   'django.contrib.admin', # django admin app, following 4 are dependencies
+    'django.contrib.admin', # django admin app, following 4 are dependencies
     'django.contrib.auth',
     'django.contrib.contenttypes',
-#   'django.contrib.sessions',
-#   'django.contrib.messages',
-#   'django.contrib.staticfiles',
+    'django.contrib.sessions',
+    'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user_system',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware', # session, auth
     'django.middleware.common.CommonMiddleware',    # append slash
-#   'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',  # auth
-#   'django.contrib.messages.middleware.MessageMiddleware',
-#   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'hippocampus.urls'   # highest level mapping
