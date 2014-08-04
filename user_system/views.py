@@ -64,6 +64,7 @@ def do_login(request):
         user = django_authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             if user.is_active:
+                django_login(user)
                 data['status'] = 0
             else:
                 data['status'] = 2
@@ -74,7 +75,7 @@ def do_login(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 def do_logout(request):
-    logout(request)
+    django_logout(request)
     return HttpResponseRedirect("/login/")
 
 def settings(request):
