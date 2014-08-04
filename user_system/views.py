@@ -64,7 +64,7 @@ def do_login(request):
         user = django_authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             if user.is_active:
-                django_login(user)
+                django_login(request, user)
                 data['status'] = 0
             else:
                 data['status'] = 2
