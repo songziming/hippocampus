@@ -1,7 +1,7 @@
 function load_li() {
 			$("#user-name li").css({visibility:"visible"});
 		
-			$("#up").css({background:"#338822",color:"#fff"});
+			$("#up").css({background:"#16a085",color:"#fff"});
 			
 		}
 function remove_li(){
@@ -14,38 +14,38 @@ function remove_li(){
 function change_icon_color(){
 
 	$("#links").mouseover(function(){
-		$("#l-png").attr("src","images/link.active.png");
+		$("#l-png").attr("src","../../static/images/link.active.png");
 		//$("#links p").css({color:"#f60"});
 	});
 	$("#links").mouseout(function(){
-		$("#l-png").attr("src","images/link.png");
+		$("#l-png").attr("src","../../static/images/link.png");
 		//$("#links p").css({color:"#000"});
 	});
 
 	$("#msgs").mouseover(function(){
-		$("#m-png").attr("src","images/msg.active.png");
+		$("#m-png").attr("src","../../static/images/msg.active.png");
 		//$("#msgs p").css({color:"#f60"});
 	});
 	$("#msgs").mouseout(function(){
-		$("#m-png").attr("src","images/msg.png");
+		$("#m-png").attr("src","../../static/images/msg.png");
 		//$("#msgs p").css({color:"#000"});
 	});
 
 	$("#clocks").mouseover(function(){
-		$("#cl-png").attr("src","images/clock.active.png");
+		$("#cl-png").attr("src","../../static/images/clock.active.png");
 		//$("#clocks p").css({color:"#f60"});
 	});
 	$("#clocks").mouseout(function(){
-		$("#cl-png").attr("src","images/clock.png");
+		$("#cl-png").attr("src","../../static/images/clock.png");
 		//$("#clocks p").css({color:"#000"});
 	});
 
 	$("#custom").mouseover(function(){
-		$("#cu-png").attr("src","images/custom.active.png");
+		$("#cu-png").attr("src","../../static/images/custom.active.png");
 		//$("#custom p").css({color:"#f60"});
 	});
 	$("#custom").mouseout(function(){
-		$("#cu-png").attr("src","images/custom.png");
+		$("#cu-png").attr("src","../../static/images/custom.png");
 		// $("#custom p").css({color:"#000"});
 	});
 }

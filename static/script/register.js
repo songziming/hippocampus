@@ -1,3 +1,21 @@
+function login_Action(username,password) {
+    var my_Request3 = Ajax();
+    var form3 = new FormData();
+
+    form3.append("password", password);
+    form3.append("username", username);
+
+    my_Request3.onreadystatechange = function() {
+    if (my_Request3.readyState == 4 && my_Request3.status == 200) {
+        var resText3 = my_Request3.responseText;
+         window.location.href="/login/";
+        }
+    }
+    my_Request3.open("POST", "/do_login/", true);
+    my_Request3.send(form3);
+   
+}
+
 function regist_Action() {
     //Ajax登陆function
     var agree = document.getElementById("agree").checked;
@@ -31,14 +49,16 @@ function regist_Action() {
 
     my_Request.onreadystatechange = function() {
     if (my_Request.readyState == 4 && my_Request.status == 200) {
-        localStorage.setItem("hpcp_login", email);
         var resText = my_Request.responseText;
-         alert(resText.toString());
-       // var json_Object=parse(resText);
-        // alert("注册成功\n\n点击确定进入登陆页面");
-        // alert(json_Object("status").toString());
-        //alert(resText);
-        // location.href = "../login/login.html";
+         var do_register_status=JSON.parse(resText).status.toString();
+         //alert(do_register_status);
+         if(do_register_status=="0"){
+            localStorage.removeItem("hpcp_login");
+            localStorage.setItem("hpcp_login",username);
+            sessionStorage.setItem("hpcp_login",username);
+                login_Action(username,password);
+         }
+         
         }
     }
     my_Request.open("POST", "/do_register/", true);
@@ -161,6 +181,5 @@ function listen_close_wrong_window(){
         });
 
 }
-
 
 
