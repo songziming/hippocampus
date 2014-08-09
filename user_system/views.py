@@ -20,7 +20,7 @@ def default(request):
 def register(request):
     return render(request, 'user_system/register.html', {})
 
-def is_username_exist(name):
+def __is_username_exist__(name):
     try:
         u = User.objects.get(username=name)
     except User.DoesNotExist:
@@ -30,64 +30,73 @@ def is_username_exist(name):
 
 
 def do_check_existence(request):
-    data = {}
+    res = {}
     if request.method == 'POST':
         if 'username' in request.POST:
-            data['status'] = 0
-            data['exist'] = is_username_exist(request.POST['username'])
+            res['status'] = 0
+            res['exist'] = __is_username_exist__(request.POST['username'])
         else:
-            data['status'] = 1
+            res['status'] = 1
     else:
-        data['status'] = 1
-    return HttpResponse(json.dumps(data), content_type='application/json')
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type='application/json')
 
 def do_register(request):
-    data = {}
+    res = {}
     if request.method == 'POST':
-        if ('username' in request.POST) and ('password' in request.POST):
-            user = User.objects.create_user(request.POST['username'], password=request.POST['password'])
-            profile = UserProfile(user=user)
-            data['status'] = 0
+        if 'username' in request.POST and 'password' in request.POST and 'email' in request.POST:
+            username = request.POST['username'];
+            password = request.POST['password'];
+            email = request.POST['email'];
+            if __is_username_exist__(username):
+                res['status'] = 2
+            else:
+                user = User.objects.create_user(username=username, password=password)
+                profile = UserProfile(user=user)
+                res['status'] = 0
         else:
-            data['status'] = 1
+            res['status'] = 1
     else:
-        data['status'] = 1
-    return HttpResponse(json.dumps(data), content_type='application/json')
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type='application/json')
 
 def login(request):
     return render(request, 'user_system/login.html', {})
 
 def do_login(request):
-    data = {}
-    if ('username' in request.POST) and ('password' in request.POST):
-        #user = User.objects.get(username_exact=request.POST['username'])
-        user = django_authenticate(username=request.POST['username'], password=request.POST['password'])
+    res = {}
+    if 'username' in request.POST and 'password' in request.POST:
+        username = request.POST['username'];
+        password = request.POST['password'];
+        user = django_authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 django_login(request, user)
-                data['status'] = 0
+                res['status'] = 0
             else:
-                data['status'] = 2
+                res['status'] = 2
         else:
-            data['status'] = 2
+            res['status'] = 2
     else:
-        data['status'] = 1
-    return HttpResponse(json.dumps(data), content_type='application/json')
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type='application/json')
 
 def do_logout(request):
     django_logout(request)
-    return HttpResponseRedirect("/login/")
+    return HttpResponse("")
 
 def settings(request):
-    return HttpResponse('123');
+    return render(request, 'user_system/settings.html', {});
 
 def do_update_settings(request):
-    data = {}
+    res = {}
     if request.method == 'POST':
-        data['status'] = 0
+        res['status'] = 0
     else:
-        data['status'] = 1
-    return HttpResponse(json.dumps(data), content_type='application/json')
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type='application/json')
 
 def do_update_preferences(request):
-    data = {}
+    res = {}
+    return HttpResponse(json.dumps(res), content_type='application/json')
+
