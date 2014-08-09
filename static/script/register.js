@@ -49,11 +49,13 @@ function regist_Action() {
 
     my_Request.onreadystatechange = function() {
     if (my_Request.readyState == 4 && my_Request.status == 200) {
-        localStorage.setItem("hpcp_login", email);
         var resText = my_Request.responseText;
          var do_register_status=JSON.parse(resText).status.toString();
          //alert(do_register_status);
          if(do_register_status=="0"){
+            localStorage.removeItem("hpcp_login");
+            localStorage.setItem("hpcp_login",username);
+            sessionStorage.setItem("hpcp_login",username);
                 login_Action(username,password);
          }
          

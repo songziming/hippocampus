@@ -12,8 +12,10 @@ function login() {
           var do_register_status=JSON.parse(resText3).status.toString();
          //alert(do_register_status);
          if(do_register_status=="0"){
-         	sessionStorage.setItem("hpcp_login", username);
-         	localStorage.setItem("hpcp_login",username);
+         	// sessionStorage.setItem("hpcp_login", username);
+         	// localStorage.setItem("hpcp_login",username);
+              localStorage.hpcp_login=username;
+              sessionStorage.hpcp_login=username;
                 alert("dear "+username+", you log in successully ^_^");
                 window.location.href="/";
          }
