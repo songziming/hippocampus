@@ -1,0 +1,151 @@
+
+
+<html>
+
+<head>
+
+    <title>可拖动的层</title>
+
+
+    <script language="javascript" >
+
+        //验证是否按下鼠标左键的变量
+
+        var down=false;
+
+        //分别为鼠标x轴y轴，div层坐标x轴y轴
+
+        var mX,mY,dX,dY;
+
+
+        //当鼠标左键点指定div时触发
+
+        function mouseDown()
+
+        {
+
+            down=true;//鼠标左键在点住期间，down值为true
+
+            mX=event.clientX;//获得鼠标坐标，并记录当前坐标给变量
+
+            mY=event.clientY;//获得鼠标坐标，并记录当前坐标给变量，以便后面计算
+
+            dX=parseInt(card3.style.left);//获得card3（这是层的Id值）的坐标，因为本来是px的字符串，所以要取其中的整数值
+
+            dY=parseInt(card3.style.top);//parseInt()就是用来截取整数值的方法
+
+        }
+
+
+        //鼠标左键松开时触发up事件
+
+        function up()
+
+        {
+
+            //如果down为true时，因为鼠标左键不按状态下都属于up事件，所以要加上验证
+
+            if(down)
+
+            {
+
+                down=false;//设置down为false，表示左键没有点住
+
+                //   upDown();//调用下浮效果的方法，使移动停止后会有下沉的效果。如不需要可删除
+
+            }
+
+        }
+
+
+        //鼠标在指定区域移动时会触发此事件
+
+        function move()
+
+        {
+
+            //必先判断鼠标左键已被在指定区域按下
+
+            if(down){
+
+                //设置该层坐标等于原坐标加上鼠标移动的坐标
+
+                card3.style.left=dX+event.clientX-mX;
+
+                card3.style.top=dY+event.clientY-mY;
+
+            }
+
+        }
+
+
+        //此变量t控制漂浮效果的次数
+
+        var t=0;
+
+        //此方法用于停止移动时的下沉漂浮效果
+
+        function upDown()
+
+        {
+
+            if(t==0)
+
+            {
+
+                //t等于0时，每10毫秒调用一次本方法，并使t++避免下次再次执行
+
+                val=setInterval("upDown()",1000);
+
+                t++;
+
+            }
+
+            //获取现在的纵坐标，因为做下沉动作，所以只需在纵坐标上动些手脚
+
+            dY=parseInt(card3.style.top);
+
+            //设置纵坐标，+3px就是离顶部距离增加了3像素，循环增加便成了下沉的效果
+
+            card3.style.top=dY+3;
+
+            //增加一次t+1
+
+            t++;
+
+            //当循环15次之后
+
+            if(t==15)
+
+            {
+
+                t=0;//t归零
+
+                clearInterval(val);//停止之前的每10毫秒调用一次
+
+            }
+
+        }
+
+    </script>
+
+</head>
+
+<body onMouseMove="move()" onMouseUp="up()">
+
+<div id="card3" onMouseDown="mouseDown()" onMouseUp="up()" style="background-color:#BBBBBB; width:200px; height:200px; position:absolute; top:100px; left:200px; border:#6666FF; border:double;">
+
+    <div id="title" onMouseDown="mouseDown()" onMouseUp="up()" style="width:200px; height:20px; background-color:#330033; top:70px; left:136px; z-index:200; position: static; font-size:9pt; color:#FFFFFF; padding-top:5px; padding-left:5px;">
+
+        浮动窗口实例。
+
+    </div>
+
+    <font size="2" color="#6666FF"> <br>这个可以移动的层看起来怎么样？与之前的模式窗口结合起来就可以做一个可以移动的模式窗口了！</font>
+
+</div>
+
+</body>
+
+
+</html>
