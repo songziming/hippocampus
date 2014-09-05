@@ -134,20 +134,24 @@ function create_edit_control(obj){
         content_input.attr("value",content);
         content_input.text(content);
 
+        var pos=get_col_row(card_jq);
+        var col=pos[0];
+        var row=pos[1];
+        if(row<rows_arr[col]){
+            var prev=$("#"+window.my_map[col][row+1]);
+            set_float_card_in_colum_position(prev);
+        }
+        else{
+            return;
+        }
+        fresh_height_arr();
+        reset_col_top(col,0);
+        add_missing_cards();
+        set_container_height();
 
     }
-    fresh_height_arr();
-    var pos=get_col_row(card_jq);
-    var col=pos[0];
-    var row=pos[1];
-    if(row<rows_arr[col]){
-        var prev=$("#"+window.my_map[col][row+1]);
-        set_float_card_in_colum_position(prev);
-    }
-    else{
-        return;
-    }
-    add_missing_cards();
+
+
 
 
 }

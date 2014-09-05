@@ -325,23 +325,18 @@ function find_lowest_colum(){
     return lowest_no;
 }
 function set_container_height(){
-    var lowest_no=0;
 
     for(var i=0;i<window.col_num;i++){
-
         if(window.col_height_arr[i]>window.heightest_length){
             window.heightest_length=window.col_height_arr[i];
-
-            if(window.heightest_length<window.innerHeight()){
-                $("#container-main").css({"height":window.innerHeight().toString()+"px"});
-            }
-            else {
-                $("#container-main").css({"height": (window.heightest_length + 100).toString() + "px"});
-            }
         }
     }
-    return lowest_no;
+    $("#container-main").css({"height":(window.heightest_length+50).toString()+"px"});
+
 }
+
+
+
 function set_float_card_in_colum_position(cards,mX,mY){
 
     var my_card=cards;
