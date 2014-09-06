@@ -87,9 +87,7 @@ function move(event)
         var target_jq=$("#"+window.target.id.toString());
         var recent_card_left=target_jq.offset().left;
         var recent_col_No=Math.floor((event.clientX-window.container_left_edge)/window.card_width);
-        //console.log(recent_col_No);
-        //console.log(window.old_top);
-        //$("#card0 .card-content-p p").text(event.clientX.toString()+"  "+event.clientY.toString()+"<br>"+window.dX.toString()+"  "+window.dY.toString());
+
         if(recent_col_No<0){
             recent_col_No=0;
         }
@@ -97,22 +95,11 @@ function move(event)
             recent_col_No=window.col_num-1;
         }
 
-        //鼠标向下越界，交换
-        /*
-         if((event.pageY)==(window.old_top+target_jq.outerHeight())){
-         var pos=get_col_row(target_jq);
-         var col=pos[0];
-         var row=pos[1];
-         window.old_top=excute_top_new(col,row);
 
-         }
-         */
         if((event.pageY)>=(window.old_top+target_jq.outerHeight())){
             var pos=get_col_row(target_jq);
             var col=pos[0];
             var row=pos[1];
-            //window.old_top=excute_top_new(col,row);
-            //fresh_height_arr();
 
             if(col==-1 || row==-1){
                 set_float_card_in_colum_position(target_jq,event.pageX,event.pageY);
@@ -120,9 +107,7 @@ function move(event)
             else{
                 window.old_top=window.my_top_map[col][row];
             }
-            //window.old_top=window.my_top_map[col][row];
 
-            //$("#card0 .card-content-p p").text(" (window.old_top)="+(window.old_top));
             var downside_col_No=get_Row_No(window.target,recent_col_No);
 
             if(downside_col_No==window.rows_arr[recent_col_No]){
@@ -138,8 +123,7 @@ function move(event)
             var pos=get_col_row(target_jq);
             var col=pos[0];
             var row=pos[1];
-            //window.old_top=excute_top(col,row);
-            //fresh_height_arr();
+
             if(col==-1 || row==-1){
                 set_float_card_in_colum_position(target_jq,event.pageX,event.pageY);
             }
@@ -147,9 +131,6 @@ function move(event)
                 window.old_top=window.my_top_map[col][row];
             }
 
-
-            $("#card0 .card-content-p p").text(" (window.old_top)="+(window.old_top));
-            //alert("!!!");
             var upside_col_No=get_Row_No(window.target,recent_col_No);
             //console.log(upside_col_No);
             if(upside_col_No==0){
@@ -331,7 +312,7 @@ function set_container_height(){
             window.heightest_length=window.col_height_arr[i];
         }
     }
-    $("#container-main").css({"height":(window.heightest_length+50).toString()+"px"});
+    $("#container-main").css({"height":(window.heightest_length+100).toString()+"px"});
 
 }
 
@@ -352,66 +333,7 @@ function set_float_card_in_colum_position(cards,mX,mY){
         var target_left=window.container_left_edge+window.card_width*recent_col;
         my_card.css({left:target_left.toString()+"px",top:target_top.toString()+"px"});
     }
-    /*
-     if(mX==undefined & mY==undefined){
-     if(recent_col>-1 && recent_row>-1){
-     var target_top=window.my_top_map[recent_col][recent_row];
 
-     var target_left=window.container_left_edge+window.card_width*recent_col;
-     my_card.css({left:target_left.toString()+"px",top:target_top.toString()+"px"},200,"linear");
-     }
-     }
-
-     else{
-     var new_col,old_col;
-     var new_row,old_row;
-     if(mX<=window.container_left_edge){
-     new_col=0;
-     }
-     else if(mX>=(window.container_left_edge+window.card_width*(window.col_num-1)-10)){
-     new_col=window.col_num-1;
-     }
-     else{
-     new_col=Math.floor((mX-window.container_left_edge)/window.card_width);
-     }
-     if (new_col==recent_col){
-     var target_top=window.my_top_map[recent_col][recent_row];
-
-     var target_left=window.container_left_edge+window.card_width*recent_col;
-     my_card.css({left:target_left.toString()+"px",top:target_top.toString()+"px"},200,"linear");
-     }
-     else{
-     if(window.my_map[new_col][window.rows_arr[new_row]]==my_card.attr("id")){
-     var target_top=window.my_top_map[new_col][new_row];
-     var target_left=new_col*window.card_width+window.container_left_edge;
-     my_card.css({left:target_left,top:target_top});
-     }
-     else{
-     window.rows_arr[new_col]++;
-
-
-     new_row=window.rows_arr[new_col];
-     show_map();
-     var find_null_res=find_null_map_value();
-     old_col=find_null_res[0];
-     old_row=find_null_res[1];
-
-
-     window.my_map[old_col][old_row]="";
-     window.rows_arr[old_col]--;
-     window.my_map[new_col][new_row]=my_card.attr("id");
-     set_container_height(new_col);
-     show_map();
-     fresh_height_arr();
-     var target_top=window.my_top_map[new_col][new_row];
-     var target_left=new_col*window.card_width+window.container_left_edge;
-     my_card.css({left:target_left,top:target_top});
-     }
-     }
-     reset_col_top(old_col,0);
-     reset_col_top(new_col,0);
-     }
-     */
 }
 function find_null_map_value() {
     for(var i=0;i<window.col_num;i++){

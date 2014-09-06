@@ -3,10 +3,10 @@
  */
 function bindlistener(){
     $("#header-plus").click(function(){
-        addcard("卡片","请填写你的内容");
+        addcard("新卡片","请填写你的内容");
     });
     $(".card-action").click(function(){
-        create_edit_control(this);
+        add_menu(this);
     });
 }
 function addcard(title,content){
@@ -15,7 +15,7 @@ function addcard(title,content){
     var id="card"+(cardnum).toString();
 
     var color="color"+(cardnum%10).toString();
-    $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-ellipsis-h fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
+    $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-ellipsis-v fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
     var cards=$("#"+id.toString());
     cards.attr("class","card "+color);
 
@@ -30,17 +30,9 @@ function addcard(title,content){
     console.log(window.rows_arr[lowest]);
     window.my_map[lowest][(window.rows_arr[lowest])]=cards.attr("id");
 
-    //reset_col_top(lowest,0);
-
-
-
-    //window.col_height_arr[lowest]+=card_height+10;
     $("#"+id.toString()+" .card-content-p p").text(content);
 
-    // window.my_top_map[lowest][(window.rows_arr[lowest])]=card_top;
-
-    //show_map();
-    $(".card-action").attr("onClick","create_edit_control(this)");
+    $(".card-action").attr("onClick","add_menu(this)");
 
     set_float_card_in_colum_position(cards);
     fresh_height_arr();
@@ -81,6 +73,13 @@ function add_missing_cards(){
             move_cards_to_new_place(k);
         }
     }
+}
+function add_menu(obj){
+    var card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id.toString());
+    card_jq.appeend('<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>');
+
+
 }
 function move_cards_to_new_place(cardsnum){
     var cards=$("#card"+cardsnum.toString());
@@ -129,7 +128,9 @@ function create_edit_control(obj){
         var content_input=$("#"+card.id+" .content #content-input");
         this_content.css({"display":"none"});
         $("#"+card.id+" .content").css({"background-color":"transparent"});
-        $("#"+card.id+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>')
+        $("#"+card.id+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+        $("#"+card.id+" .content .cancel").attr("onClick","cancel_edit(this)");
+        $("#"+card.id+" .content .change").attr("onClick","save_edit(this)");
         content_input.css({"display":"block"});
         content_input.attr("value",content);
         content_input.text(content);
@@ -149,9 +150,71 @@ function create_edit_control(obj){
         add_missing_cards();
         set_container_height();
 
+
     }
+}
+function cancel_edit(obj){
+    var card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id.toString());
+    card_jq.attr("onMouseDown","mouseDown(this,event)");
+    card_jq.attr("onMouseUp","up(event)");
+    card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
+    $("#"+card.id +" .title #title-input").css({"display":"none"});
+    $("#"+card.id+" .content #content-input").css({"display":"none"});
+    $("#"+card.id+" .content .cancel").remove();
+    $("#"+card.id+" .content .change").remove();
+    $("#"+card.id +" .title .card-name").css({"display":"block"});
+    $("#"+card.id+" .content .card-content-p").css({"display":"block"});
+    $("#"+card.id +" .title #title-input").remove();
+    $("#"+card.id+" .content #content-input").remove();
+    var pos=get_col_row(card_jq);
+    var col=pos[0];
+    var row=pos[1];
+    if(row<rows_arr[col]){
+        var prev=$("#"+window.my_map[col][row+1]);
+        set_float_card_in_colum_position(prev);
+    }
+    else{
+        return;
+    }
+    fresh_height_arr();
+    reset_col_top(col,0);
+    add_missing_cards();
+    set_container_height();
 
+}
+function save_edit(obj){
+    var card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id.toString());
+    card_jq.attr("onMouseDown","mouseDown(this,event)");
+    card_jq.attr("onMouseUp","up(event)");
 
+    card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
+    var card_name=$("#"+card.id +" .title #title-input").val();
+    var card_content=$("#"+card.id+" .content #content-input").val();
+    $("#"+card.id +" .title .card-name").html(card_name);
+    $("#"+card.id+" .content .card-content-p p").text(card_content);
+    $("#"+card.id +" .title #title-input").css({"display":"none"});
+    $("#"+card.id+" .content #content-input").css({"display":"none"});
+    $("#"+card.id+" .content .cancel").remove();
+    $("#"+card.id+" .content .change").remove();
+    $("#"+card.id +" .title .card-name").css({"display":"block"});
+    $("#"+card.id+" .content .card-content-p").css({"display":"block"});
 
-
+    $("#"+card.id +" .title #title-input").remove();
+    $("#"+card.id+" .content #content-input").remove();
+    var pos=get_col_row(card_jq);
+    var col=pos[0];
+    var row=pos[1];
+    if(row<rows_arr[col]){
+        var prev=$("#"+window.my_map[col][row+1]);
+        set_float_card_in_colum_position(prev);
+    }
+    else{
+        return;
+    }
+    fresh_height_arr();
+    reset_col_top(col,0);
+    add_missing_cards();
+    set_container_height();
 }
