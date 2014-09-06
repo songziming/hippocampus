@@ -374,7 +374,7 @@ body{
 .content{
     background-color: rgba(255,255,255,0.5);
     min-width:200px;
-    min-height: 50px;
+    min-height: 90px;
     float:none;
     margin: 0;
     height: auto;
@@ -471,9 +471,9 @@ body{
 .menu{
     position: absolute;
     display: inline-block;
-    background-color: #333;
+    background-color: #293e6a;
     top: 36px;
-    left:100px;
+    left:110px;
     padding-top: 4px;
     padding-left: 4px;
     padding-right: 4px;
@@ -483,12 +483,12 @@ body{
     display: inline-block;
     height: 0;
     width: 0;
-    border-bottom: 7px solid #333;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
+    border-bottom: 6px solid #293e6a;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
     position: absolute;
-    top: -7px;
-    left: 110px;
+    top: -6px;
+    left: 100px;
     -webkit-transition: border-right-color 85ms ease-in;
     transition: border-right-color 85ms ease-in;
 }
@@ -499,7 +499,7 @@ body{
     cursor: pointer;
 }
 .card-menu-icon:hover{
-    background-color:#666;
+    background-color:#639bf1;
 }
 .card-menu-icon img{
     height: 20px;
@@ -509,37 +509,37 @@ body{
 .color-menu{
     display: block;
     position: absolute;
-    background-color: #333;
-    border-top: 2px solid #333;
-    border-left: 2px solid #333;
+    background-color: #293e6a;
+    border-top: 2px solid #293e6a;
+    border-left: 2px solid #293e6a;
     width: 60px;
     height: 60px;
     top: 40px;
-    left:72px;
+    left:68px;
 }
 .color-menu .top-arrow{
     display: inline-block;
     height: 0;
     width: 0;
-    border-bottom: 5px solid #333;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
+    border-bottom: 6px solid #293e6a;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
     position: absolute;
-    top: -5px;
-    left: 40px;
+    top: -6px;
+    left: 24px;
     -webkit-transition: border-right-color 85ms ease-in;
     transition: border-right-color 85ms ease-in;
 }
 .color-block{
     border-radius: 4px;
     cursor: pointer;
-    border: 1px solid #333;
+    border: 1px solid #293e6a;
     height: 16px;
     width: 16px;
     position: absolute;
 }
 .color-block:hover{
-    border: 1px solid #ccc;
+    border: 1px solid #fff;
 }
 .color-menu .color0{
     left:0px;

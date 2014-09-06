@@ -5,7 +5,7 @@ function bindlistener(){
     $("#header-plus").click(function(){
         addcard("新卡片","请填写你的内容");
     });
-    $(".card-action").click(function(){
+    $(".card-action").mousemove(function(){
         add_menu(this);
     });
 }
@@ -32,7 +32,7 @@ function addcard(title,content){
 
     $("#"+id.toString()+" .card-content-p p").text(content);
 
-    $(".card-action").attr("onClick","add_menu(this)");
+    $(".card-action").attr("onmousemove","add_menu(this)");
 
     set_float_card_in_colum_position(cards);
     fresh_height_arr();
@@ -77,7 +77,7 @@ function add_missing_cards(){
 function add_menu(obj){
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
-    card_jq.appeend('<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>');
+    card_jq.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
 
 }
