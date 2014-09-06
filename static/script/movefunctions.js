@@ -199,6 +199,18 @@ function init_card_position(){
             window.my_map[0][i]=cards.attr("id");
             window.col_height_arr[i]=cards.outerHeight();
 
+            var id=cards.attr("id");
+
+            if(($("#"+id.toString()+" .menu")).length<=0){
+
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+
+                $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
+
+                $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
+
+                $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+            }
             cards=cards.next(".card");
         }
 
@@ -217,6 +229,21 @@ function init_card_position(){
 
             window.my_map[i][0]=cards.attr("id");
             window.rows_arr[i]=0;
+
+            var id=cards.attr("id");
+
+            if(($("#"+id.toString()+" .menu")).length<=0){
+
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+
+                $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
+
+                $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
+
+                $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+            }
+
+
 
             cards=cards.next(".card");
 
@@ -256,6 +283,21 @@ function init_card_position(){
 
             window.my_map[col_No][(window.rows_arr[col_No])]=cards.attr("id");
 
+            var id=cards.attr("id");
+
+            if(($("#"+id.toString()+" .menu")).length<=0){
+
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+
+                $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
+
+                $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
+
+                $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+            }
+
+
+
             cards=cards.next(".card");
         }
         //根据高度自动填充剩余card
@@ -267,9 +309,8 @@ function colum_num_listener(){
     var new_col_num=Math.floor($("#container-main").width()/window.card_width);
     if(new_col_num<window.col_num){
         window.col_num=new_col_num;
-
-
         init_card_position();
+        bindlistener();
     }
     else if(new_col_num>window.col_num){
         window.col_num=new_col_num;
@@ -287,6 +328,7 @@ function colum_num_listener(){
 
         init_card_position();
         window.heightest_length=0;
+        bindlistener();
     }
 }
 function find_lowest_colum(){

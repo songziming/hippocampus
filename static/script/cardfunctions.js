@@ -5,9 +5,9 @@ function bindlistener(){
     $("#header-plus").click(function(){
         addcard("新卡片","请填写你的内容");
     });
-    $(".card-action").mousemove(function(){
-        add_menu(this);
-    });
+    $(".card-action").attr("onclick","show_menu(this)");
+    $(".colors").attr("onclick","show_color_board(this)");
+    $(".edit").attr("onclick","create_edit_control(this)");
 }
 function addcard(title,content){
 
@@ -17,6 +17,7 @@ function addcard(title,content){
     var color="color"+(cardnum%10).toString();
     $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-ellipsis-v fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
     var cards=$("#"+id.toString());
+
     cards.attr("class","card "+color);
 
     var lowest=find_lowest_colum();
@@ -29,11 +30,20 @@ function addcard(title,content){
     window.rows_arr[lowest]++;
     console.log(window.rows_arr[lowest]);
     window.my_map[lowest][(window.rows_arr[lowest])]=cards.attr("id");
+    if(($("#"+id.toString()+" .menu")).length<=0){
+        $("#"+id.toString()+" .card-content-p p").text(content);
+        cards.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
-    $("#"+id.toString()+" .card-content-p p").text(content);
+        $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
-    $(".card-action").attr("onmousemove","add_menu(this)");
+        $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
 
+        $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+    }
+
+    $("#"+id.toString()+" .card-action").attr("onclick","show_menu(this)");
+    $("#"+id.toString()+" .colors").attr("onclick","show_color_board(this)");
+    $("#"+id.toString()+" .edit").attr("onclick","create_edit_control(this)");
     set_float_card_in_colum_position(cards);
     fresh_height_arr();
     add_missing_cards();
@@ -50,9 +60,7 @@ function add_missing_cards(){
                 if(j!=window.rows_arr[i]){
                     for(var y=j;y<rows_arr[i];y++){
                         window.my_map[i][y]=window.my_map[i][y+1];
-
                     }
-
                 }
                 else{
                     window.rows_arr[i]--;
@@ -63,7 +71,6 @@ function add_missing_cards(){
                 var num=parseInt(window.my_map[i][j].slice(4,num_length));
                 miss_cards[num]=true;
             }
-
         }
     }
     for(var k=0;k<cardnum;k++){
@@ -74,13 +81,37 @@ function add_missing_cards(){
         }
     }
 }
-function add_menu(obj){
+
+function show_menu(obj){
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
-    card_jq.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
-
-
+    var menu_obj=$("#"+card.id+" .menu");
+    var color_menu_obj=$("#"+card.id+" .menu .color-menu");
+    if(menu_obj.css("display")=="none"){
+        menu_obj.show();
+        card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
+        card_jq.attr("onmousedown","");
+        card_jq.attr("onMouseUp","");
+    }else if(menu_obj.css("display")=="block"){
+        menu_obj.hide();
+        color_menu_obj.css({"display":"none"});
+        card_jq.css({"-webkit-user-select":"auto","-ms-user-select":"auto"});
+        card_jq.attr("onMouseDown","mouseDown(this,event)");
+        card_jq.attr("onMouseUp","up(event)");
+    }
 }
+
+function show_color_board(obj){
+    var card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id.toString());
+    var color_menu_obj=$("#"+card.id+" .menu .color-menu");
+    if(color_menu_obj.css("display")=="none"){
+        color_menu_obj.show();
+    }else if(color_menu_obj.css("display")=="block"){
+        color_menu_obj.hide();
+    }
+}
+
 function move_cards_to_new_place(cardsnum){
     var cards=$("#card"+cardsnum.toString());
     console.log("#card"+cardsnum.toString());
@@ -102,57 +133,60 @@ function move_cards_to_new_place(cardsnum){
 }
 
 function create_edit_control(obj){
-    if($("#"+obj.parentNode.parentNode.id +" .title").children().length==3){
-        return;
+    show_menu(obj);
+    var card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id.toString());
+    card_jq.attr("onmousedown","function(){}");
+    card_jq.css({"-webkit-user-select":"auto","-ms-user-select":"auto"});
+    var this_title=$("#"+card.id +" .title");
+    var card_name_obj=$("#"+card.id +" .title .card-name");
+    var this_content=$("#"+card.id+" .content .card-content-p");
+    var content=this_content.text();
+    var title=card_name_obj.html();
+
+
+
+    var title_input=$("#"+card.id +" .title #title-input");
+
+    card_name_obj.css({"display":"none"});
+    title_input.css({"display":"block"});
+    title_input.attr("value",title);
+
+    var content_input=$("#"+card.id+" .content #content-input");
+    this_content.css({"display":"none"});
+    $("#"+card.id+" .content").css({"background-color":"transparent"});
+    content_input.css({"display":"block"});
+    content_input.attr("value",content);
+    content_input.text(content);
+
+    $("#"+card.id+" .content .cancel").css({"display":"inline-block"});
+    $("#"+card.id+" .content .change").css({"display":"inline-block"});
+
+    $("#"+card.id+" .content .cancel").attr("onClick","cancel_edit(this)");
+    $("#"+card.id+" .content .change").attr("onClick","save_edit(this)");
+
+
+
+
+    var pos=get_col_row(card_jq);
+    var col=pos[0];
+    var row=pos[1];
+    if(row<rows_arr[col]){
+        var prev=$("#"+window.my_map[col][row+1]);
+        set_float_card_in_colum_position(prev);
     }
     else{
-        var card=obj.parentNode.parentNode;
-        var card_jq=$("#"+card.id.toString());
-        card_jq.attr("onmousedown","function(){}");
-        card_jq.css({"-webkit-user-select":"auto","-ms-user-select":"auto"});
-        var this_title=$("#"+card.id +" .title");
-        var card_name_obj=$("#"+card.id +" .title .card-name");
-        var this_content=$("#"+card.id+" .content .card-content-p");
-        var content=this_content.text();
-        var title=card_name_obj.html();
-
-        this_title.append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
-
-        var title_input=$("#"+card.id +" .title #title-input");
-
-        card_name_obj.css({"display":"none"});
-        title_input.css({"display":"block"});
-        title_input.attr("value",title);
-
-        $("#"+card.id+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
-        var content_input=$("#"+card.id+" .content #content-input");
-        this_content.css({"display":"none"});
-        $("#"+card.id+" .content").css({"background-color":"transparent"});
-        $("#"+card.id+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
-        $("#"+card.id+" .content .cancel").attr("onClick","cancel_edit(this)");
-        $("#"+card.id+" .content .change").attr("onClick","save_edit(this)");
-        content_input.css({"display":"block"});
-        content_input.attr("value",content);
-        content_input.text(content);
-
-        var pos=get_col_row(card_jq);
-        var col=pos[0];
-        var row=pos[1];
-        if(row<rows_arr[col]){
-            var prev=$("#"+window.my_map[col][row+1]);
-            set_float_card_in_colum_position(prev);
-        }
-        else{
-            return;
-        }
-        fresh_height_arr();
-        reset_col_top(col,0);
-        add_missing_cards();
-        set_container_height();
-
-
+        return;
     }
+    fresh_height_arr();
+    reset_col_top(col,0);
+    add_missing_cards();
+    set_container_height();
+
 }
+
+
+
 function cancel_edit(obj){
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
@@ -161,12 +195,11 @@ function cancel_edit(obj){
     card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
     $("#"+card.id +" .title #title-input").css({"display":"none"});
     $("#"+card.id+" .content #content-input").css({"display":"none"});
-    $("#"+card.id+" .content .cancel").remove();
-    $("#"+card.id+" .content .change").remove();
+    $("#"+card.id+" .content .cancel").css({"display":"none"});
+    $("#"+card.id+" .content .change").css({"display":"none"});
     $("#"+card.id +" .title .card-name").css({"display":"block"});
     $("#"+card.id+" .content .card-content-p").css({"display":"block"});
-    $("#"+card.id +" .title #title-input").remove();
-    $("#"+card.id+" .content #content-input").remove();
+
     var pos=get_col_row(card_jq);
     var col=pos[0];
     var row=pos[1];
@@ -192,17 +225,19 @@ function save_edit(obj){
     card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
     var card_name=$("#"+card.id +" .title #title-input").val();
     var card_content=$("#"+card.id+" .content #content-input").val();
+    var reg=new RegExp("\n","g");
+    card_content= card_content.replace(reg,"<br>");
     $("#"+card.id +" .title .card-name").html(card_name);
-    $("#"+card.id+" .content .card-content-p p").text(card_content);
+    $("#"+card.id+" .content .card-content-p p").html(card_content);
     $("#"+card.id +" .title #title-input").css({"display":"none"});
     $("#"+card.id+" .content #content-input").css({"display":"none"});
-    $("#"+card.id+" .content .cancel").remove();
-    $("#"+card.id+" .content .change").remove();
+    $("#"+card.id+" .content .cancel").css({"display":"none"});
+    $("#"+card.id+" .content .change").css({"display":"none"});
     $("#"+card.id +" .title .card-name").css({"display":"block"});
     $("#"+card.id+" .content .card-content-p").css({"display":"block"});
 
-    $("#"+card.id +" .title #title-input").remove();
-    $("#"+card.id+" .content #content-input").remove();
+//    $("#"+card.id +" .title #title-input").remove();
+//    $("#"+card.id+" .content #content-input").remove();
     var pos=get_col_row(card_jq);
     var col=pos[0];
     var row=pos[1];
@@ -217,4 +252,9 @@ function save_edit(obj){
     reset_col_top(col,0);
     add_missing_cards();
     set_container_height();
+}
+
+function set_card_color(obj){
+    var card=obj.parentNode.parentNode.parentNode;
+    var card_jq=$("#"+card.toString());
 }
