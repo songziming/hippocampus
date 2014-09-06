@@ -132,7 +132,7 @@ function move(event)
             }
 
             var upside_col_No=get_Row_No(window.target,recent_col_No);
-            //console.log(upside_col_No);
+
             if(upside_col_No==0){
                 //continue;
             }
@@ -178,7 +178,6 @@ function init_map(){
     }
 }
 function init_card_position(){
-    //console.log("!!!!");
 
     var card_num=$("#container-main").children(".card").length;
     //alert(card_num);
@@ -344,7 +343,6 @@ function find_lowest_colum(){
             $("#container-main").css({"height":(window.heightest_length+100).toString()+"px"});
         }
     }
-    console.log(lowest_no);
     return lowest_no;
 }
 function set_container_height(){
@@ -402,9 +400,7 @@ function fresh_height_arr() {
             }
 
         }
-        //window.col_height_arr[i]-=10;
-
-        console.log(i+"  "+j+"  "+ window.col_height_arr[i]);
+        //console.log(i+"  "+j+"  "+ window.col_height_arr[i]);
 
     }
 }
@@ -476,7 +472,6 @@ function exchange_down(){
 
     set_float_card_in_colum_position(target_down_obj);
 
-    show_map();
 }
 //向左移动
 function exchange_left(col,mouse_y) {

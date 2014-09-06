@@ -2,12 +2,11 @@
  * Created by WunG on 2014/9/4.
  */
 function bindlistener(){
-    $("#header-plus").click(function(){
-        addcard("新卡片","请填写你的内容");
-    });
+    $("#header-plus").attr("onclick","addcard(\"新卡片\",\"请填写你的内容\")");
     $(".card-action").attr("onclick","show_menu(this)");
     $(".colors").attr("onclick","show_color_board(this)");
     $(".edit").attr("onclick","create_edit_control(this)");
+    $(".color-block").attr("onclick","set_card_color(this)");
 }
 function addcard(title,content){
 
@@ -23,12 +22,11 @@ function addcard(title,content){
     var lowest=find_lowest_colum();
     var card_left=window.container_left_edge+(lowest)*window.card_width;
     var card_top=window.col_height_arr[lowest];
-    console.log(card_top);
     cards.animate({opacity:'show',left:card_left.toString()+"px",top:card_top.toString()+"px"},200,"linear");
     var card_height=cards.outerHeight();
-    //window.col_height_arr[lowest]+=card_height+10;
+
     window.rows_arr[lowest]++;
-    console.log(window.rows_arr[lowest]);
+
     window.my_map[lowest][(window.rows_arr[lowest])]=cards.attr("id");
     if(($("#"+id.toString()+" .menu")).length<=0){
         $("#"+id.toString()+" .card-content-p p").text(content);
@@ -44,6 +42,7 @@ function addcard(title,content){
     $("#"+id.toString()+" .card-action").attr("onclick","show_menu(this)");
     $("#"+id.toString()+" .colors").attr("onclick","show_color_board(this)");
     $("#"+id.toString()+" .edit").attr("onclick","create_edit_control(this)");
+    $("#"+id.toString()+".color-block").attr("onclick","set_card_color(this)");
     set_float_card_in_colum_position(cards);
     fresh_height_arr();
     add_missing_cards();
@@ -76,7 +75,6 @@ function add_missing_cards(){
     for(var k=0;k<cardnum;k++){
         if(miss_cards[k]!=true){
             var ress=$("#card"+k.toString());
-            console.log("k "+k);
             move_cards_to_new_place(k);
         }
     }
@@ -114,7 +112,6 @@ function show_color_board(obj){
 
 function move_cards_to_new_place(cardsnum){
     var cards=$("#card"+cardsnum.toString());
-    console.log("#card"+cardsnum.toString());
     var lowest=find_lowest_colum();
     var card_left=window.container_left_edge+(lowest)*window.card_width;
     var card_top=window.col_height_arr[lowest];
@@ -127,9 +124,6 @@ function move_cards_to_new_place(cardsnum){
     cards.animate({opacity:'show',left:card_left.toString()+"px",top:card_top.toString()+"px"},200,"linear");
     window.rows_arr[lowest]++;
     window.my_map[lowest][(window.rows_arr[lowest])]=cards.attr("id");
-    //fresh_height_arr();
-
-    //reset_col_top(lowest,0);
 }
 
 function create_edit_control(obj){
@@ -199,6 +193,7 @@ function cancel_edit(obj){
     $("#"+card.id+" .content .change").css({"display":"none"});
     $("#"+card.id +" .title .card-name").css({"display":"block"});
     $("#"+card.id+" .content .card-content-p").css({"display":"block"});
+    $("#"+card.id+" .content").css({"background-color":"rgba(255,255,255,0.5)"});
 
     var pos=get_col_row(card_jq);
     var col=pos[0];
@@ -235,9 +230,8 @@ function save_edit(obj){
     $("#"+card.id+" .content .change").css({"display":"none"});
     $("#"+card.id +" .title .card-name").css({"display":"block"});
     $("#"+card.id+" .content .card-content-p").css({"display":"block"});
+    $("#"+card.id+" .content").css({"background-color":"rgba(255,255,255,0.5)"});
 
-//    $("#"+card.id +" .title #title-input").remove();
-//    $("#"+card.id+" .content #content-input").remove();
     var pos=get_col_row(card_jq);
     var col=pos[0];
     var row=pos[1];
@@ -256,5 +250,11 @@ function save_edit(obj){
 
 function set_card_color(obj){
     var card=obj.parentNode.parentNode.parentNode;
-    var card_jq=$("#"+card.toString());
+    var card_jq=$("#"+card.id.toString());
+    var color_class=obj.className.slice(12,obj.className.length);
+
+    card_jq.attr("class","card "+color_class.toString());
+    show_menu(obj.parentNode);
+
+
 }
