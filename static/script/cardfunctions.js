@@ -1,18 +1,47 @@
 /**
  * Created by WunG on 2014/9/4.
  */
+function loadcards(){
+
+}
+
+function my_card(id,title,content,index,color,category){
+    this.id=(id||set_card_id());
+    this.title=(title||"请添加标题");
+    this.content=(content||"请添加新内容");
+    this.index=index;
+    this.category=(category||"default");
+    this.corlor=color;
+    this.set_category=function(category){
+        this.category=category;
+    };
+    this.set_color=function(colorclass){
+        this.color=colorclass;
+    }
+    return this;
+}
+
 function bindlistener(){
     $("#header-plus").attr("onclick","addcard(\"新卡片\",\"请填写你的内容\")");
+
     $(".card-action").attr("onclick","show_menu(this)");
     $(".colors").attr("onclick","show_color_board(this)");
     $(".edit").attr("onclick","create_edit_control(this)");
     $(".color-block").attr("onclick","set_card_color(this)");
+    $(".set-class").attr("onclick","show_card_class_input(this)");
+    $(".change-class-yes").attr("onclick","change_class_name(this)");
 }
 function addcard(title,content){
 
-    var cardnum=$("#container-main").children().length;
-    var id="card"+(cardnum).toString();
 
+    var cardnum=$("#container-main").children().length;
+
+
+
+//    var id="card"+(cardnum).toString();
+    var id=set_card_id();
+    var card_o=new my_card(id,title,content);
+    window.cards_arr.push(card_o);
     var color="color"+(cardnum%10).toString();
     $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-ellipsis-v fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
     var cards=$("#"+id.toString());
@@ -30,34 +59,42 @@ function addcard(title,content){
     window.my_map[lowest][(window.rows_arr[lowest])]=cards.attr("id");
     if(($("#"+id.toString()+" .menu")).length<=0){
         $("#"+id.toString()+" .card-content-p p").text(content);
-        cards.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+        cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" alt=\"\"/></div><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
         $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
         $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
 
         $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+
+        $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
     }
 
     $("#"+id.toString()+" .card-action").attr("onclick","show_menu(this)");
     $("#"+id.toString()+" .colors").attr("onclick","show_color_board(this)");
     $("#"+id.toString()+" .edit").attr("onclick","create_edit_control(this)");
-    $("#"+id.toString()+".color-block").attr("onclick","set_card_color(this)");
+    $("#"+id.toString()+" .color-block").attr("onclick","set_card_color(this)");
+    $("#"+id.toString()+" .set-class").attr("onclick","show_card_class_input(this)");
+    $("#"+id.toString()+" .change-class-yes").attr("onclick","change_class_name(this)");
     set_float_card_in_colum_position(cards);
     fresh_height_arr();
-    add_missing_cards();
+    //add_missing_cards();
+    //show_map();
+
 }
 function add_missing_cards(){
     var cardnum=$("#container-main").children().length;
     var miss_cards=new Array(cardnum-1);
     for(var x=0;x<=cardnum;x++){
-        miss_cards[x]=false;
+
     }
     for(var i=0;i<window.col_num;i++){
         for(var j=0;j<=window.rows_arr[i];j++){
             if(window.my_map[i][j]==""||typeof(window.my_map[i][j])=="undefined"){
+
                 if(j!=window.rows_arr[i]){
                     for(var y=j;y<rows_arr[i];y++){
+
                         window.my_map[i][y]=window.my_map[i][y+1];
                     }
                 }
@@ -130,7 +167,10 @@ function create_edit_control(obj){
     show_menu(obj);
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
-    card_jq.attr("onmousedown","function(){}");
+
+    card_jq.attr("onmousedown","");
+    card_jq.attr("onMouseUp","");
+
     card_jq.css({"-webkit-user-select":"auto","-ms-user-select":"auto"});
     var this_title=$("#"+card.id +" .title");
     var card_name_obj=$("#"+card.id +" .title .card-name");
@@ -211,6 +251,8 @@ function cancel_edit(obj){
     set_container_height();
 
 }
+
+
 function save_edit(obj){
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
@@ -257,6 +299,72 @@ function set_card_color(obj){
     show_menu(obj.parentNode);
 }
 
-function set_card_category(obj){
+function show_card_class_input(obj){
     var  card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id);
+    var input_block_jq= $("#"+card.id+" .class-input-block");
+//    if(input_block_jq.css("display")=="none"){
+//
+//        card_jq.attr("onMouseDown","function(){}");
+//        card_jq.attr("onMouseUp","function(){}");
+//
+//        input_block_jq.show();
+//        show_menu(obj);
+//    }else if(input_block_jq.css("display")=="block"){
+//
+//        $("#"+card.id.toString()).attr("onMouseDown","mouseDown(this,event)");
+//        $("#"+card.id.toString()).attr("onMouseDown","Up(event)");
+//        input_block_jq.hide();
+//    }
+    show_menu(obj);
+    input_block_jq.show();
+    card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
+    card_jq.attr("onmousedown","");
+    card_jq.attr("onMouseUp","");
+
+}
+
+function change_class_name(obj){
+    var card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id.toString());
+    var card_class=$("#"+card.id.toString()+" .class-input-block .card-class-name-input").val();
+    var x=search_arr_by_id(card.id);
+    if(x!=false){
+        x.category=card_class;
+    }
+    card_jq.attr("onMouseDown","mouseDown(this,event)");
+    card_jq.attr("onMouseUp","up(event)");
+    card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
+    //show_card_class_input();
+    $("#"+card.id+" .class-input-block").hide();
+    card_jq.attr("onMouseDown","mouseDown(this,event)");
+    show_id();
+}
+
+function set_card_id(){
+    //hxstr=$.md5(username+new Date().getTime());
+    hxstr=$.md5(new Date().getTime().toString());
+    return hxstr;
+
+}
+function show_id(){
+    for(var x =0;x<window.cards_arr.length;x++){
+        alert(window.cards_arr[x].category);
+    }
+
+}
+
+function search_arr_by_id(yourid){
+    var flag=false;
+    for(var x =0;x<window.cards_arr.length;x++){
+        if(window.cards_arr[x].id==yourid){
+
+            flag=true;
+            return window.cards_arr[x];
+
+        }
+    }
+    if(!flag){
+        return false;
+    }
 }

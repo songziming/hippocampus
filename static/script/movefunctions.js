@@ -15,6 +15,8 @@ function init_window_val(){
     window.old_top;
     window.container_top ;
     window.card_width=250;
+
+    window.cards_arr=new Array();
 //var window.container_left_edge=Math.floor($("#container-main").offset().left);
     window.container_left_edge=50;
 //alert(window.container_left_edge);
@@ -189,26 +191,33 @@ function init_card_position(){
         window.col_height_arr=new Array(card_num);
         window.rows_arr=new Array(window.col_num);
 
+
         for(var i=0;i<card_num;i++){
             var card_left=window.container_left_edge+i*window.card_width;
 
             cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
 
 
+
             window.my_map[0][i]=cards.attr("id");
+
             window.col_height_arr[i]=cards.outerHeight();
 
             var id=cards.attr("id");
+            var card_o=new my_card(id);
+            window.cards_arr.push(card_o);
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" alt=\"\"/></div><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
                 $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
                 $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
 
                 $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+
+                $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
             }
             cards=cards.next(".card");
         }
@@ -230,22 +239,23 @@ function init_card_position(){
             window.rows_arr[i]=0;
 
             var id=cards.attr("id");
+            var card_o=new my_card(id);
+            window.cards_arr.push(card_o);
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" alt=\"\"/></div><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
                 $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
                 $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
 
                 $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+
+                $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
             }
 
-
-
             cards=cards.next(".card");
-
         }
 
         //初始化高度数组
@@ -283,20 +293,22 @@ function init_card_position(){
             window.my_map[col_No][(window.rows_arr[col_No])]=cards.attr("id");
 
             var id=cards.attr("id");
+            var card_o=new my_card(id,"","");
+            window.cards_arr.push(card_o);
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" alt=\"\"/></div><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
                 $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
                 $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
 
                 $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+
+                $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
+
             }
-
-
-
             cards=cards.next(".card");
         }
         //根据高度自动填充剩余card
@@ -395,7 +407,9 @@ function fresh_height_arr() {
             window.col_height_arr[i]+=$("#"+window.my_map[i][j]).outerHeight()+10;
 
             if(window.rows_arr[i]>0 && j>0){
-                window.my_top_map[i][j]=window.my_top_map[i][j-1]+$("#"+window.my_map[i][j-1].toString()).outerHeight()+10;
+                if(typeof (window.my_map[i][j-1])!="undefined") {
+                    window.my_top_map[i][j] = window.my_top_map[i][j - 1] + $("#" + window.my_map[i][j - 1].toString()).outerHeight() + 10;
+                }
 
             }
 
