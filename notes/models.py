@@ -9,6 +9,7 @@ class Note(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User)
     title = models.CharField(max_length=128)
+    category = models.CharField(max_length=128)
     content = models.CharField(max_length=65536)
     index = models.IntegerField()
     def __unicode__(self):  # 相当于toString
