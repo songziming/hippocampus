@@ -255,6 +255,8 @@ function set_card_color(obj){
 
     card_jq.attr("class","card "+color_class.toString());
     show_menu(obj.parentNode);
+}
 
-
+function set_card_category(obj){
+    var  card=obj.parentNode.parentNode;
 }
