@@ -15,9 +15,9 @@
 
 <body onresize="colum_num_listener()">
 	<div id="header">
-		<div id="boards">
+		<div id="boards" onclick="hide_side_bar()">
             <span class="fa-tasks fa icon-tasks"></span>
-            <span class="header-tasks">管理</span>
+            <span class="header-tasks" >卡片组</span>
             <!--笔记本/私人或队伍/拉人等等功能-->
 		</div>
 		<div id="header-search-div">
@@ -26,12 +26,25 @@
 			<img class="icon-new-window icon" src="../../static/images/new-window.png">
 			<img class="icon-close icon" src="../../static/images/close.png">
 		</div>
-		<div id="header-logo-div">
+		<div id="header-logo-div" onclick="init_card_position()">
 			<img src="../../static/images/logo.png" alt="Hpcp">
 		</div>
-		<div id="header-new-bar-creator">
+		<div id="header-new-bar-creator" onclick="init_card_position()" >
 			<span class="left-arrow"></span>
-			<span id="new-bar">新建卡片！</span>
+			<span id="new-bar" onclick="function b(){var card_num=$("#container-main").children(".card").length;
+            cards=$("#container-main").children(".card").first();
+
+            for(var i=0;i<card_num;i++){
+
+            cards.css({left:"60px",top:"80px"});
+            cards.hide(20);
+
+            cards=cards.next(".card");
+            }
+
+            init_card_position();
+            window.heightest_length=0;
+            bindlistener();}">洗牌~~</span>
 		</div>
 		<div id="header-hpcp">
             <img src="../../static/images/hpcp.png" alt="海马体"/>
@@ -199,15 +212,25 @@
 
     </div>
 
-        <script>
-            init_window_val();
-            init_map();
-            init_card_position();
-            bindlistener();
 
+    <div id="group">
 
-
-        </script>
+        <div class="card-group" id="default-group">默认</div>
+        <div class="card-group" id="all-group">全部</div>
+        <div class="card-group" id="archieved-group">已归档</div>
+        <div id="hide-bar" onclick="hide_side_bar()">
+            <span class="fa-angle-double-left fa" ></span>
+        </div>
+    </div>
 
 </body>
+<script>
+    init_window_val();
+    init_map();
+    init_card_position();
+    bindlistener();
+    set_sidebar_active();
+
+
+</script>
 </html>

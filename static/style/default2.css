@@ -6,7 +6,7 @@
     #container-main{
         width: 96%;
         padding:0 2% 0 2%;
-        min-width: 768px;
+        min-width: 550px;
     }
 
 
@@ -50,9 +50,24 @@
         width: 90%;
         margin-left: 5%;
         padding: 10px;
-        min-width: 480px;
+        /*min-width: 480px;*/
         overflow-x: hidden !important;
         overflow-y: visible;
+    }
+    .card{
+        width: 80% !important;
+    }
+    #title-input{
+        width: 80% !important;
+    }
+    #content-input{
+        width: 80% !important;
+    }
+    .card-content-p{
+        width: 80% !important;
+    }
+    .card-content-p{
+        width: 96% !important;
     }
 
 }
@@ -67,13 +82,14 @@ body{
 
 #header{
     top:0;
-    position: absolute;
+    position: fixed;
 	background-color: #293e6a;
 	color: #393939;
 	height: 34px;
 	margin: 0 auto;
 	/*width: 100%;*/
 	width: 100%;
+    z-index: 2;
 	padding-top: 5px;
 	padding-bottom: 2px;
 	display: inline-block;
@@ -173,6 +189,7 @@ body{
 }
 #new-bar{
 	left:7px;
+    z-index:5;
 	position: absolute;
 	width: auto;
 	height: auto;
@@ -211,13 +228,13 @@ body{
 	height: 32px;
 	color: #FFF;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
 	line-height: 32px;
     margin:auto;
     text-align: center;
 }
 #header-hpcp img{
-    z-index: 1;
+    z-index: 2;
     text-align: center;
     height: 34px;
     text-align: center;
@@ -348,6 +365,7 @@ body{
     box-shadow:-1px 2px 1px 1px rgba(0,0,0,0.2);
     -webkit-user-select:none;
     -ms-user-select:none;
+    z-index: 0;
 }
 .card-name{
     float: left;
@@ -475,7 +493,7 @@ body{
     display: inline-block;
     background-color: #293e6a;
     top: 36px;
-    left:92px;
+    right:0px;
     padding-top: 4px;
     padding-left: 4px;
     padding-right: 4px;
@@ -631,6 +649,60 @@ body{
 .card-class-name-input:focus{
     background-color:rgba(255,255,255,0.6);
 }
+
+
+#group{
+    position:fixed;
+    height: 100%;
+    width: 110px;
+    z-index: 1;
+    top: 0px;
+    left:-110px;
+    background-color: rgba(59,89,152,0.9);
+}
+.card-group{
+    width: 100%;
+    height: 50px;
+    background-color: rgba(59,89,152,0.8);
+    color: #eee;
+    text-indent: 1em;
+    line-height: 50px;
+    margin-top: 0px;
+    font-size: 14px;
+    cursor: pointer;
+    border-top:1px solid rgb(70,110,170);
+}
+.card-group:hover{
+    background-color: rgba(99,155,241,0.3);
+}
+#default-group{
+    margin-top: 40px;
+}
+.active-group{
+    background-color:rgba(99,155,241,0.3);
+}
+#hide-bar{
+    position:absolute;
+    top:45%;
+    right:0px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 45px;
+    display: block;
+    color: #fff;
+    font-size: 40px;
+    background-color: rgba(255,255,255,0.2 );
+    cursor: pointer;
+    transition:width 2s;
+    -moz-transition:background-color 0.3s; /* Firefox 4 */
+    -webkit-transition: background-color 0.3s; /* Safari and Chrome */
+    -o-transition:background-color 0.3s; /* Opera */
+}
+#hide-bar:hover{
+    background-color: rgba(255,255,255,0.4);
+}
+
 /* 设置滚动条的样式 */
 ::-webkit-scrollbar {
     width: 10px;

@@ -14,7 +14,7 @@ function init_window_val(){
     window.old_left;
     window.old_top;
     window.container_top ;
-    window.card_width=250;
+    window.card_width=$(".card").width()+10;
 
     window.cards_arr=new Array();
 //var window.container_left_edge=Math.floor($("#container-main").offset().left);
@@ -24,6 +24,7 @@ function init_window_val(){
     window.col_num=Math.floor(window.container_width/window.card_width);
     window.col_height_arr;
     window.heightest_length=0;
+    window.group_arr=new Array(["default","archieved"]);
 
 
 
@@ -73,7 +74,7 @@ function up(event)
         //alert("")
         set_float_card_in_colum_position($("#"+window.target.id.toString()),event.pageX,event.pageY);
 
-        add_missing_cards();
+        //add_missing_cards();
     }
 
 }
@@ -209,7 +210,7 @@ function init_card_position(){
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" alt=\"\"/></div><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
                 $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
@@ -221,6 +222,7 @@ function init_card_position(){
             }
             cards=cards.next(".card");
         }
+        set_container_height();
 
 
     }
@@ -244,7 +246,7 @@ function init_card_position(){
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" alt=\"\"/></div><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
                 $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
@@ -256,6 +258,7 @@ function init_card_position(){
             }
 
             cards=cards.next(".card");
+            set_container_height();
         }
 
         //初始化高度数组
@@ -298,7 +301,7 @@ function init_card_position(){
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" alt=\"\"/></div><div class=\"card-menu-icon edit\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
                 $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
@@ -310,6 +313,7 @@ function init_card_position(){
 
             }
             cards=cards.next(".card");
+            set_container_height();
         }
         //根据高度自动填充剩余card
 
@@ -318,6 +322,7 @@ function init_card_position(){
 }
 function colum_num_listener(){
     var new_col_num=Math.floor($("#container-main").width()/window.card_width);
+    window.card_width=$(".card").width()+10;
     if(new_col_num<window.col_num){
         window.col_num=new_col_num;
         init_card_position();
@@ -358,13 +363,13 @@ function find_lowest_colum(){
     return lowest_no;
 }
 function set_container_height(){
-
+    var heightest_length=window.container_top;
     for(var i=0;i<window.col_num;i++){
-        if(window.col_height_arr[i]>window.heightest_length){
-            window.heightest_length=window.col_height_arr[i];
+        if(window.col_height_arr[i]>heightest_length){
+            heightest_length=window.col_height_arr[i];
         }
     }
-    $("#container-main").css({"height":(window.heightest_length+100).toString()+"px"});
+    $("#container-main").css({"height":(heightest_length+100).toString()+"px"});
 
 }
 
@@ -385,6 +390,7 @@ function set_float_card_in_colum_position(cards,mX,mY){
         var target_left=window.container_left_edge+window.card_width*recent_col;
         my_card.css({left:target_left.toString()+"px",top:target_top.toString()+"px"});
     }
+    set_container_height();
 
 }
 function find_null_map_value() {
@@ -407,11 +413,16 @@ function fresh_height_arr() {
             window.col_height_arr[i]+=$("#"+window.my_map[i][j]).outerHeight()+10;
 
             if(window.rows_arr[i]>0 && j>0){
-                if(typeof (window.my_map[i][j-1])!="undefined") {
+                if(typeof (window.my_map[i][j-1])=="undefined") {
+                    window.my_map[i][j-1]=window.my_map[i][j];
+                    window.my_top_map[i][j-1]=window.my_top_map[i][j];
+                }
+                else{
                     window.my_top_map[i][j] = window.my_top_map[i][j - 1] + $("#" + window.my_map[i][j - 1].toString()).outerHeight() + 10;
                 }
 
             }
+
 
         }
         //console.log(i+"  "+j+"  "+ window.col_height_arr[i]);
@@ -589,7 +600,7 @@ function show_map() {
     for(var i=0;i<window.col_num;i++){
         console.log("第"+i+"列行数："+window.rows_arr[i]);
         for(var j=0;j<=window.rows_arr[i];j++){
-            console.log(i+" "+j+" "+window.my_map[i][j]);
+            console.log(i+" "+j+" "+window.my_top_map[i][j]);
         }
     }
     console.log("\n\n");
