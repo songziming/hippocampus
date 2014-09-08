@@ -321,31 +321,65 @@ function init_card_position(){
 
 }
 function colum_num_listener(){
-    var new_col_num=Math.floor($("#container-main").width()/window.card_width);
-    window.card_width=$(".card").width()+10;
-    if(new_col_num<window.col_num){
-        window.col_num=new_col_num;
-        init_card_position();
-        bindlistener();
-    }
-    else if(new_col_num>window.col_num){
-        window.col_num=new_col_num;
-        //列数变多需要重新定位置
-        var card_num=$("#container-main").children(".card").length;
-        cards=$("#container-main").children(".card").first();
-
-        for(var i=0;i<card_num;i++){
-
-            cards.css({left:"60px",top:"80px"});
-            cards.hide(20);
-
-            cards=cards.next(".card");
+    if($(window).width()<=768){
+        window.container_left_edge=Math.floor($(window).width()/20);
+        var new_col_num=Math.floor($("#container-main").width()/window.card_width);
+        window.card_width=$(".card").width()+10;
+        if(new_col_num<window.col_num){
+            window.col_num=new_col_num;
+            init_card_position();
+            bindlistener();
         }
+        else if(new_col_num>window.col_num){
+            window.col_num=new_col_num;
+            //列数变多需要重新定位置
+            var card_num=$("#container-main").children(".card").length;
+            cards=$("#container-main").children(".card").first();
 
+            for(var i=0;i<card_num;i++){
+
+                cards.css({left:"60px",top:"80px"});
+                cards.hide(20);
+
+                cards=cards.next(".card");
+            }
+
+            init_card_position();
+            window.heightest_length=0;
+            bindlistener();
+        }
         init_card_position();
         window.heightest_length=0;
         bindlistener();
     }
+    else{
+        var new_col_num=Math.floor($("#container-main").width()/window.card_width);
+        window.card_width=$(".card").width()+10;
+        if(new_col_num<window.col_num){
+            window.col_num=new_col_num;
+            init_card_position();
+            bindlistener();
+        }
+        else if(new_col_num>window.col_num){
+            window.col_num=new_col_num;
+            //列数变多需要重新定位置
+            var card_num=$("#container-main").children(".card").length;
+            cards=$("#container-main").children(".card").first();
+
+            for(var i=0;i<card_num;i++){
+
+                cards.css({left:"60px",top:"80px"});
+                cards.hide(20);
+
+                cards=cards.next(".card");
+            }
+
+            init_card_position();
+            window.heightest_length=0;
+            bindlistener();
+        }
+    }
+
 }
 function find_lowest_colum(){
     var lowest_no=0;
