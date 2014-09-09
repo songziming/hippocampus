@@ -76,7 +76,7 @@
 
 	<div id="container-main" onMouseMove="move(event)" onMouseUp="up(event)">
 
-        <div class="card color0" id="card0" onMouseDown="mouseDown(this,event)" onMouseUp="up(event)">
+        <!-- <div class="card color0" id="card0" onMouseDown="mouseDown(this,event)" onMouseUp="up(event)">
             <div class="title">
                 <span class="card-name">卡片0</span>
                 <span class="card-action fa-bars fa"></span>
@@ -86,9 +86,9 @@
                 <p>请问这么执着的男子，是什么星座的啊？:男子搭公交没赶上 打的追7站问司机为什么不停车</p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="card color1" id="card1" onMouseDown="mouseDown(this,event)" onMouseUp="up(event)">
+        <!-- <div class="card color1" id="card1" onMouseDown="mouseDown(this,event)" onMouseUp="up(event)">
             <div class="title">
                 <span class="card-name">卡片1</span>
                 <span class="card-action fa-bars fa"></span>
@@ -122,7 +122,7 @@
                     <p>【不可不知的9道解酒招，你家男人会派上用场】1. 蜂蜜水—酒后头痛 ；2.西红柿汁—酒后头晕 ；3.新鲜葡萄—酒后反胃、恶心 ；4.西瓜汁—酒后全身发热 ；5.柚子—酒后口气 ；6.芹菜汁—酒后胃肠不适、颜面发红 ；7.酸奶—酒后烦躁 ；8.香蕉—酒后心悸、胸闷 ；9.橄榄—酒后厌食。</p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!--
         <div class="card color4" id="card4" onMouseDown="mouseDown(this,event)" onMouseUp="up(event)">
@@ -197,9 +197,9 @@
                 </div>
             </div>
         </div>
-
+        -->
     </div>
-    -->
+    
 
 
     <div id="group">
@@ -212,13 +212,18 @@
     </div>
 
 </body>
-<script>
+<script> 
+
     init_window_val();
-    init_map();
-    init_card_position();
-    bindlistener();
-    set_sidebar_active();
+     init_map();
     load_cards();
+    set_sidebar_active();
+    // show_id();
+    //change_group_view();
+    //init_card_position();
+    bindlistener();
+    
+    //load_cards();
 
     function b(){
         var card_num=$("#container-main").children(".card").length;cards=$("#container-main").children(".card").first();for(var i=0;i<card_num;i++){

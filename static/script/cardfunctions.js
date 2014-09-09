@@ -11,7 +11,7 @@ function my_card(id,title,content,index,color,category){
     this.content=(content||"请添加新内容");
     this.index=index;
     this.category=(category||"默认");
-    this.corlor=(color||"color0");
+    this.color=(color||"color0");
     this.setCategory=function(category){
         this.category=category;
     };
@@ -36,36 +36,50 @@ function bindlistener(){
 }
 function addcard(title,content){
 
-
     var cardnum=$("#container-main").children().length;
-
-
-
-//    var id="card"+(cardnum).toString();
     var id=set_card_id();
     var card_o=new my_card(id,title,content);
-
-    var color="color"+(cardnum%10).toString();
+    var color="color"+(cardnum%9).toString();
     $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
     var cards=$("#"+id.toString());
 
     cards.attr("class","card "+color);
     card_o.setColor(color);
     window.cards_arr.push(card_o);
+    window.allcards.push(card_o);
 
-    var lowest=find_lowest_colum();
-    var card_left=window.container_left_edge+(lowest)*window.card_width;
-    var card_top=window.col_height_arr[lowest];
-    if((typeof(card_top)=="undefined")){
-        card_top=80;
+    if(cardnum>=window.col_num){
+         
+
+
+            var lowest=find_lowest_colum();
+            var card_left=window.container_left_edge+(lowest)*window.card_width;
+            var card_top=window.col_height_arr[lowest];
+            if((typeof(card_top)=="undefined")){
+                card_top=80;
+            }
+            cards.animate({opacity:'show',left:card_left.toString()+"px",top:card_top.toString()+"px"},200,"linear");
+            window.rows_arr[lowest]++;
+            var card_height=parseInt(cards.outerHeight());
+            window.col_height_arr[lowest]+=card_height+10;
+            window.my_map[lowest][(window.rows_arr[lowest])]=cards.attr("id");
+   
     }
-    cards.animate({opacity:'show',left:card_left.toString()+"px",top:card_top.toString()+"px"},200,"linear");
-    var card_height=cards.outerHeight();
-
-    window.rows_arr[lowest]++;
-
-    window.my_map[lowest][(window.rows_arr[lowest])]=cards.attr("id");
-    if(($("#"+id.toString()+" .menu")).length<=0){
+    else{
+            var lowest=cardnum;
+            var card_left=window.container_left_edge+(lowest)*window.card_width;
+            var card_top=window.col_height_arr[lowest];
+            if((typeof(card_top)=="undefined")){
+            card_top=80;
+            }
+            cards.animate({opacity:'show',left:card_left.toString()+"px",top:card_top.toString()+"px"},200,"linear");
+             var card_height=cards.outerHeight();
+            window.rows_arr[lowest]=0;
+            var card_height=parseInt(cards.outerHeight());
+            window.col_height_arr[lowest]+=card_height+10;
+            window.my_map[lowest][0]=cards.attr("id");
+    }
+ if(($("#"+id.toString()+" .menu")).length<=0){
         $("#"+id.toString()+" .card-content-p p").text(content);
         cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
@@ -91,8 +105,8 @@ function addcard(title,content){
     fresh_height_arr();
     //add_missing_cards();
     //show_map();
-
 }
+
 function add_missing_cards(){
     var cardnum=$("#container-main").children().length;
     var miss_cards=new Array(cardnum-1);
@@ -366,7 +380,7 @@ function cancel_change_class_name(obj){
 
 function set_card_id(){
     //hxstr=$.md5(username+new Date().getTime());
-    hxstr=$.md5(new Date().getTime().toString());
+    hxstr=$.md5($("#header-username").html()+new Date().getTime().toString());
     return hxstr;
 
 }
@@ -537,11 +551,13 @@ function load_cards(){
                     if (find_category(notes[i].category)==-1) {
                             create_new_category(notes[i].category);
                     };
-                    //window.cards_arr.push(card);
+                    window.cards_arr[notes[i].index]=card;
                     window.allcards[notes[i].index]=card;
                     console.log(card);
+
                 };
                     show_id();
+                    change_group_view();
                 }          
          }); 
 }
@@ -561,9 +577,9 @@ function change_group_view(){
             if(window.allcards[i].category==target_category){
                 cards_arr.push(window.allcards[i]);
             }
-        }
-        init_map();
-        init_card_position();
-        bindlistener();
+        } 
     }
+    init_map();
+    init_card_position();
+    bindlistener();
 }

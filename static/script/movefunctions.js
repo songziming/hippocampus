@@ -13,9 +13,9 @@ function init_window_val(){
 //当鼠标左键点指定div时触发
     window.old_left;
     window.old_top;
-    window.container_top ;
-    window.card_width=$(".card").width()+10;
-
+    window.container_top=80 ;
+    // window.card_width=$(".card").width()+10;
+    window.card_width=250;
     window.allcards=new Array();
 
     window.cards_arr=new Array();
@@ -23,6 +23,7 @@ function init_window_val(){
     window.container_left_edge=50;
 //alert(window.container_left_edge);
     window.container_width=Math.floor($("#container-main").width());
+    //window.concatainer_width=250;
     window.col_num=Math.floor(window.container_width/window.card_width);
     window.col_height_arr=new Array([80]);
     window.heightest_length=0;
@@ -34,7 +35,7 @@ function init_window_val(){
     window.map_y=100;//每页最多有多少行
     window.my_map=new Array(window.map_x);//保存卡片位置的二维数组：
     window.my_top_map=new Array(window.map_x);//记录cardtop的二维数组！
-    window.rows_arr;
+    window.rows_arr=new Array([0]);
 
 
 }
@@ -182,8 +183,9 @@ function init_map(){
         }
     }
 }
-function init_card_position(){
 
+function init_card_position(){
+        $("container-main").children(".card").remove();
     //var card_num=$("#container-main").children(".card").length;
     var card_num=window.cards_arr.length;
     //alert(card_num);
@@ -199,17 +201,20 @@ function init_card_position(){
         for(var i=0;i<card_num;i++){
             var cards=window.cards_arr[i];
             var card_left=window.container_left_edge+i*window.card_width;
-
-            cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
-
-            window.my_map[0][i]=cards.attr("id");
-
-            window.col_height_arr[i]=cards.outerHeight();
             var id=cards.id;
-            $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
+           
 
-            var card_o=new my_card(id);
-            window.cards_arr.push(card_o);
+            window.my_map[i][0]=cards.id;
+            window.rows_arr[i]=0;
+
+            
+            $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
+            cards=$("#"+id);
+            window.col_height_arr[i]=cards.outerHeight();
+            
+             cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
+            //var card_o=new my_card(id);
+            //window.cards_arr.push(card_o);
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
@@ -226,6 +231,7 @@ function init_card_position(){
 
         }
         set_container_height();
+        show_map();
 
 
     }
@@ -236,16 +242,22 @@ function init_card_position(){
         window.rows_arr=new Array(window.col_num);
         //初始化第一行
         for(var i=0;i<window.col_num;i++){
+            var cards=window.cards_arr[i];
             var card_left=window.container_left_edge+i*window.card_width;
+            var id=cards.id;
+           
 
-            cards.animate({opacity:'show',left:card_left.toString()+"px"},0,"linear");
-
-            window.my_map[i][0]=cards.attr("id");
+            window.my_map[i][0]=cards.id;
             window.rows_arr[i]=0;
 
-            var id=cards.attr("id");
-            var card_o=new my_card(id);
-            window.cards_arr.push(card_o);
+            
+            $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
+            cards=$("#"+id);
+            window.col_height_arr[i]=cards.outerHeight();
+            
+             cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
+            //var card_o=new my_card(id);
+            //window.cards_arr.push(card_o);
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
@@ -259,14 +271,10 @@ function init_card_position(){
 
                 $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
             }
-
-            cards=cards.next(".card");
             set_container_height();
         }
 
         //初始化高度数组
-        cards=$("#container-main").children(".card").first();
-        window.container_top =cards.offset().top-10;
         for(var j=0;j<window.col_num;j++){
             window.col_height_arr[j]=parseInt(cards.offset().top)+parseInt(cards.outerHeight());
 
@@ -275,32 +283,21 @@ function init_card_position(){
         }
         //循环添加
         for(var k=window.col_num;k<card_num;k++){
-
+            var cards=window.cards_arr[k];
             var lowest=find_lowest_colum();
-
-            card_left=window.container_left_edge+(lowest)*window.card_width;
-
+            var card_left=window.container_left_edge+(lowest)*window.card_width;
             var card_top=window.col_height_arr[lowest];
+            var id=cards.id;
+
+             $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
+            cards=$("#"+id);
 
             cards.animate({opacity:'show',left:card_left.toString()+"px",top:card_top.toString()+"px"},200,"linear");
-
-
-
             var card_height=parseInt(cards.outerHeight());
-
             window.col_height_arr[lowest]+=card_height+10;
-
             var col_No=Math.floor((card_left-window.container_left_edge)/window.card_width);
-
-
             window.rows_arr[col_No]++;
-
-
-            window.my_map[col_No][(window.rows_arr[col_No])]=cards.attr("id");
-
-            var id=cards.attr("id");
-            var card_o=new my_card(id,"","");
-            window.cards_arr.push(card_o);
+            window.my_map[col_No][(window.rows_arr[col_No])]=id;
 
             if(($("#"+id.toString()+" .menu")).length<=0){
 
@@ -315,7 +312,7 @@ function init_card_position(){
                 $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
 
             }
-            cards=cards.next(".card");
+            
             set_container_height();
         }
         //根据高度自动填充剩余card
@@ -637,6 +634,7 @@ function show_map() {
     for(var i=0;i<window.col_num;i++){
         console.log("第"+i+"列行数："+window.rows_arr[i]);
         for(var j=0;j<=window.rows_arr[i];j++){
+            console.log(i+" "+j+" "+window.my_map[i][j]);
             console.log(i+" "+j+" "+window.my_top_map[i][j]);
         }
     }
@@ -655,6 +653,7 @@ function excute_top(col,row){
     }
     return res;
 }
+
 function excute_top_new(col,row){
     if(row==0){
         return window.container_top ;
