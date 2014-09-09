@@ -46,7 +46,7 @@ function addcard(title,content){
     var card_o=new my_card(id,title,content);
 
     var color="color"+(cardnum%10).toString();
-    $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-ellipsis-v fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
+    $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
     var cards=$("#"+id.toString());
 
     cards.attr("class","card "+color);
@@ -56,6 +56,9 @@ function addcard(title,content){
     var lowest=find_lowest_colum();
     var card_left=window.container_left_edge+(lowest)*window.card_width;
     var card_top=window.col_height_arr[lowest];
+    if((typeof(card_top)=="undefined")){
+        card_top=80;
+    }
     cards.animate({opacity:'show',left:card_left.toString()+"px",top:card_top.toString()+"px"},200,"linear");
     var card_height=cards.outerHeight();
 
@@ -534,7 +537,8 @@ function load_cards(){
                     if (find_category(notes[i].category)==-1) {
                             create_new_category(notes[i].category);
                     };
-                    window.cards_arr.push(card);
+                    //window.cards_arr.push(card);
+                    window.allcards[notes[i].index]=card;
                     console.log(card);
                 };
                     show_id();
@@ -542,10 +546,24 @@ function load_cards(){
          }); 
 }
 
-change_group_view(){
+function change_group_view(){
     var new_group_No=window.recent_group;
-    if(new_group_No==1){
-        load_cards();
-        window.
+
+    if(new_group_No==1){//判断到当前卡片组是所有卡片（因为所有并不算是一个分组~）
+        //load_cards();
+        window.cards_arr=window.allcards.concat();//复制所有卡片数组
+    }
+    else{
+        var target_category=window.group_arr[new_group_No];
+        window.cards_arr=[];
+        $("#container-main").children(".card").remove();
+        for(var i=0;i<window.allcards.length;i++){
+            if(window.allcards[i].category==target_category){
+                cards_arr.push(window.allcards[i]);
+            }
+        }
+        init_map();
+        init_card_position();
+        bindlistener();
     }
 }

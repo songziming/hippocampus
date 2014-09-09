@@ -16,16 +16,18 @@ function init_window_val(){
     window.container_top ;
     window.card_width=$(".card").width()+10;
 
+    window.allcards=new Array();
+
     window.cards_arr=new Array();
 //var window.container_left_edge=Math.floor($("#container-main").offset().left);
     window.container_left_edge=50;
 //alert(window.container_left_edge);
     window.container_width=Math.floor($("#container-main").width());
     window.col_num=Math.floor(window.container_width/window.card_width);
-    window.col_height_arr;
+    window.col_height_arr=new Array([80]);
     window.heightest_length=0;
     window.group_arr=new Array(["默认","全部","已归档"]);
-    window.recent_group=0;
+    window.recent_group=1;
 
 
     window.map_x=16;//每页最多有多少列
@@ -182,9 +184,10 @@ function init_map(){
 }
 function init_card_position(){
 
-    var card_num=$("#container-main").children(".card").length;
+    //var card_num=$("#container-main").children(".card").length;
+    var card_num=window.cards_arr.length;
     //alert(card_num);
-    var cards=$("#container-main").children(".card").first();
+    //var cards=$("#container-main").children(".card").first();
     //初始化第一行
 
     if(window.col_num>=card_num){
@@ -194,17 +197,17 @@ function init_card_position(){
 
 
         for(var i=0;i<card_num;i++){
+            var cards=window.cards_arr[i];
             var card_left=window.container_left_edge+i*window.card_width;
 
             cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
 
-
-
             window.my_map[0][i]=cards.attr("id");
 
             window.col_height_arr[i]=cards.outerHeight();
+            var id=cards.id;
+            $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
 
-            var id=cards.attr("id");
             var card_o=new my_card(id);
             window.cards_arr.push(card_o);
 
@@ -220,7 +223,7 @@ function init_card_position(){
 
                 $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
             }
-            cards=cards.next(".card");
+
         }
         set_container_height();
 
@@ -321,7 +324,7 @@ function init_card_position(){
 
 }
 function colum_num_listener(){
-    if($(window).width()<=768){
+    if($(window).width()<=780){
         window.container_left_edge=Math.floor($(window).width()/20);
         var new_col_num=Math.floor($("#container-main").width()/window.card_width);
         window.card_width=$(".card").width()+10;
