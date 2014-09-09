@@ -13,7 +13,7 @@ def default(request):
     # check if current user is authenticated
     if request.user.is_authenticated():
         context = { 'username': request.user.username, }
-        return render(request, 'user_system/default.html', context)
+        return render(request, 'user_system/default2.html', context)
     else:
         return HttpResponseRedirect('/login/')
 

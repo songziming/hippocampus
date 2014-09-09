@@ -43,7 +43,7 @@
 
 		<div id="header-user">
 
-            <span id="header-username">自highの宋子明</span>
+            <span id="header-username">{{username}}</span>
 			<img src="../../static/images/icon.jpg" class="user-icon header-user-icon">
 		</div>
 
@@ -76,7 +76,7 @@
 
 	<div id="container-main" onMouseMove="move(event)" onMouseUp="up(event)">
 
-        <div class="card color0" id="card0" onMouseDown="mouseDown(this,event)" onMouseUp="up(event)">
+        <!-- <div class="card color0" id="card0" onMouseDown="mouseDown(this,event)" onMouseUp="up(event)">
             <div class="title">
                 <span class="card-name">卡片0</span>
                 <span class="card-action fa-ellipsis-v fa"></span>
@@ -195,19 +195,18 @@
                 </div>
             </div>
         </div>
-
+ -->
 
     </div>
 
 
     <div id="group">
-
+         <div id="hide-bar" onclick="hide_side_bar()">
+            <span class="fa-angle-double-left fa" ></span>
+        </div>
         <div class="card-group" id="default-group">默认</div>
         <div class="card-group" id="all-group">全部</div>
         <div class="card-group" id="archieved-group">已归档</div>
-        <div id="hide-bar" onclick="hide_side_bar()">
-            <span class="fa-angle-double-left fa" ></span>
-        </div>
     </div>
 
 </body>
@@ -217,6 +216,7 @@
     init_card_position();
     bindlistener();
     set_sidebar_active();
+    load_cards();
 
     function b(){
         var card_num=$("#container-main").children(".card").length;cards=$("#container-main").children(".card").first();for(var i=0;i<card_num;i++){
@@ -226,7 +226,6 @@
 
             cards=cards.next(".card");
         }
-
         init_card_position();
         window.heightest_length=0;
         bindlistener();

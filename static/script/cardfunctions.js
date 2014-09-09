@@ -11,7 +11,7 @@ function my_card(id,title,content,index,color,category){
     this.content=(content||"请添加新内容");
     this.index=index;
     this.category=(category||"默认");
-    this.corlor=color;
+    this.corlor=(color||"color0");
     this.setCategory=function(category){
         this.category=category;
     };
@@ -313,19 +313,6 @@ function show_card_class_input(obj){
     var  card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id);
     var input_block_jq= $("#"+card.id+" .class-input-block");
-//    if(input_block_jq.css("display")=="none"){
-//
-//        card_jq.attr("onMouseDown","function(){}");
-//        card_jq.attr("onMouseUp","function(){}");
-//
-//        input_block_jq.show();
-//        show_menu(obj);
-//    }else if(input_block_jq.css("display")=="block"){
-//
-//        $("#"+card.id.toString()).attr("onMouseDown","mouseDown(this,event)");
-//        $("#"+card.id.toString()).attr("onMouseDown","Up(event)");
-//        input_block_jq.hide();
-//    }
     show_menu(obj);
     input_block_jq.show();
     card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
@@ -358,6 +345,7 @@ function change_class_name(obj){
         card_jq.attr("onMouseDown","mouseDown(this,event)");
     }
 }
+
 function cancel_change_class_name(obj){
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
@@ -381,7 +369,7 @@ function set_card_id(){
 }
 function show_id(){
     for(var x =0;x<window.cards_arr.length;x++){
-        console.log(x.toString()+" --- "+window.cards_arr[x].category);
+        console.log(x.toString()+" --- "+window.cards_arr[x].id);
     }
 
 }
@@ -414,6 +402,9 @@ function find_category(category){
 
 function create_new_category(category){
     window.group_arr.push(category);
+    $("#group").append("<div class=\"card-group\" id=\"user-group"+find_category(category).toString()+"\">"+category.toString()+"</div>");
+    //alert("已创建分组： "+category);
+    set_sidebar_active();
 }
 function move_card_to_another_category(){
 
@@ -494,15 +485,16 @@ function set_sidebar_active(){
         var x=$("#group").children(".card-group").first();
         for(var i=0;i<$("#group").children(".card-group").length;i++){
             if(x.attr("id")==id){
-
                 index=i;
                 x.attr("class","card-group active-group");
+                if(window.recent_group!=i){
+                    change_group_view();
+                }
             }
             else{
-
                 x.attr("class","card-group");
             }
-            x= x.next();
+            x= x.next(".card-group");
         }
 
     });
@@ -524,3 +516,36 @@ Array.prototype.remove = function(val) {
         this.splice(index, 1);
     }
 };
+
+function load_cards(){
+         $.ajax({
+         type: "GET",
+         url: "/do_get_notes/",
+         data: {},
+         dataType: "json",
+         success: function(resText){
+                console.log(resText);
+                var status=resText["status"];
+                console.log(status);
+                var notes=resText["notes"];
+                window.card_num=notes.length;
+                for(var i=0;i<window.card_num;i++){
+                    var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,null,notes[i].category);
+                    if (find_category(notes[i].category)==-1) {
+                            create_new_category(notes[i].category);
+                    };
+                    window.cards_arr.push(card);
+                    console.log(card);
+                };
+                    show_id();
+                }          
+         }); 
+}
+
+change_group_view(){
+    var new_group_No=window.recent_group;
+    if(new_group_No==1){
+        load_cards();
+        window.
+    }
+}

@@ -24,8 +24,8 @@ function init_window_val(){
     window.col_num=Math.floor(window.container_width/window.card_width);
     window.col_height_arr;
     window.heightest_length=0;
-    window.group_arr=new Array(["default","archieved"]);
-
+    window.group_arr=new Array(["默认","全部","已归档"]);
+    window.recent_group=0;
 
 
     window.map_x=16;//每页最多有多少列
