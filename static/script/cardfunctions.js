@@ -537,7 +537,7 @@ function load_cards(){
                     if (find_category(notes[i].category)==-1) {
                             create_new_category(notes[i].category);
                     };
-                    //window.cards_arr.push(card);
+                    window.cards_arr[notes[i].index]=card;
                     window.allcards[notes[i].index]=card;
                     console.log(card);
                 };

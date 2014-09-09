@@ -23,6 +23,7 @@ function init_window_val(){
     window.container_left_edge=50;
 //alert(window.container_left_edge);
     window.container_width=Math.floor($("#container-main").width());
+    //window.concatainer_width=250;
     window.col_num=Math.floor(window.container_width/window.card_width);
     window.col_height_arr=new Array([80]);
     window.heightest_length=0;
@@ -34,7 +35,7 @@ function init_window_val(){
     window.map_y=100;//每页最多有多少行
     window.my_map=new Array(window.map_x);//保存卡片位置的二维数组：
     window.my_top_map=new Array(window.map_x);//记录cardtop的二维数组！
-    window.rows_arr;
+    window.rows_arr=new Array([0]);
 
 
 }
@@ -182,6 +183,7 @@ function init_map(){
         }
     }
 }
+
 function init_card_position(){
 
     //var card_num=$("#container-main").children(".card").length;
@@ -655,6 +657,7 @@ function excute_top(col,row){
     }
     return res;
 }
+
 function excute_top_new(col,row){
     if(row==0){
         return window.container_top ;
