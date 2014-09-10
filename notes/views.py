@@ -12,7 +12,7 @@ def do_get_notes(request):
         arr = Note.objects.all().filter(user = request.user)
         res['notes'] = [];
         for e in arr:
-            res['notes'].append({'id': e.id, 'title': e.title, 'category': e.category, 'content': e.content, 'index': e.index,});
+            res['notes'].append({'id': e.id, 'title': e.title, 'category': e.category, 'content': e.content, 'index': e.index, 'color': e.color});
     else:
         res['status'] = 1
     return HttpResponse(json.dumps(res), content_type='application/json')
@@ -30,7 +30,7 @@ def do_create_note(request):
     res = {}
     if request.user.is_authenticated() and request.user.is_active and 'title' in request.POST and 'category' in request.POST and 'content' in request.POST and 'index' in request.POST:
         # Note.objects.create(user = request.user, title = request.POST['title'], content = request.POST['content'])
-        note = Note(user = request.user, title = request.POST['title'], category = request.POST['category'], content = request.POST['content'], index=request.POST['index'])
+        note = Note(user = request.user, title = request.POST['title'], category = request.POST['category'], content = request.POST['content'], index=request.POST['index'], color = request.POST['color'])
         note.save()
         # res['id'] = note.id;
         res['status'] = 0
@@ -40,16 +40,17 @@ def do_create_note(request):
 
 def do_update_note(request):
     res = {}
-    if request.user.is_authenticated() and request.user.is_active and 'id' in request.POST and 'title' in request.POST and 'category' in request.POST and 'content' in request.POST and 'index' in request.POST:
+    if request.user.is_authenticated() and request.user.is_active and 'id' in request.POST and 'title' in request.POST and 'category' in request.POST and 'content' in request.POST and 'index' in request.POST and 'color' in request.POST:
         try:
             note = Note.objects.get(user = request.user, id = request.POST['id'])
         except Note.DoesNotExist:
             res['status'] = 2
         else:
             note.title = request.POST['title']
-            note.title = request.POST['category']
+            note.category = request.POST['category']
             note.content = request.POST['content']
             note.index = request.POST['index']
+            note.color = request.POST['color']
             note.save()
             res['status'] = 0
     else:

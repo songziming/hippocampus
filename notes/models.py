@@ -12,5 +12,6 @@ class Note(models.Model):
     category = models.CharField(max_length=128)
     content = models.CharField(max_length=65536)
     index = models.IntegerField()
+    color = models.CharField(max_length=128)
     def __unicode__(self):  # 相当于toString
         return "%s's note %s" % (self.user, self.title)
