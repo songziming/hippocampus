@@ -38,8 +38,17 @@ function addcard(title,content){
 
     var cardnum=$("#container-main").children().length;
     var id=set_card_id();
-    var card_o=new my_card(id,title,content);
     var color="color"+(cardnum%9).toString();
+    var card_o;
+    if(window.recent_group<=1){
+            card_o=new my_card(id,title,content,window.allcards.length,color,null);
+            
+    }
+    else{
+        var target_category=window.group_arr[window.recent_group];
+        card_o=new my_card(id,title,content,window.allcards.length,color,target_category);
+    }
+    console.log(card_o);
     $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
     var cards=$("#"+id.toString());
 
@@ -104,7 +113,7 @@ function addcard(title,content){
     set_float_card_in_colum_position(cards);
     fresh_height_arr();
     //add_missing_cards();
-    //show_map();
+    show_map();
 }
 
 function add_missing_cards(){
@@ -341,25 +350,35 @@ function show_card_class_input(obj){
 function change_class_name(obj){
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
+    $("#"+card.id+" .class-input-block").hide();
+        card_jq.attr("onMouseDown","mouseDown(this,event)");
+        card_jq.attr("onMouseUp","up(event)");
+        card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
+        //show_card_class_input()
+        card_jq.attr("onMouseDown","mouseDown(this,event)");
     var card_class=$("#"+card.id.toString()+" .class-input-block .card-class-name-input").val();
-    if(card_class==""){
+    var old_category=search_arr_by_id(card.id).category;
+    if(card_class==old_category){
+	//类名没变，什么也不做
+    }
+    else if(card_class==""){
         alert("卡片组名不能为空!");
     }
     else{
         var x=search_arr_by_id(card.id);
         if(x!=false ){
             var find_res=find_category(card_class);
-            if(find_res==-1){
-                create_new_category(card_class);
+            if(find_res==-1){                       //没有找到这个分类
+                create_new_category(card_class);//创建新的分类
             }
-            x.setCategory(card_class);
+		//如果当前分类是全部，那么不做，否则从当前数组和视图中去除这个卡片；
+            if(window.recent_group==1){
+
+            }else{
+                    remove_card(obj,1);
+            }
         }
-        card_jq.attr("onMouseDown","mouseDown(this,event)");
-        card_jq.attr("onMouseUp","up(event)");
-        card_jq.css({"-webkit-user-select":"none","-ms-user-select":"none"});
-        //show_card_class_input();
-        $("#"+card.id+" .class-input-block").hide();
-        card_jq.attr("onMouseDown","mouseDown(this,event)");
+         x.setCategory(card_class);
     }
 }
 
@@ -418,7 +437,9 @@ function find_category(category){
 }
 
 function create_new_category(category){
-    window.group_arr.push(category);
+    //console.log(window.group_arr);
+    window.group_arr[(window.group_arr.length)]=category;
+
     $("#group").append("<div class=\"card-group\" id=\"user-group"+find_category(category).toString()+"\">"+category.toString()+"</div>");
     //alert("已创建分组： "+category);
     set_sidebar_active();
@@ -432,7 +453,7 @@ function archive(obj){
     var x=search_arr_by_id(card.id);
     if(x!=false){
         x.setCategory("已归档");
-        alert("已归档！");
+        remove_card(obj,1);
     }else{
         alert("对不起，无法归档！请稍后再试~");
     }
@@ -440,9 +461,9 @@ function archive(obj){
     //show_id();
 }
 
-function remove_card(obj){
+function remove_card(obj,isDelete){
     show_menu(obj);
-    show_map();
+    
     var card=obj.parentNode.parentNode;
 
     var pos=get_col_row($("#"+card.id));
@@ -466,17 +487,18 @@ function remove_card(obj){
         window.my_map[col][0]="";
         window.rows_arr[col]=0;
     }
+    if(isDelete==null){
+            window.allcards.remove(card.id);
+    }
     window.cards_arr.remove(card.id);
-    $("#"+card.id).remove();
+    $("#"+card.id).animate({left:50,top:120,zoom:0.01,opacity:0},300);
+   setTimeout(function(){$("#"+card.id).remove();},500); 
 
     fresh_height_arr();
     reset_col_top(col,0);
     show_map();
     set_container_height();
-
-
     //发送消息
-
 }
 
 
@@ -505,6 +527,9 @@ function set_sidebar_active(){
                 index=i;
                 x.attr("class","card-group active-group");
                 if(window.recent_group!=i){
+                    //alert(i);
+                    console.log(window.group_arr);
+                    window.recent_group=i;
                     change_group_view();
                 }
             }
@@ -528,7 +553,12 @@ Array.prototype.indexOf = function(val) {
 };
 //删除数组中的指定下表元素
 Array.prototype.remove = function(val) {
-    var index = this.indexOf(val);
+    var index=-1;
+    for(var x=0;x<this.length;x++){
+        if(this[x].id==val){
+            index=x;
+        }
+    }
     if (index > -1) {
         this.splice(index, 1);
     }
@@ -571,6 +601,7 @@ function change_group_view(){
     }
     else{
         var target_category=window.group_arr[new_group_No];
+        //alert(target_category);
         window.cards_arr=[];
         $("#container-main").children(".card").remove();
         for(var i=0;i<window.allcards.length;i++){

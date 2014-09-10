@@ -27,7 +27,7 @@ function init_window_val(){
     window.col_num=Math.floor(window.container_width/window.card_width);
     window.col_height_arr=new Array([80]);
     window.heightest_length=0;
-    window.group_arr=new Array(["默认","全部","已归档"]);
+    window.group_arr=["默认","全部","已归档"];
     window.recent_group=1;
 
 
@@ -210,7 +210,7 @@ function init_card_position(){
             
             $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
             cards=$("#"+id);
-            window.col_height_arr[i]=cards.outerHeight();
+            window.col_height_arr[i]=cards.outerHeight()+window.container_top+10;
             
              cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
             //var card_o=new my_card(id);
@@ -253,7 +253,7 @@ function init_card_position(){
             
             $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
             cards=$("#"+id);
-            window.col_height_arr[i]=cards.outerHeight();
+            window.col_height_arr[i]=cards.outerHeight()+window.container_top+10;
             
              cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
             //var card_o=new my_card(id);
@@ -276,10 +276,9 @@ function init_card_position(){
 
         //初始化高度数组
         for(var j=0;j<window.col_num;j++){
+            var cards=window.cards_arr[j];
+            cards=$("#"+cards.id);
             window.col_height_arr[j]=parseInt(cards.offset().top)+parseInt(cards.outerHeight());
-
-
-            cards=cards.next(".card");
         }
         //循环添加
         for(var k=window.col_num;k<card_num;k++){
@@ -320,8 +319,9 @@ function init_card_position(){
     }
 
 }
+
 function colum_num_listener(){
-    if($(window).width()<=780){
+    if($(window).width()<=767){
         window.container_left_edge=Math.floor($(window).width()/20);
         var new_col_num=Math.floor($("#container-main").width()/window.card_width);
         window.card_width=$(".card").width()+10;
@@ -381,6 +381,7 @@ function colum_num_listener(){
     }
 
 }
+
 function find_lowest_colum(){
     var lowest_no=0;
 
@@ -396,6 +397,7 @@ function find_lowest_colum(){
     }
     return lowest_no;
 }
+
 function set_container_height(){
     var heightest_length=window.container_top;
     for(var i=0;i<window.col_num;i++){
@@ -634,8 +636,8 @@ function show_map() {
     for(var i=0;i<window.col_num;i++){
         console.log("第"+i+"列行数："+window.rows_arr[i]);
         for(var j=0;j<=window.rows_arr[i];j++){
-            console.log(i+" "+j+" "+window.my_map[i][j]);
-            console.log(i+" "+j+" "+window.my_top_map[i][j]);
+            console.log("my_map: "+i+" "+j+" "+window.my_map[i][j]);
+            console.log("my_top_map: "+i+" "+j+" "+window.my_top_map[i][j]);
         }
     }
     console.log("\n\n");
