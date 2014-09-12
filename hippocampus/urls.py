@@ -30,4 +30,5 @@ urlpatterns = patterns('',
     url(r'^do_delete_note/$', 'notes.views.do_delete_note'),
     url(r'^do_get_notes_order/$', 'notes.views.do_get_notes_order'),
     url(r'^do_update_notes_order/$', 'notes.views.do_update_notes_order'),
+    url(r'^do_update_indexes/$', 'notes.views.do_update_indexes'),
 )

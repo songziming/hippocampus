@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from notes.models import Note
 from user_system.models import UserProfile
 import json
+from StringIO import StringIO
 
 # Create your views here.
 def do_get_notes(request):
@@ -111,6 +112,27 @@ def do_update_notes_order(request):
         else:
             profile.notesOrder = request.POST['notesorder']
             profile.save()
+            res['status'] = 0
+    else:
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type = "application/json")
+
+def __update_index__(request, id, index):
+    note = Note.objects.get(user = request.user, id = request.POST['id'])
+    note.index = index
+    note.save()
+
+# preferred POST data: {"pairs":[{"id":1, "index":5}, {"id":2, "index":4}]}
+def do_update_indexes(request):
+    res = {}
+    if request.user.is_authenticated() and request.user.is_active and 'pairs' in request.POST:
+        try:
+            pairs = json.load(StringIO(request.POST['pairs']));
+            for e in pairs:
+                __update_index__(request, e.id, e.index)
+        except Note.DoesNotExist:
+            res['status'] = 2
+        else:
             res['status'] = 0
     else:
         res['status'] = 1
