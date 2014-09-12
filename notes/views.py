@@ -38,8 +38,8 @@ def do_create_note(request):
             note.category = request.POST['category']
         if 'content' in request.POST:
             note.content = request.POST['content']
-#        if 'index' in request.POST:
-#            note.index = request.POST['index']
+        if 'index' in request.POST:
+            note.index = request.POST['index']
         if 'color' in request.POST:
             note.color = request.POST['color']
         note.save()
@@ -63,8 +63,8 @@ def do_update_note(request):
                 note.category = request.POST['category']
             if 'content' in request.POST:
                 note.content = request.POST['content']
-#            if 'index' in request.POST:
-#                note.index = request.POST['index']
+            if 'index' in request.POST:
+                note.index = request.POST['index']
             if 'color' in request.POST:
                 note.color = request.POST['color']
             note.save()

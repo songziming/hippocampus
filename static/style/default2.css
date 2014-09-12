@@ -297,11 +297,11 @@ body{
     border-radius: 0px 5px 5px 0px;
     background-color: #3b5998;
 }
-#header-username:hover,#header-remind:hover,#header-plus:hover,#boards:hover{
+#header-username:hover,#header-remind:hover,#header-plus:hover,#boards:hover,#header-save:hover{
     background-color: #639bf1;
     cursor: pointer;
 }
-#header-plus{
+#header-plus,#header-save{
     position: relative;
     z-index: 5;
     float: right;
@@ -313,7 +313,7 @@ body{
     border-radius: 3px;
     text-align: center;
 }
-.icon-plus{
+.icon-plus,.icon-save{
     font-size: 20px;
     font-weight: normal;
     color: #fff;
@@ -417,6 +417,7 @@ body{
 }
 .card-content-p p{
     line-height: 20px;
+    word-wrap:break-word;
 }
 #title-input{
 
@@ -512,7 +513,7 @@ body{
     border-right: 6px solid transparent;
     position: absolute;
     top: -6px;
-    left: 118px;
+    right: 24px;
     -webkit-transition: border-right-color 85ms ease-in;
     transition: border-right-color 85ms ease-in;
 }

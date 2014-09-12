@@ -499,6 +499,9 @@ function exchange_up(){
     window.old_top=temp;
 
     set_float_card_in_colum_position(target_up_obj);
+    var ex_obj=search_arr_by_id(up_id);
+    var target_obj=search_arr_by_id(window.target.id);
+   // exchange_index(target_obj,ex_obj);
 
 }
 //向下移动
@@ -532,6 +535,11 @@ function exchange_down(){
     window.old_top=temp;
 
     set_float_card_in_colum_position(target_down_obj);
+    var ex_obj=search_arr_by_id(down_id);
+    var target_obj=search_arr_by_id(window.target.id);
+
+    //exchange_index(target_obj,ex_obj);
+
 
 }
 //向左移动
@@ -539,6 +547,7 @@ function exchange_left(col,mouse_y) {
     var target_jq=$("#"+window.target.id.toString());
     var left_Col_No=col;
     var row_No=get_Row_No(window.target,col+1);
+    var ex_obj;
 
 
     for(var i=0;i<=window.rows_arr[left_Col_No];i++){
@@ -546,6 +555,7 @@ function exchange_left(col,mouse_y) {
         if((obj.offset().top)<=mouse_y && (obj.offset().top+obj.outerHeight())>=mouse_y){
             obj.css({left:window.old_left+"px",top:window.old_top+"px"},200);
             window.my_map[col+1][row_No]=window.my_map[left_Col_No][i];
+            ex_obj=search_arr_by_id(window.my_map[left_Col_No][i]);
             window.my_map[left_Col_No][i]=window.target.id;
             window.old_left=col*window.card_width+window.container_left_edge;
             window.old_top=obj.offset().top;
@@ -559,6 +569,9 @@ function exchange_left(col,mouse_y) {
             break;
         }
     }
+    var target_obj=search_arr_by_id(window.target.id);
+
+   // exchange_index(target_obj,ex_obj);
 
 }
 //向右移动
@@ -566,6 +579,7 @@ function exchange_right(col,mouse_y) {
     var target_jq=$("#"+window.target.id.toString());
     var right_Col_No=col;
     var row_No=get_Row_No(window.target,col-1);
+    var ex_obj;
 
 
     for(var i=0;i<=window.rows_arr[right_Col_No];i++){
@@ -573,6 +587,8 @@ function exchange_right(col,mouse_y) {
         if((obj.offset().top)<=mouse_y && (obj.offset().top+obj.outerHeight())>=mouse_y){
             obj.css({left:window.old_left+"px",top:window.old_top+"px"},200);
             window.my_map[col-1][row_No]=window.my_map[right_Col_No][i];
+
+            ex_obj=search_arr_by_id(window.my_map[right_Col_No][i]);
             window.my_map[right_Col_No][i]=window.target.id;
             window.old_left=col*window.card_width+window.container_left_edge;
             window.old_top=obj.offset().top;
@@ -586,6 +602,9 @@ function exchange_right(col,mouse_y) {
             break;
         }
     }
+    var target_obj=search_arr_by_id(window.target.id);
+
+    //exchange_index(target_obj,ex_obj);
 
 }
 //刷新列元素高度
@@ -670,3 +689,32 @@ function excute_top_new(col,row){
     return res;
 }
 
+function exchange_index(obj1,obj2){
+    var index1=obj1.index;
+    var index2=obj2.index;
+    var flag=0;
+    $.ajax({
+        type: "POST",
+        url: "/do_update_note/",
+        data: {id:obj1.id,index:index2},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+                flag++;
+            }
+        }
+    });
+    $.ajax({
+        type: "POST",
+        url: "/do_update_note/",
+        data: {id:obj2.id,index:index1},
+        dataType: "json",
+        success: function(resText){
+            flag++;
+        }
+    });
+    if(flag==2){
+        obj1.index=index2;
+        obj2.index=index1;
+    }
+}

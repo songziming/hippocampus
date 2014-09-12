@@ -31,13 +31,13 @@
 		</div>
 		<div id="header-new-bar-creator" onclick="init_card_position()" >
 			<span class="left-arrow"></span>
-			<span id="new-bar" onclick="b()">洗牌~~</span>
+			<span id="new-bar" onclick="b()">重新整理</span>
 		</div>
 		<div id="header-hpcp">
             <img src="../../static/images/hpcp.png" alt="海马体"/>
 		</div>
 
-		<div id="header-remind">
+		<div id="header-remind" title="查看提醒">
 			<span class="fa fa-bell icon-remind"></span>
 		</div>
 
@@ -47,8 +47,11 @@
 			<img src="../../static/images/icon.jpg" class="user-icon header-user-icon">
 		</div>
 
-        <div id="header-plus">
+        <div id="header-plus" title="添加新记事">
         <span class="icon-plus fa-plus fa"></span>
+        </div>
+        <div id="header-save" title="存储当前布局">
+            <span class="icon-save fa-floppy-o fa"></span>
         </div>
 
 	</div>
@@ -212,13 +215,18 @@
     </div>
 
 </body>
-<script> 
+<script>
 
+
+
+    get_times();
     init_window_val();
      init_map();
     load_cards();
     set_sidebar_active();
     bindlistener();
+    //save_all_cards();
+    //get_index();
 
     function b(){
         var card_num=$("#container-main").children(".card").length;cards=$("#container-main").children(".card").first();for(var i=0;i<card_num;i++){

@@ -6,23 +6,35 @@ function loadcards(){
 }
 
 function my_card(id,title,content,index,color,category){
-    this.id=(id||set_card_id());
+    this.id=(id||"");
     this.title=(title||"请添加标题");
     this.content=(content||"请添加新内容");
     this.index=index;
     this.category=(category||"默认");
     this.color=(color||"color0");
+    this.setId=function(id){
+        this.id=id;
+    };
     this.setCategory=function(category){
         this.category=category;
     };
     this.setColor=function(colorclass){
         this.color=colorclass;
+    };
+    this.setIndex=function(){
+        this.index=index;
+    }
+    this.setTitle=function(title){
+        this.title=title;
+    }
+    this.setContent=function(content){
+        this.content=content;
     }
     return this;
 }
 
 function bindlistener(){
-    $("#header-plus").attr("onclick","addcard(\"新卡片\",\"请填写你的内容\")");
+    $("#header-plus").attr("onclick","send_add_cards()");
     $(".menu").attr("onblur","show_menu(this.parentNode)");
     $(".card-action").attr("onclick","show_menu(this)");
     $(".colors").attr("onclick","show_color_board(this)");
@@ -34,20 +46,24 @@ function bindlistener(){
     $(".archive").attr("onclick","archive(this)");
     $(".delete").attr("onclick","remove_card(this)");
 }
-function addcard(title,content){
+function addcard(id,title,content){
 
     var cardnum=$("#container-main").children().length;
-    var id=set_card_id();
+    var category;
     var color="color"+(cardnum%9).toString();
-    var card_o;
     if(window.recent_group<=1){
-            card_o=new my_card(id,title,content,window.allcards.length,color,null);
-            
+        //card_o=new my_card(id,title,content,window.allcards.length,color,null);
+        category="默认";
+
     }
     else{
-        var target_category=window.group_arr[window.recent_group];
-        card_o=new my_card(id,title,content,window.allcards.length,color,target_category);
+        category=window.group_arr[window.recent_group];
+        //card_o=new my_card(id,title,content,window.allcards.length,color,category);
     }
+
+    var card_o;
+    card_o=new my_card(id,title,content,window.allcards.length,color,category);
+    
     console.log(card_o);
     $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\"> <div class=\"title\"><span class=\"card-name\">'+title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p></p></div></div></div>');
     var cards=$("#"+id.toString());
@@ -295,6 +311,7 @@ function save_edit(obj){
     var card_content=$("#"+card.id+" .content #content-input").val();
     var reg=new RegExp("\n","g");
     card_content= card_content.replace(reg,"<br>");
+    send_edit_change(card.id,card_name,card_content);
     $("#"+card.id +" .title .card-name").html(card_name);
     $("#"+card.id+" .content .card-content-p p").html(card_content);
     $("#"+card.id +" .title #title-input").css({"display":"none"});
@@ -330,6 +347,7 @@ function set_card_color(obj){
     var x=search_arr_by_id(card.id);
     if(x!=false){
         x.setColor(color_class);
+        send_edit_change(card.id,null,null,color_class);
     }
     //show_id();
     show_menu(obj.parentNode);
@@ -379,6 +397,7 @@ function change_class_name(obj){
             }
         }
          x.setCategory(card_class);
+        send_edit_change(card.id,null,null,null,card_class);
     }
 }
 
@@ -453,6 +472,7 @@ function archive(obj){
     var x=search_arr_by_id(card.id);
     if(x!=false){
         x.setCategory("已归档");
+        send_edit_change(card.id,null,null,null,"已归档");
         remove_card(obj,1);
     }else{
         alert("对不起，无法归档！请稍后再试~");
@@ -467,6 +487,7 @@ function remove_card(obj,isDelete){
     var card=obj.parentNode.parentNode;
 
     var pos=get_col_row($("#"+card.id));
+    var card_my=search_arr_by_id(card.id);
     var col=pos[0];
     var row=pos[1];
 
@@ -486,11 +507,15 @@ function remove_card(obj,isDelete){
     else{
         window.my_map[col][0]="";
         window.rows_arr[col]=0;
+        init_card_position();
     }
     if(isDelete==null){
             window.allcards.remove(card.id);
+            window.allcards.reset_index();
+            send_delete(card.id);
     }
     window.cards_arr.remove(card.id);
+    window.cards_arr.reset_index();
     $("#"+card.id).animate({left:50,top:120,zoom:0.01,opacity:0},300);
    setTimeout(function(){$("#"+card.id).remove();},500); 
 
@@ -542,7 +567,23 @@ function set_sidebar_active(){
     });
 }
 
+function set_bell(obj){
+    var card=obj.parentNode.parentNode;
+}
 
+function get_times() {
+    var d = new Date();
+    var vYear = d.getFullYear();
+    var vMon = d.getMonth() + 1;
+    var vDay = d.getDate();
+    var h = d.getHours(); 
+    var m = d.getMinutes(); 
+    var se = d.getSeconds();
+    //alert(d.toLocaleDateString());
+
+    var mytime=d.toLocaleTimeString();
+    //alert(d.toLocaleString());
+}
 
 //寻找数组中的指定元素下标
 Array.prototype.indexOf = function(val) {
@@ -563,6 +604,11 @@ Array.prototype.remove = function(val) {
         this.splice(index, 1);
     }
 };
+Array.prototype.reset_index = function() {
+    for(var x=0;x<this.length;x++){
+        this[x].index=x;
+    }
+};
 
 function load_cards(){
          $.ajax({
@@ -577,7 +623,7 @@ function load_cards(){
                 var notes=resText["notes"];
                 window.card_num=notes.length;
                 for(var i=0;i<window.card_num;i++){
-                    var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,null,notes[i].category);
+                    var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,notes[i].color,notes[i].category);
                     if (find_category(notes[i].category)==-1) {
                             create_new_category(notes[i].category);
                     };
@@ -586,11 +632,115 @@ function load_cards(){
                     console.log(card);
 
                 };
-                    show_id();
+                    //show_id();
                     change_group_view();
+                    convert_obj();
+                    get_index();
                 }          
          }); 
 }
+
+function send_add_cards(){
+    $.ajax({
+        type: "POST",
+        url: "/do_create_note/",
+        data: {title:"请输入标题",content:"请输入内容内容",category:function(){
+            if(window.recent_group<=1){
+                //card_o=new my_card(id,title,content,window.allcards.length,color,null);
+               return "默认";
+
+            }
+            else{
+                return window.group_arr[window.recent_group];
+                //card_o=new my_card(id,title,content,window.allcards.length,color,category);
+            }
+        },color:"color"+((window.card_num)%9).toString(),index:window.card_num},
+        dataType: "json",
+        success: function(resText){
+
+            if(resText.status==0){
+                window.card_num++;
+                var id=resText.id;
+                addcard(id,"请输入标题","请输入内容");
+            }
+
+        }
+    });
+
+}
+function send_edit_change(id,card_name,card_content,color,category){
+    if(card_name!=null){
+        $.ajax({
+            type: "POST",
+            url: "/do_update_note/",
+            data: {id:id,title:card_name,content:card_content},
+            dataType: "json",
+            success: function(resText){
+
+                if(resText.status==0){
+                    alert("成功保存！");
+                }
+
+            }
+        });
+    }
+    else if(color!=null){
+        $.ajax({
+            type: "POST",
+            url: "/do_update_note/",
+            data: {id:id,color:color},
+            dataType: "json",
+            success: function(resText){
+                if(resText.status==0){
+                }
+            }
+        });
+    }
+    else if(category!=null){
+        $.ajax({
+            type: "POST",
+            url: "/do_update_note/",
+            data: {id:id,category:category},
+            dataType: "json",
+            success: function(resText){
+                if(resText.status==0){
+                    //alert("成功应用更改！");
+                }
+            }
+        });
+    }
+}
+
+function send_delete(id){
+    $.ajax({
+        type: "POST",
+        url: "/do_delete_note/",
+        data: {id:id},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+
+            }
+        }
+    });
+    //remove_card(obj,)
+
+}
+
+function convert_obj() {
+    var arr=new Array();
+    for(var i=0;i<window.allcards.length;i++){
+        var str=window.allcards[i];
+        console.log(str);
+        str=JSON.stringify(str);
+        arr[i]=str;
+        console.log(str);
+    }
+    var res="["+arr.join(",")+"]";
+    save_all_cards(res);
+
+}
+
 
 function change_group_view(){
     var new_group_No=window.recent_group;
