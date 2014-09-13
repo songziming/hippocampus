@@ -36,6 +36,7 @@ function init_window_val(){
     window.my_map=new Array(window.map_x);//保存卡片位置的二维数组：
     window.my_top_map=new Array(window.map_x);//记录cardtop的二维数组！
     window.rows_arr=new Array([0]);
+    window.category_layouts=new Array();
 
 
 }
@@ -200,34 +201,38 @@ function init_card_position(){
 
         for(var i=0;i<card_num;i++){
             var cards=window.cards_arr[i];
-            var card_left=window.container_left_edge+i*window.card_width;
-            var id=cards.id;
-           
+            if(typeof (cards)=="undefined"){}
+            else{
+                var card_left=window.container_left_edge+i*window.card_width;
+                var id=cards.id;
 
-            window.my_map[i][0]=cards.id;
-            window.rows_arr[i]=0;
 
-            
-            $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
-            cards=$("#"+id);
-            window.col_height_arr[i]=cards.outerHeight()+window.container_top+10;
-            
-             cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
-            //var card_o=new my_card(id);
-            //window.cards_arr.push(card_o);
+                window.my_map[i][0]=cards.id;
+                window.rows_arr[i]=0;
 
-            if(($("#"+id.toString()+" .menu")).length<=0){
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"设置提醒\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
+                cards=$("#"+id);
+                window.col_height_arr[i]=cards.outerHeight()+window.container_top+10;
 
-                $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
+                cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
+                //var card_o=new my_card(id);
+                //window.cards_arr.push(card_o);
 
-                $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
+                if(($("#"+id.toString()+" .menu")).length<=0){
 
-                $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+                    cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"设置提醒\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
-                $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
+                    $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
+
+                    $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
+
+                    $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+
+                    $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
+                }
             }
+
 
         }
         set_container_height();
@@ -243,33 +248,36 @@ function init_card_position(){
         //初始化第一行
         for(var i=0;i<window.col_num;i++){
             var cards=window.cards_arr[i];
-            var card_left=window.container_left_edge+i*window.card_width;
-            var id=cards.id;
-           
+            if(typeof (cards)=="undefined"){}
+            else {
+                var card_left = window.container_left_edge + i * window.card_width;
+                var id = cards.id;
 
-            window.my_map[i][0]=cards.id;
-            window.rows_arr[i]=0;
 
-            
-            $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
-            cards=$("#"+id);
-            window.col_height_arr[i]=cards.outerHeight()+window.container_top+10;
-            
-             cards.animate({opacity:'show',left:card_left.toString()+"px"},200,"linear");
-            //var card_o=new my_card(id);
-            //window.cards_arr.push(card_o);
+                window.my_map[i][0] = cards.id;
+                window.rows_arr[i] = 0;
 
-            if(($("#"+id.toString()+" .menu")).length<=0){
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"设置提醒\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                $("#container-main").append('<div  id=\"' + id + '\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card ' + cards.color + '\"> <div class=\"title\"><span class=\"card-name\">' + cards.title + '</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>' + cards.content + '</p></div></div></div>');
+                cards = $("#" + id);
+                window.col_height_arr[i] = cards.outerHeight() + window.container_top + 10;
 
-                $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
+                cards.animate({opacity: 'show', left: card_left.toString() + "px"}, 200, "linear");
+                //var card_o=new my_card(id);
+                //window.cards_arr.push(card_o);
 
-                $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
+                if (($("#" + id.toString() + " .menu")).length <= 0) {
 
-                $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+                    cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"设置提醒\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
-                $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
+                    $("#" + id.toString() + " .title").append('<input' + ' id=\"title-input\" placeholder=\"请输入标题\">');
+
+                    $("#" + id.toString() + " .content").append('<textarea' + ' id=\"content-input\"><\/textarea>');
+
+                    $("#" + id.toString() + " .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+
+                    $("#" + id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
+                }
             }
             set_container_height();
         }
@@ -283,35 +291,37 @@ function init_card_position(){
         //循环添加
         for(var k=window.col_num;k<card_num;k++){
             var cards=window.cards_arr[k];
-            var lowest=find_lowest_colum();
-            var card_left=window.container_left_edge+(lowest)*window.card_width;
-            var card_top=window.col_height_arr[lowest];
-            var id=cards.id;
+            if(typeof (cards)=="undefined"){}
+            else {
+                var lowest = find_lowest_colum();
+                var card_left = window.container_left_edge + (lowest) * window.card_width;
+                var card_top = window.col_height_arr[lowest];
+                var id = cards.id;
 
-             $("#container-main").append('<div  id=\"'+id+'\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card '+cards.color+'\"> <div class=\"title\"><span class=\"card-name\">'+cards.title+'</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>'+ cards.content +'</p></div></div></div>');
-            cards=$("#"+id);
+                $("#container-main").append('<div  id=\"' + id + '\" onMouseDown=\"mouseDown(this,event)\" onMouseUp=\"up(event)\" class=\"card ' + cards.color + '\"> <div class=\"title\"><span class=\"card-name\">' + cards.title + '</span><span class=\"card-action fa-bars fa\"></span></div><div class=\"content\" ><div class=\"card-content-p\"><p>' + cards.content + '</p></div></div></div>');
+                cards = $("#" + id);
 
-            cards.animate({opacity:'show',left:card_left.toString()+"px",top:card_top.toString()+"px"},200,"linear");
-            var card_height=parseInt(cards.outerHeight());
-            window.col_height_arr[lowest]+=card_height+10;
-            var col_No=Math.floor((card_left-window.container_left_edge)/window.card_width);
-            window.rows_arr[col_No]++;
-            window.my_map[col_No][(window.rows_arr[col_No])]=id;
+                cards.animate({opacity: 'show', left: card_left.toString() + "px", top: card_top.toString() + "px"}, 200, "linear");
+                var card_height = parseInt(cards.outerHeight());
+                window.col_height_arr[lowest] += card_height + 10;
+                var col_No = Math.floor((card_left - window.container_left_edge) / window.card_width);
+                window.rows_arr[col_No]++;
+                window.my_map[col_No][(window.rows_arr[col_No])] = id;
 
-            if(($("#"+id.toString()+" .menu")).length<=0){
+                if (($("#" + id.toString() + " .menu")).length <= 0) {
 
-                cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"设置提醒\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+                    cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"设置提醒\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
-                $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
+                    $("#" + id.toString() + " .title").append('<input' + ' id=\"title-input\" placeholder=\"请输入标题\">');
 
-                $("#"+id.toString()+" .content").append('<textarea'+' id=\"content-input\"><\/textarea>');
+                    $("#" + id.toString() + " .content").append('<textarea' + ' id=\"content-input\"><\/textarea>');
 
-                $("#"+id.toString()+" .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
+                    $("#" + id.toString() + " .content").append('<div class=\"cancel\">取消</div><div class=\"change\">保存</div>');
 
-                $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
+                    $("#" + id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
 
+                }
             }
-            
             set_container_height();
         }
         //根据高度自动填充剩余card
@@ -655,8 +665,8 @@ function show_map() {
     for(var i=0;i<window.col_num;i++){
         console.log("第"+i+"列行数："+window.rows_arr[i]);
         for(var j=0;j<=window.rows_arr[i];j++){
-            console.log("my_map: "+i+" "+j+" "+window.my_map[i][j]);
-            console.log("my_top_map: "+i+" "+j+" "+window.my_top_map[i][j]);
+            console.log("my_map: "+i+"列 "+j+"行 "+window.my_map[i][j]);
+            //console.log("my_top_map: "+i+" "+j+" "+window.my_top_map[i][j]);
         }
     }
     console.log("\n\n");

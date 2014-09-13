@@ -1,9 +1,147 @@
 /**
  * Created by WunG on 2014/9/4.
  */
-function loadcards(){
-
+function Map() {
+this.keys = new Array();
+this.data = new Array();
+//添加键值对
+this.set = function (key, value) {
+if (this.data[key] == null) {//如键不存在则身【键】数组添加键名
+this.keys.push(value);
 }
+this.data[key] = value;//给键赋值
+};
+//获取键对应的值
+this.get = function (key) {
+return this.data[key];
+};
+//去除键值，(去除键数据中的键名及对应的值)
+this.remove = function (key) {
+this.keys.remove(key);
+this.data[key] = null;
+};
+//判断键值元素是否为空
+this.isEmpty = function () {
+return this.keys.length == 0;
+};
+//获取键值元素大小
+this.size = function () {
+return this.keys.length;
+};
+}
+
+//页面布局对象
+function category_layout(category,indexs){
+    this.category=category;
+    this.indexs=indexs;
+    return this;
+}
+
+function pairs(id,index){
+    this.id=id;
+    this.index=index;
+    return this;
+}
+
+function BuildDictionary() {
+    dic = new Object();
+    dic.Keys = new Array();      //键数组
+    dic.Values = new Array();   //值数组
+    return dic;
+}
+
+/*添加 key,value*/
+function AddItem(key, value, dic) {
+    var keyCount = dic.Keys.length;
+    if (keyCount > 0) {
+        var flag = true;
+        for (var i = 0; i < keyCount; i++) {
+            if (dic.Keys[i] == key) {
+                flag = false;
+                break; //如果存在则不添加
+            }
+        }
+        if (flag) {
+            dic.Keys.push(key)
+            dic.Values.push(value);
+        }
+    }
+    else {
+        dic.Keys.push(key)
+        dic.Values.push(value);
+    }
+    return dic;
+}
+/*更改key,value*/
+function UpdateItem(key, value, dic) {
+    var keyCount = dic.Keys.length;
+    if (keyCount > 0) {
+        var flag = -1;
+        for (var i = 0; i < keyCount; i++) {
+            if (dic.Keys[i] == key) {
+                flag = i;
+                break; //查找相应的index
+            }
+        }
+        if (flag > -1) {
+            dic.Keys[flag] = key;
+            dic.Values[flag] = value;
+        }
+        return dic;
+    }
+    else {
+        return dic;
+    }
+}
+/*移除key value*/
+function DeleteItem(key, dic) {
+    var keyCount = dic.Keys.length;
+    if (keyCount > 0) {
+        var flag = -1;
+        for (var i = 0; i < keyCount; i++) {
+            if (dic.Keys[i] == key) {
+                flag = i;
+                break; //查找相应的index
+            }
+        }
+        if (flag > -1) {
+            dic.Keys.splice(flag,1); //移除
+            dic.Values.splice(flag, 1);  //移除
+        }
+        return dic;
+    }
+    else {
+        return dic;
+    }
+}
+
+/*获取Key字符串,用符号拼接*/
+function  GetKeyStr(separator,dic)
+{
+  var keyCount=dic.Keys.length;
+  if(keyCount>0)
+  {
+  return dic.Keys.join(separator);
+  }
+  else
+  {
+  return '';
+  }
+}
+/*获取Value字符串,用符号拼接*/
+function  GetValueStr(separator,dic)
+{
+  var keyCount=dic.Keys.length;
+  if(keyCount>0)
+  {
+  return dic.Values.join(separator);
+  }
+  else
+  {
+  return '';
+  }
+}
+
 
 function my_card(id,title,content,index,color,category){
     this.id=(id||"");
@@ -312,6 +450,9 @@ function save_edit(obj){
     var reg=new RegExp("\n","g");
     card_content= card_content.replace(reg,"<br>");
     send_edit_change(card.id,card_name,card_content);
+    var x=search_arr_by_id(card.id);
+    x.setTitle(card_name);
+    x.setContent(card_content);
     $("#"+card.id +" .title .card-name").html(card_name);
     $("#"+card.id+" .content .card-content-p p").html(card_content);
     $("#"+card.id +" .title #title-input").css({"display":"none"});
@@ -442,6 +583,19 @@ function search_arr_by_id(yourid){
         return false;
     }
 }
+function search_all_cards_by_val(yourid){
+    var flag=false;
+    for(var x =0;x<window.cards_arr.length;x++){
+        if(window.cards_arr[x]==yourid){
+
+            flag=true;
+            return x;
+        }
+    }
+    if(!flag){
+        return false;
+    }
+}
 
 function find_category(category){
     var flag=-1;
@@ -513,8 +667,11 @@ function remove_card(obj,isDelete){
             window.allcards.remove(card.id);
             window.allcards.reset_index();
             send_delete(card.id);
+            window.allcards=remove_null_elemt(window.allcards);
+            window.cards_arr=remove_null_elemt(window.cards_arr);
     }
     window.cards_arr.remove(card.id);
+    window.cards_arr=remove_null_elemt(window.cards_arr);
     window.cards_arr.reset_index();
     $("#"+card.id).animate({left:50,top:120,zoom:0.01,opacity:0},300);
    setTimeout(function(){$("#"+card.id).remove();},500); 
@@ -585,6 +742,26 @@ function get_times() {
     //alert(d.toLocaleString());
 }
 
+Array.prototype.removeUseless=function(){
+    var last_useful_index=-1;
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == NaN ||typeof(this[i]) == "undefined"){
+
+        }
+        else{
+            if(last_useful_index==i-1){
+                last_useful_index++;
+            }
+            else{
+                last_useful_index++;
+                this[last_useful_index]=this[i];
+                this[i]=NaN;
+            }
+        }
+    }
+    this.splice(last_useful_index,this.length-last_useful_index-1);
+    this.reset_index();
+}
 //寻找数组中的指定元素下标
 Array.prototype.indexOf = function(val) {
     for (var i = 0; i < this.length; i++) {
@@ -622,22 +799,47 @@ function load_cards(){
                 console.log(status);
                 var notes=resText["notes"];
                 window.card_num=notes.length;
+                var temp_Arr1=new Array();
+                var temp_Arr2=new Array();
                 for(var i=0;i<window.card_num;i++){
-                    var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,notes[i].color,notes[i].category);
+                    if(window.allcards.length!=0){
+                        var card=new my_card(notes[i].id,notes[i].title,notes[i].content,search_all_cards_by_val(notes[i].id),notes[i].color,notes[i].category);
+                    }
+                    else{
+                        var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,notes[i].color,notes[i].category);
+                    }
+                    window.cards_arr[card.index]=card;
                     if (find_category(notes[i].category)==-1) {
                             create_new_category(notes[i].category);
                     };
-                    window.cards_arr[notes[i].index]=card;
-                    window.allcards[notes[i].index]=card;
+
+                   //temp_Arr2[notes[i].index]=card;
+
                     console.log(card);
 
                 };
                     //show_id();
+             //window.allcards.removeUseless();
+             window.cards_arr.removeUseless();
+             window.cards_arr.reset_index();
+              //window.allcards=remove_null_elemt(temp_Arr1);
+             //window.cards_arr=remove_null_elemt(window.cards_arr);
+             window.allcards=cards_arr.concat();
                     change_group_view();
-                    convert_obj();
-                    get_index();
+                    //convert_obj();
                 }          
          }); 
+}
+function remove_null_elemt(arr){
+    var temp=new Array();
+    for (var i = 0; i < arr.length; i++) {
+        if(arr[i]==NaN || typeof (arr[i])=="undefined"){
+
+        }else{
+            temp.push(arr[i]);
+        }
+    };
+    return temp;
 }
 
 function send_add_cards(){
@@ -662,6 +864,9 @@ function send_add_cards(){
                 window.card_num++;
                 var id=resText.id;
                 addcard(id,"请输入标题","请输入内容");
+                send_indexs();
+                show_map();
+                //save_layout();
             }
 
         }
@@ -676,7 +881,6 @@ function send_edit_change(id,card_name,card_content,color,category){
             data: {id:id,title:card_name,content:card_content},
             dataType: "json",
             success: function(resText){
-
                 if(resText.status==0){
                     alert("成功保存！");
                 }
@@ -708,6 +912,7 @@ function send_edit_change(id,card_name,card_content,color,category){
                 }
             }
         });
+        save_layout();
     }
 }
 
@@ -719,12 +924,74 @@ function send_delete(id){
         dataType: "json",
         success: function(resText){
             if(resText.status==0){
-
+                send_indexs();
+                //save_layout();
             }
         }
     });
     //remove_card(obj,)
 
+}
+function send_indexs(){
+    remove_null_elemt(window.allcards);
+    //window.allcards.reset_index();
+
+    var arr=excute_index();
+//    for (var i = 0; i < window.allcards.length; i++) {
+//        var x=new pairs(window.allcards[i].id,window.allcards[i].index);
+//
+//        arr.push(x);
+//    };
+        var layout=new category_layout(window.group_arr[window.recent_group],arr);
+    for(var j=0;j<=window.category_layouts.length;j++){
+
+    }
+    var layout_arr=new Array();
+    layout_arr.push(layout);
+    layout_arr=JSON.stringify(layout_arr);
+    $.ajax({
+        type: "POST",
+        url: "/do_update_notes_order/",
+        data: {notesorder:layout_arr},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+
+            }
+        }
+    });
+}
+
+function get_indexs(){
+
+    $.ajax({
+        type: "GET",
+        url: "/do_get_notes_order/",
+        data: {},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0) {
+                window.category_layouts=JSON.parse(resText.notesorder.concat());
+                alert(typeof (window.category_layouts));
+                console.log(window.category_layouts);
+                console.log(resText.notesorder);
+                for (var i = 0; i < window.category_layouts.length; i++) {
+                    if(window.category_layouts[i].category=="全部"){
+
+                        for(var j=0;j<window.category_layouts[i].indexs.length;j++){
+                            window.allcards[(window.category_layouts[i].indexs[j].index)] = window.category_layouts[i].index[j].id;
+                            load_cards();
+                        }
+                    }
+                    else{
+                        if (find_category(window.category_layouts[i].category)==-1) {
+                            create_new_category(window.category_layouts[i].category);
+                        }
+                    }
+                }
+            }
+        }
+    });
 }
 
 function convert_obj() {
@@ -763,4 +1030,74 @@ function change_group_view(){
     init_map();
     init_card_position();
     bindlistener();
+}
+
+function save_layout(){
+
+        var layouts_arr=new Array();
+        var current_category=group_arr[window.recent_group];
+        var current_indexs=excute_index();
+        var x=new category_layout(current_category,current_indexs);
+        var flag=false;
+        for(var i=0;i<window.category_layouts.length;i++){
+            if(window.category_layouts[i].category==current_category){
+                window.category_layouts[i]=x;
+                flag=true;
+                break;
+            }
+        }
+        if(!flag){
+            layouts_arr.push(window.category_layouts);
+        }
+
+    layouts_arr=JSON.stringify(layouts_arr);
+    $.ajax({
+        type: "POST",
+        url: "/do_update_notes_order/",
+        data: {notesorder:layouts_arr},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+                //alert("post");
+            }
+        }
+    });
+
+}
+
+function excute_index(){
+    var arr=new Array();
+    for (var j = 0; j < window.cards_arr.length; j++) {
+
+        var max_row=-1;
+        for(var x=0;x<window.col_num;x++){
+            if(window.rows_arr[x]>=max_row){
+                max_row=window.rows_arr[x];
+            }
+        }
+
+        var new_index=0;
+        for(var i=0;i<=max_row;i++){
+            for(var k=0;k<window.col_num;k++){
+                if(window.my_map[k][i]==window.cards_arr[j].id){
+                    var pair=new pairs(window.cards_arr[j].id,new_index);
+                    break;
+                }
+                else if(window.my_map[k][i]==NaN || window.my_map[k][i]=="" || typeof (window.my_map[k][i])=="undefined"){
+
+                }
+                else{
+                    new_index++;
+                }
+            }
+        }
+
+        arr.push(pair);
+    }
+    remove_null_elemt(arr);
+    //arr.reset_index();
+    //arr.removeUseless();
+    return arr;
+
+
 }
