@@ -37,6 +37,7 @@ function init_window_val(){
     window.my_top_map=new Array(window.map_x);//记录cardtop的二维数组！
     window.rows_arr=new Array([0]);
     window.category_layouts=new Array();
+    window.lastView;
 
 
 }
@@ -186,7 +187,8 @@ function init_map(){
 }
 
 function init_card_position(){
-        $("container-main").children(".card").remove();
+        $("#container-main").children().remove();
+        $("#container-main").html("");
     //var card_num=$("#container-main").children(".card").length;
     var card_num=window.cards_arr.length;
     //alert(card_num);
@@ -201,8 +203,6 @@ function init_card_position(){
 
         for(var i=0;i<card_num;i++){
             var cards=window.cards_arr[i];
-            if(typeof (cards)=="undefined"){}
-            else{
                 var card_left=window.container_left_edge+i*window.card_width;
                 var id=cards.id;
 
@@ -231,7 +231,7 @@ function init_card_position(){
 
                     $("#"+id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
                 }
-            }
+
 
 
         }
@@ -248,8 +248,7 @@ function init_card_position(){
         //初始化第一行
         for(var i=0;i<window.col_num;i++){
             var cards=window.cards_arr[i];
-            if(typeof (cards)=="undefined"){}
-            else {
+
                 var card_left = window.container_left_edge + i * window.card_width;
                 var id = cards.id;
 
@@ -278,7 +277,7 @@ function init_card_position(){
 
                     $("#" + id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
                 }
-            }
+
             set_container_height();
         }
 
@@ -291,8 +290,7 @@ function init_card_position(){
         //循环添加
         for(var k=window.col_num;k<card_num;k++){
             var cards=window.cards_arr[k];
-            if(typeof (cards)=="undefined"){}
-            else {
+
                 var lowest = find_lowest_colum();
                 var card_left = window.container_left_edge + (lowest) * window.card_width;
                 var card_top = window.col_height_arr[lowest];
@@ -321,12 +319,13 @@ function init_card_position(){
                     $("#" + id.toString()).append('<div class=\"class-input-block\"><input type=\"text\"  class=\"card-class-name-input\" ><div class=\"change-class-no\">取消</div><div class=\"change-class-yes\">确定</div></div>');
 
                 }
-            }
+
             set_container_height();
         }
         //根据高度自动填充剩余card
 
     }
+    bindlistener();
 
 }
 
@@ -358,7 +357,7 @@ function colum_num_listener(){
             window.heightest_length=0;
             bindlistener();
         }
-        init_card_position();
+        //init_card_position();
         window.heightest_length=0;
         bindlistener();
     }

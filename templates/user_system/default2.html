@@ -102,7 +102,7 @@
     init_window_val();
      init_map();
     //send_indexs();
-    load_cards();
+    //load_cards();
     get_indexs();
     set_sidebar_active();
     bindlistener();
@@ -112,16 +112,9 @@
     //get_index();
 
     function b(){
-        var card_num=$("#container-main").children(".card").length;cards=$("#container-main").children(".card").first();for(var i=0;i<card_num;i++){
 
-            cards.css({left:"60px",top:"80px"});
-            cards.hide(20);
-
-            cards=cards.next(".card");
-        }
         init_card_position();
-        window.heightest_length=0;
-        bindlistener();
+
     }
 
 </script>
