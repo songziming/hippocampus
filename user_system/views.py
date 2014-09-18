@@ -100,3 +100,12 @@ def do_update_preferences(request):
     res = {}
     return HttpResponse(json.dumps(res), content_type='application/json')
 
+def do_set_password(request):
+    res = {}
+    if request.user.is_authenticated() and request.user.is_active and 'password' in request.POST:
+        request.user.set_password(request.POST['password'])
+        request.user.save()
+        res['status'] = 0
+    else:
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type="application/json")
