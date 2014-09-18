@@ -1,0 +1,94 @@
+#header {
+    position: relative;
+    width: 101%;
+    background-color: #2DBE60;
+    height: 50px;
+    color: #fff;
+    line-height: 50px;
+    font-size: 14px;
+    z-index: 100 !important;
+}
+
+#weather {
+    position: relative;
+    margin-left: -30px;
+    text-align: left !important;
+}
+
+#user-info {
+    position: relative;
+    margin-right: 100px;
+}
+
+#user-name {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+    #user-name ul {
+        position: relative;
+        padding-left: 10px;
+        list-style-type: none;
+        cursor: pointer;
+        text-align: center;
+        z-index: 100 !important;
+    }
+
+
+#up:hover {
+    color: #6699CC;
+}
+
+#user-name ul:first-child {
+    border-radius: 5px 0px 0px 5px;
+}
+
+#user-name li {
+    position: relative;
+    line-height: 2em !important;
+    width: auto;
+    visibility: hidden;
+    background: #16a085;
+    z-index: 100 !important;
+}
+
+    #user-name li:hover {
+        color: #99CC99;
+    }
+
+.hr {
+    margin: auto;
+    text-align: center;
+    height: 0px;
+    width: 80%;
+    border-bottom: 1px solid #003300;
+}
+
+#user-name li span {
+    width: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.li-first {
+    margin-top: -10px;
+}
+
+#user-icon {
+    text-align: right;
+    padding-right: 0px;
+}
+
+.user-img {
+    width: 32px;
+    border: 2px solid #fff;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    height: 20px;
+    color: #666;
+    font-size: 12px;
+}

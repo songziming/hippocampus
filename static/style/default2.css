@@ -1,0 +1,728 @@
+/*bg screen*/
+@media all and (min-width: 931px){
+    .icon-tasks{
+        display: none !important;
+    }
+    #container-main{
+        width: 96%;
+        padding:0 2% 0 2%;
+        min-width: 550px;
+    }
+
+
+}
+/*md screen*/
+@media all and (max-width: 930px) and (min-width:769px ){
+    #header-new-bar-creator{
+        display: none !important;
+    }
+    .icon-tasks{
+        display: none !important;
+    }
+    #container-main{
+        width: 90%;
+        padding-left: 5%;
+        padding: 10px;
+        min-width: 768px;
+    }
+}
+/*sm screen*/
+@media all and (max-width: 768px)  {
+    #header-logo-div{
+        display: none;
+    }
+    #header-new-bar-creator{
+        display: none !important;
+    }
+    #search-input{
+        display: none;
+    }
+    #header-username{
+        display: none !important;
+    }
+    .icon-tasks{
+        display: inline-block;
+    }
+    .header-tasks{
+        display: none !important;
+    }
+    #container-main{
+        width: 90%;
+        margin-left: 5%;
+        padding: 10px;
+        /*min-width: 480px;*/
+        overflow-x: hidden !important;
+        overflow-y: visible;
+    }
+    .card{
+        width: 80% !important;
+    }
+    #title-input{
+        width: 80% !important;
+    }
+    #content-input{
+        width: 80% !important;
+    }
+    .card-content-p{
+        width: 80% !important;
+    }
+    .card-content-p{
+        width: 96% !important;
+    }
+
+}
+
+
+body{
+	background-color:#639bf1;
+	margin: 0px;
+    font-family: 'Microsoft Yahei';
+    overflow-x: hidden;
+}
+
+#header{
+    top:0;
+    position: fixed;
+	background-color: #293e6a;
+	color: #393939;
+	height: 34px;
+	margin: 0 auto;
+	/*width: 100%;*/
+	width: 100%;
+    z-index: 2;
+	padding-top: 5px;
+	padding-bottom: 2px;
+	display: inline-block;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+}
+#boards{
+    position: relative;
+    z-index: 5;
+	border-radius: 3px;
+	margin-left: 5px;
+	width: auto;
+	height:32px;
+    padding:0 8px ;
+    background-color: #3b5998;
+	float: left;
+    color:#fff;
+    font-family: 'Microsoft Yahei';
+    text-align: center;
+    line-height: 32px;
+}
+.icon-tasks{
+
+    display: inline-block;
+    font-size: 20px;
+    font-weight: normal;
+    color: #fff;
+    line-height: 32px;
+}
+#header-search-div{
+    position: relative;
+    z-index: 5;
+	border-radius: 3px;
+	margin-left: 10px;
+	width:auto;
+	height: 32px;
+	padding: 0px;
+    background-color: #3b5998;
+	float: left;
+}
+
+
+#search-input{
+	height: 30px;
+	width: 142px;
+	border: none;
+	box-shadow: none;
+	background-color: transparent;
+	outline: none;
+	float: left;
+	text-indent: 1em;
+	font-size: 16px;
+}
+
+.icon{
+	float: left;
+	width: 28px;
+	height: 28px;
+	background-repeat:no-repeat;
+	cursor: pointer;
+}
+.icon-search{
+	display: block;
+    opacity: 0.7;
+}
+.icon-search:hover{
+    opacity: 1;
+}
+.icon-new-window,.icon-close{
+	display: none;
+    opacity: 0.5;
+}
+
+.icon-new-window:hover,.icon-close:hover{
+    opacity: 1;
+}
+#header-search-div{
+	float:left;
+}
+#header-logo-div{
+	float:left; 
+	margin-left: 10px;
+}
+#header-logo-div img{
+            position:relative; 
+             z-index: 5;
+             cursor: pointer;
+	float: left;
+	height: 32px;
+	width: 32px;
+}
+#header-new-bar-creator{
+    z-index: 5;
+	display: block;
+	position: relative;
+	float: left;
+	width:80px;
+	height:32px ;
+	overflow:visible;
+}
+#new-bar{
+	left:7px;
+    z-index:5;
+	position: absolute;
+	width: auto;
+	height: auto;
+	border-radius: 3px;
+	padding: 5px;
+	font-size: 14px;
+	font-family: 'Microsoft Yahei','Helvetica Neue', Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	background-color: #46b946;
+	line-height: 20px;
+	overflow: auto;
+	white-space: nowrap;
+	display: inline-block;
+	color: #fff;
+	cursor:pointer;
+
+}
+.left-arrow{
+	display: inline-block;
+	height: 0;
+	width: 0;
+	border-right: 6px solid #46b946;
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	position: absolute;
+	top: 8px;
+	left: 2px;
+	-webkit-transition: border-right-color 85ms ease-in;
+	transition: border-right-color 85ms ease-in;
+}
+
+
+#header-hpcp{
+    position: absolute;
+    text-align: center;
+	height: 32px;
+	color: #FFF;
+    width: 100%;
+    z-index: 2;
+	line-height: 32px;
+    margin:auto;
+    text-align: center;
+}
+#header-hpcp img{
+    z-index: 2;
+    text-align: center;
+    height: 34px;
+    text-align: center;
+    cursor: pointer;
+
+}
+#header-remind{
+    position: relative;
+    z-index: 5;
+	height: 30px;
+	width: 30px;
+	float: right;
+    background-color: #3b5998;
+	margin-right: 5px;
+	border-radius: 3px;
+	text-align: center;
+    color: #fff;
+}
+.icon-remind{
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 30px;
+}
+#header-user{
+    height: 30px;
+    width: auto;
+    margin: 0px;
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 5px;
+}
+.header-user-icon{
+    position: relative;
+    z-index: 5;
+    width: 30px;
+    height: 30px;
+    float: right;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0px 0px 3px 3px rgba(255,255,255,0.9) inset;
+}
+#header-username{
+    position: relative;
+    z-index: 5;
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    font-size: 14px;
+    float: right;
+    font-family:'Microsoft Yahei' ;
+    color: #fff;
+    line-height: 28px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 5px;
+    border-radius: 0px 5px 5px 0px;
+    background-color: #3b5998;
+}
+#header-username:hover,#header-remind:hover,#header-plus:hover,#boards:hover,#header-save:hover{
+    background-color: #639bf1;
+    cursor: pointer;
+}
+#header-plus,#header-save{
+    position: relative;
+    z-index: 5;
+    float: right;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: #3b5998;
+    margin-right: 5px;
+    border-radius: 3px;
+    text-align: center;
+}
+.icon-plus,.icon-save{
+    font-size: 20px;
+    font-weight: normal;
+    color: #fff;
+    line-height: 30px;
+}
+
+#container-main{
+    position:relative;
+    overflow:hidden;
+    height: auto;
+    min-height: 720px;
+    padding-top: 80px;
+}
+.color0{
+    background-color: #F7AFD3;
+}
+.color1{
+    background-color: #e3e3e3;
+}
+.color2{
+    background-color: #A5BFF7;
+}
+.color3{
+    background-color: wheat;
+}
+.color4{
+    background-color:#EDD5D1;
+}
+.color5{
+    background-color:#F5FCAD;
+}
+.color6{
+    background-color:#B4FAF5 ;
+}
+.color7{
+    background-color:#F2D1C6 ;
+}
+.color8{
+    background-color:#C1F09B ;
+}
+
+.card{
+
+    margin: 10px 0px 10px 10px;
+    width: 240px;
+    padding: 0px;
+    position: absolute;
+    display: none;
+    cursor:default;
+    height: auto;
+    /*border-radius: 4px;*/
+    box-shadow:-1px 2px 1px 1px rgba(0,0,0,0.2);
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    z-index: 0;
+}
+.card-name{
+    float: left;
+    font-family: 'Microsoft Yahei';
+    color: rgba(0,0,0,0.9);
+}
+.title{
+    font-size: 20px;
+    overflow: hidden;
+    height:auto;
+    padding: 5px;
+}
+.card-action{
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+    color:#666;
+    font-size: 18px;
+    padding: 5px;
+    display: block;
+
+}
+
+.content{
+    background-color: rgba(255,255,255,0.5);
+    min-width:200px;
+    min-height: 90px;
+    float:none;
+    margin: 0;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+
+}
+.card-content-p{
+    text-indent: 1em;
+    text-align: left;
+    display:block;
+    width: 220px;
+    line-height: 1em;
+    font-size: 14px;
+    line-height: 3px;
+    color: rgba(0,0,0,0.8);
+
+}
+.card-content-p p{
+    line-height: 20px;
+    word-wrap:break-word;
+}
+#title-input{
+
+    width: 180px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 3px;
+    display: block;
+    min-height: 30px;
+    padding: 6px;
+    border: 1px solid #999;
+    outline: none;
+    font-family: 'Microsoft Yahei';
+    display: none;
+    float: left;
+}
+
+#content-input{
+    resize: none;
+    width: 220px;
+    height: 180px;
+    font-size: 12px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 3px;
+    display: block;
+    margin-top: 0px;
+    min-height: 30px;
+    padding: 10px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #999;
+    font-family: 'Microsoft Yahei';
+    outline: none;
+    overflow: visible;
+    display: none;
+    float: left;
+
+}
+#content-input:focus,#title-input:focus{
+    border: 1px solid #66AFE9;
+    box-shadow: 0px 0px 1px 1px rgba(0,153,204,0.2) inset;
+    background-color:rgba(128,128,128,0.05);
+}
+.change,.cancel{
+    font-size: 14px;
+    height: 24px;
+    width: 50px;
+    line-height: 24px;
+    border: 1px solid #09c;
+    border-radius: 3px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+
+}
+.change{
+    margin-left:10px;
+}
+.cancel{
+    margin-left: 110px;
+}
+.change:active,.cancel:active{
+    border: 1px solid #66AFE9;
+    box-shadow: 0px 0px 2px 2px rgba(0,153,204,0.3);
+}
+.cancel:hover,.change:hover{
+    background-color:rgba(0,0,0,0.08);
+}
+
+.menu{
+    position: absolute;
+    display: inline-block;
+    background-color: #293e6a;
+    top: 36px;
+    right:0px;
+    padding-top: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    display: none;
+
+}
+.menu .top-arrow{
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border-bottom: 6px solid #293e6a;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    position: absolute;
+    top: -6px;
+    right: 24px;
+    -webkit-transition: border-right-color 85ms ease-in;
+    transition: border-right-color 85ms ease-in;
+}
+
+.card-menu-icon{
+    display: inline-block;
+    padding: 4px;
+    cursor: pointer;
+}
+.card-menu-icon:hover{
+    background-color:#639bf1;
+}
+.card-menu-icon img{
+    height: 20px;
+    display: block;
+}
+
+.color-menu{
+    display: none;
+    position: absolute;
+    background-color: #293e6a;
+    border-top: 2px solid #293e6a;
+    border-left: 2px solid #293e6a;
+    width: 60px;
+    height: 60px;
+    top: 40px;
+    left:85px;
+}
+.color-menu .top-arrow{
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border-bottom: 6px solid #293e6a;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    position: absolute;
+    top: -6px;
+    left: 36px;
+    -webkit-transition: border-right-color 85ms ease-in;
+    transition: border-right-color 85ms ease-in;
+}
+.color-block{
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #293e6a;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+}
+.color-block:hover{
+    border: 1px solid #fff;
+}
+.color-menu .color0{
+    left:0px;
+    top:0px;
+}
+.color-menu .color1{
+    left:20px;
+    top:0px;
+}
+.color-menu .color2{
+    left:40px;
+    top:0px;
+}.color-menu .color3{
+     left:0px;
+     top:20px;
+ }
+.color-menu .color4{
+    left:20px;
+    top:20px;
+}
+.color-menu .color5{
+    left:40px;
+    top:20px;
+}
+.color-menu .color6{
+    left:0px;
+    top:40px;
+}
+.color-menu .color7{
+    left:20px;
+    top:40px;
+}
+.color-menu .color8{
+    left:40px;
+    top:40px;
+}
+.color-menu .color9{
+    left:10px;
+    top:10px;
+}
+
+.class-input-block{
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    background-color: #293e6a;
+    top:20px;
+    left:20px;
+    display:none;
+}
+.change-class-no,.change-class-yes{
+    display: inline-block;
+    font-size: 14px;
+    height: 24px;
+    width: 50px;
+    margin-top: 10px;
+    margin-left:30px;
+    line-height: 24px;
+    border: 2px solid #eee;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    color: #eee;
+}
+.change-class-no:active , .change-class-yes:active{
+    border: 2px solid #66AFE9;
+    box-shadow: 0px 0px 2px 2px rgba(0,153,204,0.3);
+}
+.change-class-no:hover, .change-class-yes:hover{
+    background-color:rgba(0,0,0,0.1);
+}
+.card-class-name-input{
+    width: 140px;
+    margin-left: 20px;
+    margin-top: 20px;
+    display: block;
+    height: 20px;
+    padding: 6px;
+    border: 2px solid #eee;
+    outline: none;
+    font-family: 'Microsoft Yahei';
+    font-size: 16px;
+    background-color:rgba(255,255,255,0.2);
+    float: left;
+}
+.card-class-name-input:focus{
+    background-color:rgba(255,255,255,0.6);
+}
+
+
+#group{
+    position:fixed;
+    height: 100%;
+    width: 110px;
+    z-index: 1;
+    top: 0px;
+    left:-110px;
+    background-color: rgba(59,89,152,0.9);
+}
+.card-group{
+    width: 100%;
+    height: 50px;
+    background-color: rgba(59,89,152,0.8);
+    color: #eee;
+    text-indent: 1em;
+    line-height: 50px;
+    margin-top: 0px;
+    font-size: 14px;
+    cursor: pointer;
+    border-top:1px solid rgb(70,110,170);
+}
+.card-group:hover{
+    background-color: rgba(99,155,241,0.3);
+}
+#default-group{
+    margin-top: 40px;
+}
+.active-group{
+    background-color:rgba(99,155,241,0.3);
+}
+#hide-bar{
+    position:absolute;
+    top:45%;
+    right:0px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 45px;
+    display: block;
+    color: #fff;
+    font-size: 40px;
+    background-color: rgba(255,255,255,0.2 );
+    cursor: pointer;
+    transition:width 2s;
+    -moz-transition:background-color 0.3s; /* Firefox 4 */
+    -webkit-transition: background-color 0.3s; /* Safari and Chrome */
+    -o-transition:background-color 0.3s; /* Opera */
+}
+#hide-bar:hover{
+    background-color: rgba(255,255,255,0.4);
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,1);
+    border-radius: 8px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: rgba(127,127,127,0.5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,255,255,0.5);
+}
+

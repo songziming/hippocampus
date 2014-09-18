@@ -54,3 +54,8 @@ docs/_build/
 
 # Editor cache
 *~
+.idea
+
+# Windows thumbnail cache
+Thumbs.db
+
