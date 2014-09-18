@@ -145,8 +145,8 @@ function  GetValueStr(separator,dic)
 
 
 function lastView(category,indexarr){
-    var category=category;
-    var indexarr=indexarr;
+    this.category=category;
+    this.indexarr=indexarr.concat();
     return this;
 }
 
@@ -190,12 +190,14 @@ function bindlistener(){
     $(".change-class-no").attr("onclick","cancel_change_class_name(this)");
     $(".archive").attr("onclick","archive(this)");
     $(".delete").attr("onclick","remove_card(this)");
+    $("#header-save").attr("onclick","send_indexs()");
 }
-function addcard(id,title,content){
+function addcard(id,title,content,color){
 
     var cardnum=$("#container-main").children().length;
     var category;
-    var color="color"+(cardnum%9).toString();
+//    var color="color"+(cardnum%9).toString();
+    var color=color;
     if(window.recent_group<=1){
         //card_o=new my_card(id,title,content,window.allcards.length,color,null);
         category="默认";
@@ -408,8 +410,6 @@ function create_edit_control(obj){
 
 }
 
-
-
 function cancel_edit(obj){
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
@@ -440,7 +440,6 @@ function cancel_edit(obj){
     set_container_height();
 
 }
-
 
 function save_edit(obj){
     var card=obj.parentNode.parentNode;
@@ -567,6 +566,7 @@ function set_card_id(){
     return hxstr;
 
 }
+
 function show_id(){
     for(var x =0;x<window.cards_arr.length;x++){
         console.log(x.toString()+" --- "+window.cards_arr[x].id);
@@ -587,6 +587,7 @@ function search_arr_by_id(yourid){
         return false;
     }
 }
+
 function search_all_cards_by_val(yourid){
     var flag=false;
     for(var x =0;x<window.allcards.length;x++){
@@ -594,6 +595,20 @@ function search_all_cards_by_val(yourid){
 
             flag=true;
             return x;
+        }
+    }
+    if(!flag){
+        return false;
+    }
+}
+
+function search_all_cards_by_id(yourid){
+    var flag=false;
+    for(var x =0;x<window.allcards.length;x++){
+        if(window.allcards[x].id==yourid){
+
+            flag=true;
+            return window.allcards[x];
         }
     }
     if(!flag){
@@ -870,6 +885,7 @@ function remove_null_elemt(arr){
 }
 
 function send_add_cards(){
+    var color="color"+((window.card_num)%9).toString();
     $.ajax({
         type: "POST",
         url: "/do_create_note/",
@@ -883,14 +899,14 @@ function send_add_cards(){
                 return window.group_arr[window.recent_group];
                 //card_o=new my_card(id,title,content,window.allcards.length,color,category);
             }
-        },color:"color"+((window.card_num)%9).toString(),index:window.card_num},
+        },color:color,index:window.card_num},
         dataType: "json",
         success: function(resText){
 
             if(resText.status==0){
                 window.card_num++;
                 var id=resText.id;
-                addcard(id,"请输入标题","请输入内容");
+                addcard(id,"请输入标题","请输入内容",color);
                 send_indexs();
                 show_map();
                 //save_layout();
@@ -939,7 +955,8 @@ function send_edit_change(id,card_name,card_content,color,category){
                 }
             }
         });
-        save_layout();
+        //save_layout();
+        send_indexs();
     }
 }
 
@@ -987,8 +1004,8 @@ function send_indexs(){
         var arr=new Array();
         for(var i=0;i<window.allcards.length;i++){
             var temp=window.allcards[i];
-            var pairs=new pairs(temp.id,temp.index);
-            arr.push(pairs);
+            var pair=new pairs(temp.id,temp.index);
+            arr.push(pair);
         }
         remove_null_elemt(arr);
         arr.removeUseless();
@@ -1113,7 +1130,7 @@ function load_last_view(){
         $("#container-main").children(".card").remove();
         var indexs=window.lastView.indexarr;
         for(var i=0;i<indexs.length;i++){
-            var card=search_all_cards_by_val(indexs[i].id);
+            var card=search_all_cards_by_id(indexs[i].id);
             window.cards_arr[indexs[i].index]=card;
         }
     }
@@ -1192,15 +1209,14 @@ function save_layout(){
 
 function excute_index(){
     var arr=new Array();
-    for (var j = 0; j < window.cards_arr.length; j++) {
-
-        var max_row=-1;
-        for(var x=0;x<window.col_num;x++){
-            if(window.rows_arr[x]>=max_row){
-                max_row=window.rows_arr[x];
-            }
+    var max_row=-1;
+    for(var x=0;x<window.col_num;x++){
+        if(window.rows_arr[x]>=max_row){
+            max_row=window.rows_arr[x];
         }
+    }
 
+    for (var j = 0; j < window.cards_arr.length; j++) {
         var new_index=0;
         for(var i=0;i<=max_row;i++){
             for(var k=0;k<window.col_num;k++){
@@ -1219,9 +1235,10 @@ function excute_index(){
 
         arr.push(pair);
     }
-    remove_null_elemt(arr);
+    //remove_null_elemt(arr);
     //arr.reset_index();
-    arr.removeUseless();
+    //arr.removeUseless();
+    console.log(window.my_map);
     return arr;
 
 }
