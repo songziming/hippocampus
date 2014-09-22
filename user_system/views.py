@@ -53,6 +53,7 @@ def do_register(request):
             else:
                 user = User.objects.create_user(username=username, password=password)
                 profile = UserProfile(user=user)
+                profile.save()
                 res['status'] = 0
         else:
             res['status'] = 1
