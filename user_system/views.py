@@ -91,7 +91,16 @@ def settings(request):
 
 def do_update_settings(request):
     res = {}
-    if request.method == 'POST':
+    if request.user.is_authenticated() and request.user.is_active and request.method == 'POST':
+        profile = UserProfile.objects.get(user = request.user)
+        if 'nickname' in request.POST:
+            profile.nickname = request.POST['nickname']
+        if 'email' in request.POST:
+            request.user.email = request.POST['email']
+        if 'gender' in request.POST:
+            profile.gender = request.POST['gender']
+        request.user.save()
+        profile.save()
         res['status'] = 0
     else:
         res['status'] = 1
@@ -110,3 +119,14 @@ def do_set_password(request):
     else:
         res['status'] = 1
     return HttpResponse(json.dumps(res), content_type="application/json")
+
+
+"""
+XXX check password
+set password
+
+
+
+get email to notes
+
+"""
