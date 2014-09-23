@@ -885,7 +885,11 @@ function remove_null_elemt(arr){
 }
 
 function send_add_cards(){
-    var color="color"+((window.card_num)%9).toString();
+	var cardnum=window.card_num;
+	if(isNaN(cardnum)){
+		cardnum=0;	
+	}
+    var color="color"+((cardnum)%9).toString();
     $.ajax({
         type: "POST",
         url: "/do_create_note/",
@@ -899,7 +903,7 @@ function send_add_cards(){
                 return window.group_arr[window.recent_group];
                 //card_o=new my_card(id,title,content,window.allcards.length,color,category);
             }
-        },color:color,index:window.card_num},
+        },color:color,index:cardnum},
         dataType: "json",
         success: function(resText){
 
