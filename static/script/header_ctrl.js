@@ -78,6 +78,7 @@ function show_wrong_window(str) {
 function set_signin_window() {
         var h=parseInt($(window).height());
         var w=parseInt($(window).width());
+        $("body").css({"height":h,"width":w});
         var top1=Math.floor((h-400)/2);
         var left1=Math.floor((w-340)/2);
         // alert(top1.toString()+" "+left1.toString());

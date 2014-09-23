@@ -34,7 +34,7 @@ function checkOriginalPwd()
 	else
 	{
 		$.ajax({
-			url:do_check_password,
+			url:"do_check_password/",
 			type:"POST",
 			dataType:"json",
 			data:{"password":testOriginalPwd},
@@ -83,7 +83,7 @@ function submitPwd()
 		{
 			var newPwd=$("#InputNewPassword").val();
 			$.ajax({
-				url:do_set_password/,
+				url:"do_set_password/",
 				type:"POST",
 				dataType:"json",
 				data:{"password":nickname},
@@ -276,7 +276,7 @@ function submitRes()
 			var email=$("#exampleInputEmail").val();
 			var sex=$("input[name='sex']:checked").val();
 			$.ajax({
-				url:do_update_settings/,
+				url:"do_update_settings/",
 				type:"POST",
 				dataType:"json",
 				data:{"nickname":nickname,"email":email,"gender":sex},

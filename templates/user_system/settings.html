@@ -13,7 +13,9 @@
 			<nav class="navbar navbar-default row" role="navigation">
 		    	<ul class="nav nav-tabs" role="tablist">
 				  <li role="presentation" class="active" id="firstli"><a href="#resource">修改用户资料</a></li>
-				  <li role="presentation" id="lastli"><a href="#password">修改用户密码</a></li>
+				  <li role="presentation" id="secondli"><a href="#password">修改用户密码</a></li>
+				  <li role="presentation" id="lastli"><a href="#cardMove">卡片迁移</a></li>
+				  <li role="presentation" id="backli"><a href="/">回到主页</a></li>
 				</ul>	  
 			</nav>
 		</div>
@@ -72,12 +74,33 @@
 					  </div>				
 					  <button type="submit" class="btn btn-default btn-submit" id="submitPwd">Submit</button>
 					</form>
-				</div>
+			</div>
+		</div>
+
+		<div class="link movecard" id="MoveCard_div">
+			<a name="cardMove">ccc</a>
+			<!--
+				用于复制另一账户的卡片
+			-->	
+			<div class="col-md-6 col-md-offset-4 col-lg-6 col-lg-offset-4 parentTop">
+				<form role="form">
+				  <div class="form-group">
+				    <label for="AnotherAccount">Another Account</label>
+				    <input type="text" class="form-control input_length" id="AnotherAccount" placeholder="Another Account">
+				    <span class="backInfo" id="account"></span>
+				  </div>	
+				  <div class="form-group">
+				    <label for="AnotherAccountPassword">Password</label>
+				    <input type="password" class="form-control input_length" id="AnotherAccountPassword" placeholder="Password">
+				    <span class="backInfo" id="anopwd"></span>
+				  </div>				
+				  <button type="submit" class="btn btn-default btn-submit" id="submitPwd">Submit</button>
+				</form>	
+			</div>		
 		</div>
 	</div>
 	<script type="text/javascript">
-		set_active();
-		CheckAllPwd();	
+		set_active();	
 		submitRes();
 	</script>
 </body>
