@@ -84,7 +84,7 @@ def do_login(request):
 
 def do_logout(request):
     django_logout(request)
-    return HttpResponse("")
+    return HttpResponseRedirect("/")
 
 def settings(request):
     return render(request, 'user_system/settings.html', {});
