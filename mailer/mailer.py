@@ -77,7 +77,61 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
     res["status"] = 0;
     return res
 
-res = getLastMail("stn121@163.com","")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+res = getLastMail("stn121@163.com","s19z26m13")
 print res["sender"] 
 print res["subject"]
 print res["date"]
