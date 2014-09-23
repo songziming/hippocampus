@@ -345,6 +345,10 @@ body{
     color: #fff;
     padding: 5px 10px;
 }
+#user-settings a:link{
+    color: #fff;
+    text-decoration: none;
+}
 #user-block div:hover{
     background-color: #639bf1;
     cursor: pointer;

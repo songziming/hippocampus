@@ -192,6 +192,10 @@ function bindlistener(){
     $(".delete").attr("onclick","remove_card(this)");
     $("#header-save").attr("onclick","send_indexs()");
     $(".icon-new-window").attr("onclick","search_linstener()");
+    $("#header-username").attr("onclick","show_user_block()");
+
+    $("#logout").attr("onclick","logout()");
+
 }
 function addcard(id,title,content,color){
 

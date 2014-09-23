@@ -69,3 +69,39 @@ function Ajax()
       }
     return xmlhttp;
 }
+function show_user_block(){
+    if($("#user-block").css("display")=="block"){
+        $("#user-block").css({"display":"none"});
+    }
+    else{
+        $("#user-block").css({"display":"block"});
+    }
+}
+function logout(){
+    $.ajax({
+        type: "POST",
+        url: "/do_logout/",
+        data:{},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+                //alert("post");
+                show_user_block();
+            }
+        }
+    });
+}
+function go_to_settings(){
+    $.ajax({
+        type: "POST",
+        url: "/do_logout/",
+        data:{},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+                //alert("post");
+                show_user_block();
+            }
+        }
+    });
+}
