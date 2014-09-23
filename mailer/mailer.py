@@ -24,24 +24,22 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
     content = con.fetch(last,'(UID BODY.PEEK[])')
     #print content
     code = content[1][0][1]
-    #print code
     msg = email.message_from_string(code)
     date = msg.get("Date")
-    if(chTupleToDatetime(date)<=lasttime):
+    date = chTupleToDatetime(date)
+    if(date<=lasttime):
         return {"status":1}
     subject = msg.get("subject")
     #print subject
-    data = subject.split('?')
-    subject = data[3]
-    #print subject
-    subject = base64.b64decode(subject)
-    #print subject
-    subject = subject.decode(data[1]).encode('utf-8')
-    #print subject
-    content = msg.get("content")
-    #print content
+    if(subject.find("=?gbk?")==0 or subject.find("=?utf-8?")==0):
+        data = subject.split('?')
+        subject = data[3]
+        subject = base64.b64decode(subject)
+        subject = subject.decode(data[1]).encode('utf-8')
 
-    sender = msg.get("Sender")
+
+    sender = msg.get("from")
+    sender = sender[sender.find('<')+1:sender.find('>')]
     
     content = "";
 
@@ -76,3 +74,4 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
     res["content"] = content;
     res["status"] = 0;
     return res
+
