@@ -99,6 +99,8 @@ def do_update_settings(request):
             request.user.email = request.POST['email']
         if 'gender' in request.POST:
             profile.gender = request.POST['gender']
+        if 'signature' in equest.POST:
+            profile.gender = request.POST['signature']
         request.user.save()
         profile.save()
         res['status'] = 0
