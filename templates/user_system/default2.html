@@ -9,6 +9,7 @@
     <script type="text/javascript" src="../../static/script/movefunctions.js"></script>
     <script type="text/javascript" src="../../static/script/cardfunctions.js"></script>
     <script type="text/javascript" src="../../static/script/md5.js"></script>
+    <script type="text/javascript" src="../../static/script/searchFunction.js"></script>
 	<link href="../../static/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../../static/style/default2.css">
 </head>
@@ -75,6 +76,9 @@
 		});
 
 
+		$('.icon-new-window').click(function(){
+            console.log(search());
+        });
 	</script>
 
 	<div id="container-main" onMouseMove="move(event)" onMouseUp="up(event)">

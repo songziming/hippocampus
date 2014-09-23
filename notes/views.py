@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from notes.models import Note
-from user_system.models import UserProfile
+from user_system.models import User, UserProfile
 import json
 from StringIO import StringIO
 
@@ -134,6 +134,27 @@ def do_update_indexes(request):
             res['status'] = 2
         else:
             res['status'] = 0
+    else:
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type = "application/json")
+
+def do_import_notes(request):
+    res = {}
+    if request.user.is_authenticated() and request.user.is_active and 'username' in request.POST:
+        try:
+            olduser = User.objects.get(username = request.POST['username'])
+            arr = Note.objects.all().filter(user = olduser)
+            for e in arr:
+                note = Note(user = request.user)
+                note.title = e.title
+                note.category = e.category
+                note.content = e.content
+                note.index = e.index
+                note.color = e.color
+                note.save()
+            res['status'] = 0
+        except User.DoesNotExist:
+            res['status'] = 2
     else:
         res['status'] = 1
     return HttpResponse(json.dumps(res), content_type = "application/json")
