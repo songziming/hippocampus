@@ -30,12 +30,13 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
     if(date<=lasttime):
         return {"status":1}
     subject = msg.get("subject")
-    #print subject
-    if(subject.find("=?gbk?")==0 or subject.find("=?utf-8?")==0):
+    charset = "utf-8"
+    if(subject.find("=?")==0):
         data = subject.split('?')
         subject = data[3]
+        charset = data[1].lower()
         subject = base64.b64decode(subject)
-        subject = subject.decode(data[1]).encode('utf-8')
+        subject = subject.decode(charset).encode('utf-8')
 
 
     sender = msg.get("from")
@@ -65,8 +66,9 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
             else:#不是附件，是文本内容
                 #print "*"*60
                 #print par.get_payload(decode=True) # 解码出文本内容，直接输出来就可以了。
-                content = par.get_payload(decode=True)
+                content += par.get_payload(decode=True)
             #print '+'*60 # 用来区别各个部分的输出
+    content = content.decode(charset).encode("utf-8")
     res = {}
     res["sender"] = sender
     res["subject"] = subject
@@ -75,3 +77,9 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
     res["status"] = 0;
     return res
 
+res = getLastMail("stn121@163.com","")
+print res["sender"] 
+print res["subject"]
+print res["date"]
+print res["content"]
+print res["status"] 
