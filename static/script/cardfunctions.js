@@ -191,6 +191,7 @@ function bindlistener(){
     $(".archive").attr("onclick","archive(this)");
     $(".delete").attr("onclick","remove_card(this)");
     $("#header-save").attr("onclick","send_indexs()");
+    $(".icon-new-window").attr("onclick","search_linstener()");
 }
 function addcard(id,title,content,color){
 

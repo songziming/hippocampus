@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d001ff4-a4c8-40de-aa41-9d5e2737d783" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/script/searcher.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/cardfunctions.js" afterPath="$PROJECT_DIR$/static/script/cardfunctions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/movefunctions.js" afterPath="$PROJECT_DIR$/static/script/movefunctions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/default.js" afterPath="$PROJECT_DIR$/static/script/default.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/style/default2.css" afterPath="$PROJECT_DIR$/static/style/default2.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/user_system/default2.html" afterPath="$PROJECT_DIR$/templates/user_system/default2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/searcher.js" afterPath="$PROJECT_DIR$/static/script/searcher.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hippocampus.iws" />
@@ -29,41 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="default2.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="default2.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/user_system/default2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27213824" vertical-offset="0" max-vertical-offset="2286">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header_ctrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/script/header_ctrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="577" max-vertical-offset="2988">
-              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="movefunctions.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/script/movefunctions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13302">
-              <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cardfunctions.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="22590">
-              <caret line="889" column="17" selection-start-line="889" selection-start-column="17" selection-end-line="889" selection-end-column="17" />
+            <state vertical-scroll-proportion="-12.296296" vertical-offset="1486" max-vertical-offset="2700">
+              <caret line="101" column="12" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -72,8 +44,38 @@
       <file leaf-file-name="default2.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/style/default2.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="12259" max-vertical-offset="13212">
-              <caret line="299" column="95" selection-start-line="299" selection-start-column="95" selection-end-line="299" selection-end-column="95" />
+            <state vertical-scroll-proportion="-23.192308" vertical-offset="6291" max-vertical-offset="14292">
+              <caret line="383" column="21" selection-start-line="383" selection-start-column="21" selection-end-line="383" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/script/default.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5666317" vertical-offset="0" max-vertical-offset="1368">
+              <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="movefunctions.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/script/movefunctions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="13302">
+              <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cardfunctions.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-24.153847" vertical-offset="6338" max-vertical-offset="22608">
+              <caret line="387" column="19" selection-start-line="387" selection-start-column="19" selection-end-line="387" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -82,8 +84,8 @@
       <file leaf-file-name="searcher.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/script/searcher.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="972">
+              <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="49" />
               <folding>
                 <element signature="n#!!doc;n#searcher#0" expanded="false" />
               </folding>
@@ -104,11 +106,12 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/static/style/default2.css" />
-        <option value="$PROJECT_DIR$/templates/user_system/default2.html" />
-        <option value="$PROJECT_DIR$/static/script/cardfunctions.js" />
         <option value="$PROJECT_DIR$/static/script/movefunctions.js" />
+        <option value="$PROJECT_DIR$/static/script/cardfunctions.js" />
+        <option value="$PROJECT_DIR$/templates/user_system/default2.html" />
         <option value="$PROJECT_DIR$/static/script/searcher.js" />
+        <option value="$PROJECT_DIR$/static/style/default2.css" />
+        <option value="$PROJECT_DIR$/static/script/default.js" />
       </list>
     </option>
   </component>
@@ -630,6 +633,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/register.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3438">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1410286214059" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="953">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/script/header_ctrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="577" max-vertical-offset="2988">
@@ -638,26 +668,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
+    <entry file="file://$PROJECT_DIR$/static/script/searchFunction.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7844" max-vertical-offset="14616">
-          <caret line="889" column="17" selection-start-line="889" selection-start-column="17" selection-end-line="889" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.3210913" vertical-offset="0" max-vertical-offset="953">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/script/movefunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13302">
-          <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="13302">
+          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.153847" vertical-offset="6338" max-vertical-offset="22608">
+          <caret line="387" column="19" selection-start-line="387" selection-start-column="19" selection-end-line="387" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/script/searcher.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="972">
+          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="49" />
           <folding>
             <element signature="n#!!doc;n#searcher#0" expanded="false" />
           </folding>
@@ -666,16 +704,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/style/default2.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3705" max-vertical-offset="13212">
-          <caret line="299" column="95" selection-start-line="299" selection-start-column="95" selection-end-line="299" selection-end-column="95" />
+        <state vertical-scroll-proportion="-23.192308" vertical-offset="6291" max-vertical-offset="14292">
+          <caret line="383" column="21" selection-start-line="383" selection-start-column="21" selection-end-line="383" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/user_system/default2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27213824" vertical-offset="0" max-vertical-offset="2286">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state vertical-scroll-proportion="-12.296296" vertical-offset="1486" max-vertical-offset="2700">
+          <caret line="101" column="12" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/default.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5666317" vertical-offset="0" max-vertical-offset="1368">
+          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
           <folding />
         </state>
       </provider>

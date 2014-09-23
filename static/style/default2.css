@@ -133,6 +133,7 @@ body{
 
 
 #search-input{
+    position: relative;
 	height: 30px;
 	width: 142px;
 	border: none;
@@ -142,6 +143,7 @@ body{
 	float: left;
 	text-indent: 1em;
 	font-size: 16px;
+    z-idnex:50;
 }
 
 .icon{
@@ -327,6 +329,64 @@ body{
     min-height: 720px;
     padding-top: 80px;
 }
+#user-block{
+    display: none;
+    position: absolute;
+    top:41px;
+    right: 40px;
+    width:auto;
+    padding: 5px;
+    background: #3b5998;
+    color: #fff;
+}
+#user-block div{
+    position: relative;
+    z-index: 100;
+    color: #fff;
+    padding: 5px 10px;
+}
+#user-block div:hover{
+    background-color: #639bf1;
+    cursor: pointer;
+}
+#search-res-list{
+    display: none;
+    border-radius: 4px;
+    position: absolute;
+    top:41px;
+    left: 78px;
+    width:200px;
+    padding: 5px;
+    background: #3b5998;
+    text-align: center;
+    z-index:100;
+
+}
+#search-status{
+    color: #fff;
+    position: relative;
+    width: 190px;
+    margin: 0 auto;
+
+}
+.search-res{
+    color: #555;
+    border-radius: 3px;
+    background-color: #fff;
+    position: relative;
+    width: 190px;
+    margin: 3px auto;
+    padding: 5px;
+    cursor: pointer;
+    text-align: left;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow: hidden;
+}
+.search-res:hover{
+    background-color: #ddd;
+}
+
 .color0{
     background-color: #F7AFD3;
 }

@@ -2,10 +2,10 @@ function strach_header_search() {
     if($(document).width()>1080){
         $('#header-search-div').css("background-color","#fff");
         $('#header-search-div').animate({
-            width:"302px",
+            width:"302px"
         },200);
         $('#search-input').animate({
-            width:"232px",
+            width:"232px"
         },150);
         $('.icon-search').hide();
         $('.icon-new-window').show();
@@ -21,10 +21,16 @@ function strach_header_search() {
     else{
         return;
     }
-
+    $("#search-res-list").css({"display":"block"});
+    window.timer=setInterval("search_linstener()",100);
 }
 
 function zip_header_search() {
+    window.timer=clearInterval(timer);
+    $("#search-input").val("");
+    $("#search-res-list #search-status").html("暂无搜索结果");
+    $("#search-res-list .res-list").html("");
+    $("#search-res-list").css({"display":"none"});
     if ($(document).width() > 1080) {
         $('#header-search-div').css("background-color", "#3b5998");
         $('#header-search-div').animate({
