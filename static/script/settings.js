@@ -1,43 +1,59 @@
+//设置面板跳转链接
 function set_active() {		
 	$(".nav li").click(function(){
 		$(".nav li").attr("class","");
 		$(this).attr("class","active");
 		if($(this).attr("id")=="firstli"){
 			$("#password_div").css({"display":"none"});
+			$("#MoveCard_div").css({"display":"none"});
 			$("#resource_div").css({"display":"block"});
+		}
+		else if($(this).attr("id")=="secondli"){
+			$("#resource_div").css({"display":"none"});
+			$("#password_div").css({"display":"block"});
+			$("#MoveCard_div").css({"display":"none"});
 		}
 		else{
 			$("#resource_div").css({"display":"none"});
-			$("#password_div").css({"display":"block"});
+			$("#password_div").css({"display":"none"});
+			$("#MoveCard_div").css({"display":"block"});
 		}
 	});
 }
 
-/*
+
 //向后台发送，用来判断输入的原密码是否正确
-checkoriginalpwd=true;
-function checkOriginalPwd(success_function,fail_function)
+checkoriginalpwd=false;
+function checkOriginalPwd()
 {
 	var testOriginalPwd=$("#InputOldPassword").val();
-	$.ajax({
-		url:,
-		type:"POST",
-		dataType:"json",
-		data:{"OriginalPwd":testOriginalPwd},
-		success:function(data){
-			if()
-			{
-				$("#oripwd").html("<div style='color:green'>correct</div>");
-				success_function();
+	if(testOriginalPwd=="" ||testOriginalPwd==null)//如果没有输入原密码，直接返回false
+	{
+		checkoriginalpwd=false;
+	}
+	else
+	{
+		$.ajax({
+			url:,
+			type:"POST",
+			dataType:"json",
+			data:{"OriginalPwd":testOriginalPwd},
+			success:function(data){
+				if(data.status==0)
+				{
+					$("#oripwd").html("<div style='color:green'>correct</div>");
+					success_function();
+				}
+				else
+				{
+					$("#oripwd").html("<div style='color:red'>Input the correct original password</div>");
+					fail_function();
+					$("#InputOldPassword").val("value","");
+					$("#InputOldPassword").focus();
+				}
 			}
-			else
-			{
-				$("#oripwd").html("<div style='color:red'>Input the correct original password</div>");
-				fail_function();
-			}
-		}
-	});
-	return checkoriginalpwd;
+		});
+	}
 }
 
 //通过传入函数来解决ajax的返回值操作问题
@@ -51,15 +67,40 @@ function fail_function()
 	checkoriginalpwd=false;
 }
 
+//点击原密码输入框后的消息提醒
+function ClickOriPwd()
+{
+	$("#InputOldPassword").blur(function(){
+		checkOriginalPwd();
+	});
+}
+
 //处理修改密码面板的提交
 function submitPwd()
 {
 	$("#submitPwd").click(function(){
-
+		if(CheckAllPwd())
+		{
+			var newPwd=$("#InputNewPassword").val();
+			$.ajax({
+				url:do_set_password/,
+				type:"POST",
+				dataType:"json",
+				data:{"password":nickname},
+				success:function(data){
+					if(data.status==0)
+					{
+						alert("用户密码已修改");
+					}
+					else
+					{
+						alert("错误操作，请重新设置");
+					}
+				}
+			});
+		}		
 	});
 }
-
-*/
 
 //检查原密码和新密码是否相等
 function checkPwdIsChanged()
@@ -134,20 +175,35 @@ function checkNewPwdIsExist()
 //检查所有的密码面板的相关信息
 function CheckAllPwd()
 {
-	checkNewPwdIsExist();//先进行用户输入信息提示
-	$("#submitPwd").click(function(){
-		if(true)//旧密码输入正确
+	checkOriginalPwd();//对原密码进行检查
+	if(checkoriginalpwd==true)
+	{
+		//checkNewPwdIsExist();//先进行用户输入信息提示
+		if(checkNewPwdIsExist())
 		{
-			if(checkNewPwdIsExist())
+			if(checkIsExist($("#InputNewPassword")))
 			{
-				alert("correct");
+				return true;
 			}
 			else
 			{
-				alert("wrong");
-			}
+				alert("no new password");
+				return false;
+			}		
 		}
-	});	
+		else
+		{
+			alert("check your new password");
+			return false;
+		}
+	}
+	else
+	{
+		alert("please input the correct original password");
+		$("#InputOldPassword").val("value","");
+		$("#InputOldPassword").focus();
+		return false;
+	}	
 }
 
 
@@ -215,31 +271,26 @@ function submitRes()
 	$("#submitResource").click(function()
 	{
 		if(ChecksubmitResource())
-		{
-			/*
+		{	
 			var nickname=$("#nickname").val();
 			var email=$("#exampleInputEmail").val();
 			var sex=$("input[name='sex']:checked").val();
 			$.ajax({
-				url:,
+				url:do_update_settings/,
 				type:"POST",
 				dataType:"json",
-				data:{"nickname":nickname,"email":email,"sex":sex},
+				data:{"nickname":nickname,"email":email,"gender":sex},
 				success:function(data){
-					if()
+					if(data.status==0)
 					{
-						
+						alert("成功设置");
 					}
 					else
 					{
-						
+						alert("错误设置，请重新设置");
 					}
 				}
 			});
-			*/
-			alert("correct");
-
-
 		}
 	});
 }

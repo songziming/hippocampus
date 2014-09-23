@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d001ff4-a4c8-40de-aa41-9d5e2737d783" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/script/searcher.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/cardfunctions.js" afterPath="$PROJECT_DIR$/static/script/cardfunctions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/movefunctions.js" afterPath="$PROJECT_DIR$/static/script/movefunctions.js" />
@@ -28,11 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="default2.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="default2.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/user_system/default2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.962963" vertical-offset="280" max-vertical-offset="2286">
-              <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.27213824" vertical-offset="0" max-vertical-offset="2286">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header_ctrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/script/header_ctrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="577" max-vertical-offset="2988">
+              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -41,50 +52,19 @@
       <file leaf-file-name="movefunctions.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/script/movefunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.461538" vertical-offset="12046" max-vertical-offset="13284">
-              <caret line="706" column="20" selection-start-line="706" selection-start-column="20" selection-end-line="706" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13302">
+              <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cardfunctions.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="cardfunctions.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.76367617" vertical-offset="13630" max-vertical-offset="14544">
-              <caret line="1239" column="6" selection-start-line="1239" selection-start-column="6" selection-end-line="1239" selection-end-column="6" />
-              <folding>
-                <element signature="n#!!block;n#Map#0" expanded="false" />
-                <element signature="n#!!block;n#category_layout#0" expanded="false" />
-                <element signature="n#!!block;n#pairs#0" expanded="false" />
-                <element signature="n#!!block;n#BuildDictionary#0" expanded="false" />
-                <element signature="n#!!block;n#AddItem#0" expanded="false" />
-                <element signature="n#!!block;n#UpdateItem#0" expanded="false" />
-                <element signature="n#!!block;n#DeleteItem#0" expanded="false" />
-                <element signature="n#!!block;n#GetKeyStr#0" expanded="false" />
-                <element signature="n#!!block;n#GetValueStr#0" expanded="false" />
-                <element signature="n#!!block;n#lastView#0" expanded="false" />
-                <element signature="n#!!block;n#my_card#0" expanded="false" />
-                <element signature="n#!!block;n#add_missing_cards#0" expanded="false" />
-                <element signature="n#!!block;n#show_menu#0" expanded="false" />
-                <element signature="n#!!block;n#show_color_board#0" expanded="false" />
-                <element signature="n#!!block;n#move_cards_to_new_place#0" expanded="false" />
-                <element signature="n#!!block;n#create_edit_control#0" expanded="false" />
-                <element signature="n#!!block;n#cancel_edit#0" expanded="false" />
-                <element signature="n#!!block;n#set_card_color#0" expanded="false" />
-                <element signature="n#!!block;n#show_card_class_input#0" expanded="false" />
-                <element signature="n#!!block;n#change_class_name#0" expanded="false" />
-                <element signature="n#!!block;n#cancel_change_class_name#0" expanded="false" />
-                <element signature="n#!!block;n#set_card_id#0" expanded="false" />
-                <element signature="n#!!block;n#show_id#0" expanded="false" />
-                <element signature="n#!!block;n#search_arr_by_id#0" expanded="false" />
-                <element signature="n#!!block;n#find_category#0" expanded="false" />
-                <element signature="n#!!block;n#move_card_to_another_category#0" expanded="false" />
-                <element signature="n#!!block;n#hide_side_bar#0" expanded="false" />
-                <element signature="n#!!block;n#set_bell#0" expanded="false" />
-                <element signature="e#24941#25451#0" expanded="false" />
-                <element signature="e#25894#25964#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="22590">
+              <caret line="889" column="17" selection-start-line="889" selection-start-column="17" selection-end-line="889" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,9 +72,21 @@
       <file leaf-file-name="default2.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/style/default2.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4785" max-vertical-offset="13212">
+            <state vertical-scroll-proportion="0.0" vertical-offset="12259" max-vertical-offset="13212">
               <caret line="299" column="95" selection-start-line="299" selection-start-column="95" selection-end-line="299" selection-end-column="95" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searcher.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/script/searcher.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc;n#searcher#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,16 +106,17 @@
       <list>
         <option value="$PROJECT_DIR$/static/style/default2.css" />
         <option value="$PROJECT_DIR$/templates/user_system/default2.html" />
-        <option value="$PROJECT_DIR$/static/script/movefunctions.js" />
         <option value="$PROJECT_DIR$/static/script/cardfunctions.js" />
+        <option value="$PROJECT_DIR$/static/script/movefunctions.js" />
+        <option value="$PROJECT_DIR$/static/script/searcher.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1412" />
-    <option name="y" value="-4" />
-    <option name="width" value="1875" />
-    <option name="height" value="1085" />
+    <option name="x" value="1413" />
+    <option name="y" value="24" />
+    <option name="width" value="1873" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -322,7 +315,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1412" y="-4" width="1875" height="1085" extended-state="6" />
+    <frame x="1413" y="24" width="1873" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -368,6 +361,80 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/user_system/default2.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2286">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/movefunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12046" max-vertical-offset="13284">
+          <caret line="706" column="20" selection-start-line="706" selection-start-column="20" selection-end-line="706" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="16002" max-vertical-offset="22590">
+          <caret line="889" column="17" selection-start-line="889" selection-start-column="17" selection-end-line="889" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/style/default2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13212">
+          <caret line="299" column="95" selection-start-line="299" selection-start-column="95" selection-end-line="299" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/searcher.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="522">
+          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc;n#searcher#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user_system/default2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2286">
+          <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/movefunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12046" max-vertical-offset="13284">
+          <caret line="706" column="20" selection-start-line="706" selection-start-column="20" selection-end-line="706" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="13630" max-vertical-offset="14544">
+          <caret line="1239" column="6" selection-start-line="1239" selection-start-column="6" selection-end-line="1239" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/style/default2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4785" max-vertical-offset="13212">
+          <caret line="299" column="95" selection-start-line="299" selection-start-column="95" selection-end-line="299" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user_system/default2.html">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1360" max-vertical-offset="2286">
           <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
           <folding />
@@ -386,38 +453,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="15716" max-vertical-offset="21330">
           <caret line="942" column="22" selection-start-line="942" selection-start-column="22" selection-end-line="942" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!block;n#Map#0" expanded="false" />
-            <element signature="n#!!block;n#category_layout#0" expanded="false" />
-            <element signature="n#!!block;n#pairs#0" expanded="false" />
-            <element signature="n#!!block;n#BuildDictionary#0" expanded="false" />
-            <element signature="n#!!block;n#AddItem#0" expanded="false" />
-            <element signature="n#!!block;n#UpdateItem#0" expanded="false" />
-            <element signature="n#!!block;n#DeleteItem#0" expanded="false" />
-            <element signature="n#!!block;n#GetKeyStr#0" expanded="false" />
-            <element signature="n#!!block;n#GetValueStr#0" expanded="false" />
-            <element signature="n#!!block;n#lastView#0" expanded="false" />
-            <element signature="n#!!block;n#my_card#0" expanded="false" />
-            <element signature="n#!!block;n#add_missing_cards#0" expanded="false" />
-            <element signature="n#!!block;n#show_menu#0" expanded="false" />
-            <element signature="n#!!block;n#show_color_board#0" expanded="false" />
-            <element signature="n#!!block;n#move_cards_to_new_place#0" expanded="false" />
-            <element signature="n#!!block;n#create_edit_control#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_edit#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_color#0" expanded="false" />
-            <element signature="n#!!block;n#show_card_class_input#0" expanded="false" />
-            <element signature="n#!!block;n#change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_id#0" expanded="false" />
-            <element signature="n#!!block;n#show_id#0" expanded="false" />
-            <element signature="n#!!block;n#search_arr_by_id#0" expanded="false" />
-            <element signature="n#!!block;n#find_category#0" expanded="false" />
-            <element signature="n#!!block;n#move_card_to_another_category#0" expanded="false" />
-            <element signature="n#!!block;n#hide_side_bar#0" expanded="false" />
-            <element signature="n#!!block;n#set_bell#0" expanded="false" />
-            <element signature="e#24941#25451#0" expanded="false" />
-            <element signature="e#25894#25964#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -449,38 +485,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="20398" max-vertical-offset="21312">
           <caret line="1225" column="0" selection-start-line="1225" selection-start-column="0" selection-end-line="1225" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#Map#0" expanded="false" />
-            <element signature="n#!!block;n#category_layout#0" expanded="false" />
-            <element signature="n#!!block;n#pairs#0" expanded="false" />
-            <element signature="n#!!block;n#BuildDictionary#0" expanded="false" />
-            <element signature="n#!!block;n#AddItem#0" expanded="false" />
-            <element signature="n#!!block;n#UpdateItem#0" expanded="false" />
-            <element signature="n#!!block;n#DeleteItem#0" expanded="false" />
-            <element signature="n#!!block;n#GetKeyStr#0" expanded="false" />
-            <element signature="n#!!block;n#GetValueStr#0" expanded="false" />
-            <element signature="n#!!block;n#lastView#0" expanded="false" />
-            <element signature="n#!!block;n#my_card#0" expanded="false" />
-            <element signature="n#!!block;n#add_missing_cards#0" expanded="false" />
-            <element signature="n#!!block;n#show_menu#0" expanded="false" />
-            <element signature="n#!!block;n#show_color_board#0" expanded="false" />
-            <element signature="n#!!block;n#move_cards_to_new_place#0" expanded="false" />
-            <element signature="n#!!block;n#create_edit_control#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_edit#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_color#0" expanded="false" />
-            <element signature="n#!!block;n#show_card_class_input#0" expanded="false" />
-            <element signature="n#!!block;n#change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_id#0" expanded="false" />
-            <element signature="n#!!block;n#show_id#0" expanded="false" />
-            <element signature="n#!!block;n#search_arr_by_id#0" expanded="false" />
-            <element signature="n#!!block;n#find_category#0" expanded="false" />
-            <element signature="n#!!block;n#move_card_to_another_category#0" expanded="false" />
-            <element signature="n#!!block;n#hide_side_bar#0" expanded="false" />
-            <element signature="n#!!block;n#set_bell#0" expanded="false" />
-            <element signature="e#24941#25451#0" expanded="false" />
-            <element signature="e#25894#25964#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -512,38 +517,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="14296" max-vertical-offset="17802">
           <caret line="663" column="29" selection-start-line="663" selection-start-column="29" selection-end-line="663" selection-end-column="29" />
-          <folding>
-            <element signature="n#!!block;n#Map#0" expanded="false" />
-            <element signature="n#!!block;n#category_layout#0" expanded="false" />
-            <element signature="n#!!block;n#pairs#0" expanded="false" />
-            <element signature="n#!!block;n#BuildDictionary#0" expanded="false" />
-            <element signature="n#!!block;n#AddItem#0" expanded="false" />
-            <element signature="n#!!block;n#UpdateItem#0" expanded="false" />
-            <element signature="n#!!block;n#DeleteItem#0" expanded="false" />
-            <element signature="n#!!block;n#GetKeyStr#0" expanded="false" />
-            <element signature="n#!!block;n#GetValueStr#0" expanded="false" />
-            <element signature="n#!!block;n#lastView#0" expanded="false" />
-            <element signature="n#!!block;n#my_card#0" expanded="false" />
-            <element signature="n#!!block;n#add_missing_cards#0" expanded="false" />
-            <element signature="n#!!block;n#show_menu#0" expanded="false" />
-            <element signature="n#!!block;n#show_color_board#0" expanded="false" />
-            <element signature="n#!!block;n#move_cards_to_new_place#0" expanded="false" />
-            <element signature="n#!!block;n#create_edit_control#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_edit#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_color#0" expanded="false" />
-            <element signature="n#!!block;n#show_card_class_input#0" expanded="false" />
-            <element signature="n#!!block;n#change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_id#0" expanded="false" />
-            <element signature="n#!!block;n#show_id#0" expanded="false" />
-            <element signature="n#!!block;n#search_arr_by_id#0" expanded="false" />
-            <element signature="n#!!block;n#find_category#0" expanded="false" />
-            <element signature="n#!!block;n#move_card_to_another_category#0" expanded="false" />
-            <element signature="n#!!block;n#hide_side_bar#0" expanded="false" />
-            <element signature="n#!!block;n#set_bell#0" expanded="false" />
-            <element signature="e#24941#25451#0" expanded="false" />
-            <element signature="e#25894#25964#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -575,38 +549,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="10400" max-vertical-offset="14382">
           <caret line="602" column="18" selection-start-line="602" selection-start-column="18" selection-end-line="602" selection-end-column="18" />
-          <folding>
-            <element signature="n#!!block;n#Map#0" expanded="false" />
-            <element signature="n#!!block;n#category_layout#0" expanded="false" />
-            <element signature="n#!!block;n#pairs#0" expanded="false" />
-            <element signature="n#!!block;n#BuildDictionary#0" expanded="false" />
-            <element signature="n#!!block;n#AddItem#0" expanded="false" />
-            <element signature="n#!!block;n#UpdateItem#0" expanded="false" />
-            <element signature="n#!!block;n#DeleteItem#0" expanded="false" />
-            <element signature="n#!!block;n#GetKeyStr#0" expanded="false" />
-            <element signature="n#!!block;n#GetValueStr#0" expanded="false" />
-            <element signature="n#!!block;n#lastView#0" expanded="false" />
-            <element signature="n#!!block;n#my_card#0" expanded="false" />
-            <element signature="n#!!block;n#add_missing_cards#0" expanded="false" />
-            <element signature="n#!!block;n#show_menu#0" expanded="false" />
-            <element signature="n#!!block;n#show_color_board#0" expanded="false" />
-            <element signature="n#!!block;n#move_cards_to_new_place#0" expanded="false" />
-            <element signature="n#!!block;n#create_edit_control#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_edit#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_color#0" expanded="false" />
-            <element signature="n#!!block;n#show_card_class_input#0" expanded="false" />
-            <element signature="n#!!block;n#change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_id#0" expanded="false" />
-            <element signature="n#!!block;n#show_id#0" expanded="false" />
-            <element signature="n#!!block;n#search_arr_by_id#0" expanded="false" />
-            <element signature="n#!!block;n#find_category#0" expanded="false" />
-            <element signature="n#!!block;n#move_card_to_another_category#0" expanded="false" />
-            <element signature="n#!!block;n#hide_side_bar#0" expanded="false" />
-            <element signature="n#!!block;n#set_bell#0" expanded="false" />
-            <element signature="e#24941#25451#0" expanded="false" />
-            <element signature="e#25894#25964#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -645,38 +588,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="10418" max-vertical-offset="13896">
           <caret line="596" column="17" selection-start-line="596" selection-start-column="17" selection-end-line="596" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!block;n#Map#0" expanded="false" />
-            <element signature="n#!!block;n#category_layout#0" expanded="false" />
-            <element signature="n#!!block;n#pairs#0" expanded="false" />
-            <element signature="n#!!block;n#BuildDictionary#0" expanded="false" />
-            <element signature="n#!!block;n#AddItem#0" expanded="false" />
-            <element signature="n#!!block;n#UpdateItem#0" expanded="false" />
-            <element signature="n#!!block;n#DeleteItem#0" expanded="false" />
-            <element signature="n#!!block;n#GetKeyStr#0" expanded="false" />
-            <element signature="n#!!block;n#GetValueStr#0" expanded="false" />
-            <element signature="n#!!block;n#lastView#0" expanded="false" />
-            <element signature="n#!!block;n#my_card#0" expanded="false" />
-            <element signature="n#!!block;n#add_missing_cards#0" expanded="false" />
-            <element signature="n#!!block;n#show_menu#0" expanded="false" />
-            <element signature="n#!!block;n#show_color_board#0" expanded="false" />
-            <element signature="n#!!block;n#move_cards_to_new_place#0" expanded="false" />
-            <element signature="n#!!block;n#create_edit_control#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_edit#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_color#0" expanded="false" />
-            <element signature="n#!!block;n#show_card_class_input#0" expanded="false" />
-            <element signature="n#!!block;n#change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_id#0" expanded="false" />
-            <element signature="n#!!block;n#show_id#0" expanded="false" />
-            <element signature="n#!!block;n#search_arr_by_id#0" expanded="false" />
-            <element signature="n#!!block;n#find_category#0" expanded="false" />
-            <element signature="n#!!block;n#move_card_to_another_category#0" expanded="false" />
-            <element signature="n#!!block;n#hide_side_bar#0" expanded="false" />
-            <element signature="n#!!block;n#set_bell#0" expanded="false" />
-            <element signature="e#24941#25451#0" expanded="false" />
-            <element signature="e#25894#25964#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -710,6 +622,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/function.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5099685" vertical-offset="0" max-vertical-offset="1386">
+          <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/header_ctrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="577" max-vertical-offset="2988">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7844" max-vertical-offset="14616">
+          <caret line="889" column="17" selection-start-line="889" selection-start-column="17" selection-end-line="889" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/movefunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13302">
+          <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/script/searcher.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc;n#searcher#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/style/default2.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3705" max-vertical-offset="13212">
@@ -720,56 +674,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/user_system/default2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.962963" vertical-offset="280" max-vertical-offset="2286">
-          <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.27213824" vertical-offset="0" max-vertical-offset="2286">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/script/movefunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.461538" vertical-offset="12046" max-vertical-offset="13284">
-          <caret line="706" column="20" selection-start-line="706" selection-start-column="20" selection-end-line="706" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.76367617" vertical-offset="13630" max-vertical-offset="14544">
-          <caret line="1239" column="6" selection-start-line="1239" selection-start-column="6" selection-end-line="1239" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!block;n#Map#0" expanded="false" />
-            <element signature="n#!!block;n#category_layout#0" expanded="false" />
-            <element signature="n#!!block;n#pairs#0" expanded="false" />
-            <element signature="n#!!block;n#BuildDictionary#0" expanded="false" />
-            <element signature="n#!!block;n#AddItem#0" expanded="false" />
-            <element signature="n#!!block;n#UpdateItem#0" expanded="false" />
-            <element signature="n#!!block;n#DeleteItem#0" expanded="false" />
-            <element signature="n#!!block;n#GetKeyStr#0" expanded="false" />
-            <element signature="n#!!block;n#GetValueStr#0" expanded="false" />
-            <element signature="n#!!block;n#lastView#0" expanded="false" />
-            <element signature="n#!!block;n#my_card#0" expanded="false" />
-            <element signature="n#!!block;n#add_missing_cards#0" expanded="false" />
-            <element signature="n#!!block;n#show_menu#0" expanded="false" />
-            <element signature="n#!!block;n#show_color_board#0" expanded="false" />
-            <element signature="n#!!block;n#move_cards_to_new_place#0" expanded="false" />
-            <element signature="n#!!block;n#create_edit_control#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_edit#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_color#0" expanded="false" />
-            <element signature="n#!!block;n#show_card_class_input#0" expanded="false" />
-            <element signature="n#!!block;n#change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#cancel_change_class_name#0" expanded="false" />
-            <element signature="n#!!block;n#set_card_id#0" expanded="false" />
-            <element signature="n#!!block;n#show_id#0" expanded="false" />
-            <element signature="n#!!block;n#search_arr_by_id#0" expanded="false" />
-            <element signature="n#!!block;n#find_category#0" expanded="false" />
-            <element signature="n#!!block;n#move_card_to_another_category#0" expanded="false" />
-            <element signature="n#!!block;n#hide_side_bar#0" expanded="false" />
-            <element signature="n#!!block;n#set_bell#0" expanded="false" />
-            <element signature="e#24941#25451#0" expanded="false" />
-            <element signature="e#25894#25964#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
