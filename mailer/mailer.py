@@ -4,8 +4,13 @@ import imaplib
 import os
 import email
 import base64
+import datetime
+from email.utils import parsedate
 
-def getLastMail(address,password):
+def chTupleToDatetime(arg):
+    return datetime.datetime(*parsedate(arg)[:6])
+
+def getLastMail(address,password,lasttime = datetime.datetime.min):
     pos = address.find('@')
     host = "imap."+address[pos+1:]
     username = address[0:pos]#"buaasoft2012"
@@ -21,6 +26,9 @@ def getLastMail(address,password):
     code = content[1][0][1]
     #print code
     msg = email.message_from_string(code)
+    date = msg.get("Date")
+    if(chTupleToDatetime(date)<=lasttime):
+        return {"status":1}
     subject = msg.get("subject")
     #print subject
     data = subject.split('?')
@@ -34,7 +42,7 @@ def getLastMail(address,password):
     #print content
 
     sender = msg.get("Sender")
-    date = msg.get("Date")
+    
     content = "";
 
     for par in msg.walk():
@@ -66,4 +74,5 @@ def getLastMail(address,password):
     res["subject"] = subject
     res["date"] = date
     res["content"] = content;
+    res["status"] = 0;
     return res
