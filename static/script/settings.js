@@ -34,10 +34,10 @@ function checkOriginalPwd()
 	else
 	{
 		$.ajax({
-			url:,
+			url:do_check_password,
 			type:"POST",
 			dataType:"json",
-			data:{"OriginalPwd":testOriginalPwd},
+			data:{"password":testOriginalPwd},
 			success:function(data){
 				if(data.status==0)
 				{
