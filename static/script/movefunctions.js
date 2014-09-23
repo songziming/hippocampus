@@ -38,6 +38,7 @@ function init_window_val(){
     window.rows_arr=new Array([0]);
     window.category_layouts=new Array();
     window.lastView;
+    window.search_word_length=0;
 
 
 }
