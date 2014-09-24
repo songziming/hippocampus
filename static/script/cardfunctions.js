@@ -851,8 +851,8 @@ function load_cards(){
                 var temp_Arr2=new Array();
                 for(var i=0;i<window.card_num;i++){
                     if(window.allcards.length!=0){
-                        //var card=new my_card(notes[i].id,notes[i].title,notes[i].content,search_all_cards_by_val(notes[i].id),notes[i].color,notes[i].category);
-                        var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,notes[i].color,notes[i].category);
+                        var card=new my_card(notes[i].id,notes[i].title,notes[i].content,search_all_cards_by_val(notes[i].id),notes[i].color,notes[i].category);
+                        //var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,notes[i].color,notes[i].category);
                     }
                     else{
                         var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,notes[i].color,notes[i].category);
