@@ -1,17 +1,10 @@
-#! /usr/bin/env python
 # -*- coding: utf8 -*-
-
-import threading
-import imaplib
-import os
+import datetime
 import email
 import base64
-import datetime
+import imaplib
+import os
 from email.utils import parsedate
-from user_system.models import User, UserProfile
-import notes.views
-import time as TIME
-
 
 def chTupleToDatetime(arg):
     return datetime.datetime(*parsedate(arg)[:6])
@@ -30,6 +23,7 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
     content = con.fetch(last,'(UID BODY.PEEK[])')
     #print content
     code = content[1][0][1]
+    #print code
     msg = email.message_from_string(code)
     date = msg.get("Date")
     date = chTupleToDatetime(date)
@@ -73,12 +67,13 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
             else:#不是附件，是文本内容
                 #print "*"*60
                 #print par.get_payload(decode=True) # 解码出文本内容，直接输出来就可以了。
-                content += par.get_payload(decode=True)
+                content = par.get_payload(decode=True)
+                print content
+                print '*'*60
             #print '+'*60 # 用来区别各个部分的输出
     #charset = 'gbk'
-    print charset
-    if charset != "utf8" and charset != "utf-8":
-        content = content.decode(charset).encode("utf-8")
+#    if charset != "utf8" and charset != "utf-8":
+#        content = content.decode(charset).encode("utf-8")
     res = {}
     res["sender"] = sender
     res["subject"] = subject
@@ -86,36 +81,9 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
     res["content"] = content;
     res["status"] = 0;
     return res
-
-
-def getMails():
-    #vis = {}
-    while(1) :
-        print "Receiving Mail"
-        users = User.objects.all()
-        __time__ = datetime.datetime.min
-        for u in users:
-            p = UserProfile.objects.get(user = u)
-            mailaddr = u.email
-            password = p.emailPasswd
-            print "getting mail %s with password ***" % mailaddr
-            if not '@' in mailaddr:
-                continue
-            #if mailaddr in vis :
-            #    time = vis[mailaddr]
-            #else:
-            #    time = datetime.datetime.min
-            mail = getLastMail(mailaddr, password, __time__)
-            if mail["status"] == 0 :
-                #print 
-                #vis[mailaddr] = mail["date"]
-                notes.views.__create_note__(user = u, title=mail["subject"], content=mail["content"])
-        #threading.Timer(10, getAllMails, [__date__]).start()
-        __time__ = datetime.datetime.now()
-        TIME.sleep(10)
-
-print "Starting mail getter"
-
-thread = threading.Thread(target = getMails)
-thread.start()
-
+res = getLastMail("lmysoar@163.com","lmy159357")
+print res["sender"] 
+print res["subject"]
+print res["date"] 
+print res["content"]
+print res["status"] 
