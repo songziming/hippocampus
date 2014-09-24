@@ -404,7 +404,8 @@ body{
     background-color: wheat;
 }
 .color4{
-    background-color:#EDD5D1;
+    /*background-color:#EDD5D1;*/
+    background-image: url('../images/color4.jpg');
 }
 .color5{
     background-color:#F5FCAD;

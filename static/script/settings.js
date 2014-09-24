@@ -13,7 +13,7 @@ function set_active() {
 			$("#password_div").css({"display":"block"});
 			$("#MoveCard_div").css({"display":"none"});
 		}
-		else{
+		else if($(this).attr("id")=="lastli"){
 			$("#resource_div").css({"display":"none"});
 			$("#password_div").css({"display":"none"});
 			$("#MoveCard_div").css({"display":"block"});
@@ -23,21 +23,22 @@ function set_active() {
 
 
 //向后台发送，用来判断输入的原密码是否正确
-checkoriginalpwd=false;
-function checkOriginalPwd()
+
+function checkoriginalpwd_fun()
 {
+    window.checkoriginalpwd=false;
 	var testOriginalPwd=$("#InputOldPassword").val();
 	if(testOriginalPwd=="" ||testOriginalPwd==null)//如果没有输入原密码，直接返回false
 	{
-		checkoriginalpwd=false;
+		window.checkoriginalpwd=false;
 	}
 	else
 	{
 		$.ajax({
-			url:"do_check_password/",
+			url:"/do_check_password/",
 			type:"POST",
+            data:{"password":testOriginalPwd},
 			dataType:"json",
-			data:{"password":testOriginalPwd},
 			success:function(data){
 				if(data.status==0)
 				{
@@ -59,35 +60,37 @@ function checkOriginalPwd()
 //通过传入函数来解决ajax的返回值操作问题
 function success_function()
 {
-	checkoriginalpwd=true;
+	window.checkoriginalpwd=true;
 }
 
 function fail_function()
 {
-	checkoriginalpwd=false;
+	window.checkoriginalpwd=false;
 }
 
 //点击原密码输入框后的消息提醒
 function ClickOriPwd()
 {
 	$("#InputOldPassword").blur(function(){
-		checkOriginalPwd();
+		checkoriginalpwd_fun();
 	});
 }
 
 //处理修改密码面板的提交
 function submitPwd()
 {
+
 	$("#submitPwd").click(function(){
 		if(CheckAllPwd())
 		{
 			var newPwd=$("#InputNewPassword").val();
 			$.ajax({
-				url:"do_set_password/",
+				url:"/do_set_password/",
 				type:"POST",
-				dataType:"json",
-				data:{"password":nickname},
+				data:{"password":newPwd},
+                dataType:"json",
 				success:function(data){
+                    var t=data;
 					if(data.status==0)
 					{
 						alert("用户密码已修改");
@@ -175,8 +178,8 @@ function checkNewPwdIsExist()
 //检查所有的密码面板的相关信息
 function CheckAllPwd()
 {
-	checkOriginalPwd();//对原密码进行检查
-	if(checkoriginalpwd==true)
+	//checkoriginalpwd_fun();//对原密码进行检查
+	if(window.checkoriginalpwd==true)
 	{
 		//checkNewPwdIsExist();//先进行用户输入信息提示
 		if(checkNewPwdIsExist())
@@ -200,7 +203,7 @@ function CheckAllPwd()
 	else
 	{
 		alert("please input the correct original password");
-		$("#InputOldPassword").val("value","");
+		$("#InputOldPassword").val("");
 		$("#InputOldPassword").focus();
 		return false;
 	}	
@@ -276,7 +279,7 @@ function submitRes()
 			var email=$("#exampleInputEmail").val();
 			var sex=$("input[name='sex']:checked").val();
 			$.ajax({
-				url:"do_update_settings/",
+				url:"/do_update_settings/",
 				type:"POST",
 				dataType:"json",
 				data:{"nickname":nickname,"email":email,"gender":sex},

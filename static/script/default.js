@@ -79,7 +79,7 @@ function show_user_block(){
 }
 function logout(){
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/do_logout/",
         data:{},
         dataType: "json",
@@ -87,19 +87,23 @@ function logout(){
             if(resText.status==0){
                 //alert("post");
                 show_user_block();
+                alert("成功登出！");
+                window.location.href="/login";
+
             }
         }
     });
 }
 function go_to_settings(){
     $.ajax({
-        type: "POST",
+        type: "",
         url: "/do_logout/",
         data:{},
         dataType: "json",
         success: function(resText){
             if(resText.status==0){
-                //alert("post");
+//                window.location.anchor("/login/");
+
                 show_user_block();
             }
         }

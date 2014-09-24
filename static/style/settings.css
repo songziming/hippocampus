@@ -21,6 +21,11 @@
 	display: none;
 }
 
+.movecard{
+    background: #D3D3D3;
+    display: none;
+}
+
 .form-group label{
 	font-size: 20px;
 	display: block;
