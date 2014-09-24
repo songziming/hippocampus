@@ -1055,64 +1055,70 @@ function get_indexs(){
         dataType: "json",
         success: function(resText){
             if(resText.status==0) {
-                window.category_layouts=JSON.parse(resText.notesorder.concat());
-                //alert(typeof (window.category_layouts));
-                console.log(window.category_layouts);
-                console.log(resText.notesorder);
-                if(window.category_layouts.length==1){
-                    var index_arr=new Array();
-                    index_arr=window.category_layouts[0].indexs;
-                    for(var j=0;j<index_arr.length;j++){
-                        window.allcards[(index_arr[j].index)] = index_arr[j].id;
-                    }
-                    window.lastView=new lastView("全部",index_arr);
+                if(resText.notesorder==""){
+                    load_cards();
                 }
                 else{
-                    var index_arr=new Array();
-                    index_arr=window.category_layouts[0].indexs;
-                    for(var j=0;j<index_arr.length;j++){
-                        window.allcards[(index_arr[j].index)] = index_arr[j].id;
-                    }
-
-                    index_arr=window.category_layouts[1].indexs;
-                    var last_category=window.category_layouts[1].category;
-                    if (find_category(last_category)==-1) {
-                        create_new_category(last_category);
-                    }
-                    window.lastView=new lastView(last_category,index_arr);
-                    window.recent_group=find_category(last_category);
-                }
-                /*
-                for (var i = 0; i < window.category_layouts.length; i++) {
-                    if(window.category_layouts[i].category=="全部"){
+                    window.category_layouts=JSON.parse(resText.notesorder.concat());
+                    //alert(typeof (window.category_layouts));
+                    console.log(window.category_layouts);
+                    console.log(resText.notesorder);
+                    if(window.category_layouts.length==1){
                         var index_arr=new Array();
-
-                        index_arr=window.category_layouts[i].indexs;
+                        index_arr=window.category_layouts[0].indexs;
                         for(var j=0;j<index_arr.length;j++){
-
                             window.allcards[(index_arr[j].index)] = index_arr[j].id;
-
                         }
+                        window.lastView=new lastView("全部",index_arr);
                     }
                     else{
-                        if (find_category(window.category_layouts[i].category)==-1) {
-                            create_new_category(window.category_layouts[i].category);
+                        var index_arr=new Array();
+                        index_arr=window.category_layouts[0].indexs;
+                        for(var j=0;j<index_arr.length;j++){
+                            window.allcards[(index_arr[j].index)] = index_arr[j].id;
                         }
-                        else{
-                            var index_arr=new Array();
-                            window.lastView=window.category_layouts[i].category;
-                            index_arr=window.category_layouts[i].indexs;
-                            for(var j=0;j<index_arr.length;j++){
 
-                                window.allcards[(index_arr[j].index)] = index_arr[j].id;
-
-                            }
+                        index_arr=window.category_layouts[1].indexs;
+                        var last_category=window.category_layouts[1].category;
+                        if (find_category(last_category)==-1) {
+                            create_new_category(last_category);
                         }
+                        window.lastView=new lastView(last_category,index_arr);
+                        window.recent_group=find_category(last_category);
                     }
+                    /*
+                     for (var i = 0; i < window.category_layouts.length; i++) {
+                     if(window.category_layouts[i].category=="全部"){
+                     var index_arr=new Array();
+
+                     index_arr=window.category_layouts[i].indexs;
+                     for(var j=0;j<index_arr.length;j++){
+
+                     window.allcards[(index_arr[j].index)] = index_arr[j].id;
+
+                     }
+                     }
+                     else{
+                     if (find_category(window.category_layouts[i].category)==-1) {
+                     create_new_category(window.category_layouts[i].category);
+                     }
+                     else{
+                     var index_arr=new Array();
+                     window.lastView=window.category_layouts[i].category;
+                     index_arr=window.category_layouts[i].indexs;
+                     for(var j=0;j<index_arr.length;j++){
+
+                     window.allcards[(index_arr[j].index)] = index_arr[j].id;
+
+                     }
+                     }
+                     }
+                     }
+                     */
+                    load_cards();
                 }
-                */
-                load_cards();
             }
+
         }
     });
 }
