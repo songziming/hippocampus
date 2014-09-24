@@ -74,7 +74,8 @@
 
 
 body{
-	background-color:#639bf1;
+	/*background-color:#639bf1;*/
+    background-image: url('../images/purty_wood_dark.png');
 	margin: 0px;
     font-family: 'Microsoft Yahei';
     overflow-x: hidden;
@@ -390,12 +391,28 @@ body{
 .search-res:hover{
     background-color: #ddd;
 }
-
+/*卡片样式方案*/
 .color0{
-    background-color: #F7AFD3;
+    /*background-color: #F7AFD3;*/
+    background-image: url('../images/color0.jpg');
 }
+.color0 .card-name{
+    color: #fff !important;
+}
+.color0 .content{
+    background: transparent;
+}
+.color0 #content-input{
+    color: #fff;
+}
+.color0 .card-content-p{
+    color: #fff;
+}
+
+
 .color1{
-    background-color: #e3e3e3;
+    /*background-color: #e3e3e3;*/
+    background-image: url('../images/color1.jpg');
 }
 .color2{
     background-color: #A5BFF7;
@@ -404,8 +421,9 @@ body{
     background-color: wheat;
 }
 .color4{
-    background-color:#EDD5D1;
-}
+    /*background-color:#EDD5D1;*/
+    background-image: url('../images/color004.jpg');
+ }
 .color5{
     background-color:#F5FCAD;
 }
@@ -429,10 +447,21 @@ body{
     cursor:default;
     height: auto;
     /*border-radius: 4px;*/
-    box-shadow:-1px 2px 1px 1px rgba(0,0,0,0.2);
+    box-shadow:-1px 2px 1px 1px rgba(0,0,0,0.3);
     -webkit-user-select:none;
     -ms-user-select:none;
     z-index: 0;
+}
+.card .content img,.card .content video{
+    max-width:200px;
+    margin-right: 10px;
+}
+.card audio{
+    max-width:200px ;
+}
+.card iframe,.card embed{
+    width: 200px;
+    max-height:220px ;
 }
 .card-name{
     float: left;

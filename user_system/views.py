@@ -83,8 +83,11 @@ def do_login(request):
     return HttpResponse(json.dumps(res), content_type='application/json')
 
 def do_logout(request):
+    res = {}
     django_logout(request)
-    return HttpResponseRedirect("/")
+    #return HttpResponseRedirect("/")
+    res['status'] = 0
+    return HttpResponse(json.dumps(res), content_type="application/json")
 
 def settings(request):
     return render(request, 'user_system/settings.html', {});
