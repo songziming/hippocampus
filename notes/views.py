@@ -41,6 +41,18 @@ def __create_note__(user, title, category = "mail", content = ""):
         note.content = content
         note.index = num + 1
         note.save()
+        p = UserProfile.objects.get(user=user)
+        ss = p.notesOrder
+        ods = json.load(StringIO(ss))
+        for i in xrange(len(ods)):
+            if ods[i].Category == "全部":
+                ods[i].indexs.append({"id":note.id, "index": note.index})
+                break
+        p.notesOrder = json.dumps(ods)
+        p.save()
+
+    else:
+        pass
 
 def do_create_note(request):
     res = {}

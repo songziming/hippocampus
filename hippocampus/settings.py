@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'user_system',
     'notes',
-    'mailer',
 )
 
 MIDDLEWARE_CLASSES = (
