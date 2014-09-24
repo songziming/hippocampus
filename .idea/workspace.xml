@@ -4,7 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/static/script/default.js" line="104" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d001ff4-a4c8-40de-aa41-9d5e2737d783" name="Default" comment="" />
+    <list default="true" id="5d001ff4-a4c8-40de-aa41-9d5e2737d783" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/cardfunctions.js" afterPath="$PROJECT_DIR$/static/script/cardfunctions.js" />
+    </list>
     <ignored path="hippocampus.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -79,8 +81,8 @@
       <file leaf-file-name="mailer.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mailer/mailer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
-              <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
+              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -89,8 +91,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mailer/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="901" max-vertical-offset="2178">
-              <caret line="98" column="64" selection-start-line="98" selection-start-column="64" selection-end-line="98" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="973" max-vertical-offset="2340">
+              <caret line="102" column="24" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -99,8 +101,8 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notes/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.653847" vertical-offset="2223" max-vertical-offset="3258">
-              <caret line="149" column="67" selection-start-line="149" selection-start-column="67" selection-end-line="149" selection-end-column="67" />
+            <state vertical-scroll-proportion="-17.653847" vertical-offset="2349" max-vertical-offset="3366">
+              <caret line="156" column="59" selection-start-line="156" selection-start-column="59" selection-end-line="156" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -119,8 +121,8 @@
       <file leaf-file-name="cardfunctions.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.6574469" vertical-offset="0" max-vertical-offset="23112">
-              <caret line="191" column="53" selection-start-line="191" selection-start-column="53" selection-end-line="191" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.5425532" vertical-offset="14952" max-vertical-offset="23130">
+              <caret line="859" column="48" selection-start-line="859" selection-start-column="48" selection-end-line="859" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -749,24 +751,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mailer/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="901" max-vertical-offset="2178">
-          <caret line="98" column="64" selection-start-line="98" selection-start-column="64" selection-end-line="98" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="973" max-vertical-offset="2340">
+          <caret line="102" column="24" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/notes/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.653847" vertical-offset="2223" max-vertical-offset="3258">
-          <caret line="149" column="67" selection-start-line="149" selection-start-column="67" selection-end-line="149" selection-end-column="67" />
+        <state vertical-scroll-proportion="-17.653847" vertical-offset="2349" max-vertical-offset="3366">
+          <caret line="156" column="59" selection-start-line="156" selection-start-column="59" selection-end-line="156" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mailer/mailer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
+          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -821,8 +823,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.6574469" vertical-offset="0" max-vertical-offset="23112">
-          <caret line="191" column="53" selection-start-line="191" selection-start-column="53" selection-end-line="191" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.5425532" vertical-offset="14952" max-vertical-offset="23130">
+          <caret line="859" column="48" selection-start-line="859" selection-start-column="48" selection-end-line="859" selection-end-column="48" />
           <folding />
         </state>
       </provider>
