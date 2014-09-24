@@ -15,7 +15,7 @@ function init_window_val(){
     window.old_top;
     window.container_top=80 ;
     // window.card_width=$(".card").width()+10;
-    window.card_width=250;
+    window.card_width=300;
     window.allcards=new Array();
 
     window.cards_arr=new Array();

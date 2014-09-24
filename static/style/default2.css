@@ -69,13 +69,27 @@
     .card-content-p{
         width: 96% !important;
     }
+    .card .content img{
+        width: auto !important;
+        max-width: 96% !important;
+    }
+    .card .content video{
+        max-width:96% !important;
+        margin-right: 10px !important;
+    }
+    .card audio{
+        max-width:70% !important;
+    }
+    .card iframe,.card embed{
+        width: 96% !important;
+    }
 
 }
 
 
 body{
 	/*background-color:#639bf1;*/
-    background-image: url('../images/purty_wood_dark.png');
+    background-image: url('../images/purty_wood_dark.jpg');
 	margin: 0px;
     font-family: 'Microsoft Yahei';
     overflow-x: hidden;
@@ -440,7 +454,7 @@ body{
 .card{
 
     margin: 10px 0px 10px 10px;
-    width: 240px;
+    width: 290px;
     padding: 0px;
     position: absolute;
     display: none;
@@ -453,15 +467,14 @@ body{
     z-index: 0;
 }
 .card .content img,.card .content video{
-    max-width:200px;
+    max-width:280px;
     margin-right: 10px;
 }
 .card audio{
-    max-width:200px ;
+    max-width:280px ;
 }
 .card iframe,.card embed{
-    width: 200px;
-    max-height:220px ;
+    width: 280px;
 }
 .card-name{
     float: left;
@@ -486,7 +499,7 @@ body{
 
 .content{
     background-color: rgba(255,255,255,0.5);
-    min-width:200px;
+    min-width:280px;
     min-height: 90px;
     float:none;
     margin: 0;
@@ -500,7 +513,7 @@ body{
     /*text-indent: 1em;*/
     text-align: left;
     display:block;
-    width: 220px;
+    width: 280px;
     line-height: 1em;
     font-size: 14px;
     line-height: 3px;
@@ -513,8 +526,8 @@ body{
 }
 #title-input{
 
-    width: 180px;
-    margin-left: 10px;
+    width: 270px;
+    margin-left: 5px;
     box-sizing: border-box;
     -webkit-appearance: none;
     background-color: rgba(255,255,255,0.4);
@@ -531,7 +544,7 @@ body{
 
 #content-input{
     resize: none;
-    width: 220px;
+    width: 270px;
     height: 180px;
     font-size: 12px;
     box-sizing: border-box;
@@ -798,14 +811,16 @@ body{
 #hide-bar:hover{
     background-color: rgba(255,255,255,0.4);
 }
+
 #content-container{
     display: none;
-    position: fixed;
+    position: absolute;
     z-index:1000;
     top: 0;
     left:0;
     width: 100%;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     background-color: rgba(0,0,0,0.7);
     text-align: center;
 }
@@ -813,7 +828,7 @@ body{
     position: relative;
     display: block;
     z-index: 1010;
-    margin-top: 160px;
+    top: 100px;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
@@ -823,17 +838,27 @@ body{
     border-radius: 5px;
     word-wrap:break-word;
     font-size: 1em;
+    text-align: center;
+    padding: 20px;
 }
-#card-content-p-show p,#card-content-p-show video,#card-content-p-show iframe,#card-content-p-show embed,#card-content-p-show img{
-    width: 100%;
+#card-content-p-show p,#card-content-p-show img{
+    max-width: 100%;
+    width: auto;
+    margin: auto;
+}
+#card-content-p-show video,#card-content-p-show iframe,#card-content-p-show embed{
+    width: 90%;
+    margin: auto;
 }
 #cancel-show{
     position: relative;
+    float: right;
+    position: relative;
     z-idnex:1010;
-    padding: 8px 30px;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 5px;
+    margin-top: 0px;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
     display: inline-block;
     width: auto;
     height: auto;

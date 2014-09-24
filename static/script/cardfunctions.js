@@ -376,7 +376,7 @@ function create_edit_control(obj){
     var this_title=$("#"+card.id +" .title");
     var card_name_obj=$("#"+card.id +" .title .card-name");
     var this_content=$("#"+card.id+" .content .card-content-p");
-    var content=this_content.text();
+    var content=this_content.html();
     var title=card_name_obj.html();
 
 
