@@ -3,6 +3,6 @@
 from django.db import connection
 
 # connection.text_factory = str
-import mailer
+#import mailer
 
-mailer.startGetMailer()
+#mailer.startGetMailer()
