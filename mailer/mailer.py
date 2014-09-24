@@ -45,11 +45,11 @@ from user_system import User, UserProfile
 
         sender = msg.get("from")
         sender = sender[sender.find('<')+1:sender.find('>')]
-        
+
         content = "";
 
         for par in msg.walk():
-            if not par.is_multipart(): 
+            if not par.is_multipart():
                 name = par.get_param("name") #如果是附件，这里就会取出附件的文件名
                 if name:
                     #有附件
@@ -59,7 +59,7 @@ from user_system import User, UserProfile
                     fname = dh[0][0]
                     print '附件名:', fname
                     data = par.get_payload(decode=True) #　解码出附件数据，然后存储到文件中
-                    
+
                     try:
                         f = open(fname, 'wb') #注意一定要用wb来打开文件，因为附件一般都是二进制文件
                     except:
@@ -82,14 +82,15 @@ from user_system import User, UserProfile
         return res
 
     def getAllMails():
-        profiles = UserProfile.object.all()
+        profiles = UserProfile.objects.all()
         for p in profiles:
             u = p._meta.get_field('user').rel.to
             mailaddr = u.email
             password = p.emailPasswd
             mail = getLastMail(mailaddr, password)
+            print mailaddr,password
             notes.views.__create_notes__(user = u, title=mail["subject"], content=mail["content"])
-        threading.Timer(10, getAllMails).start()
+        #threading.Timer(10, getAllMails).start()
 
     def start():
         getAllMails()

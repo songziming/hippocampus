@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from notes.models import Note
@@ -28,7 +29,7 @@ def __is_note_exist__(user, title):
     else:
         return True
 
-def __create_note__(user, title, category="", content):
+def __create_note__(user, title, category = "", content = ""):
     note = Note(user = user)
     note.title = title
     note.category = category
