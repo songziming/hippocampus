@@ -193,7 +193,7 @@ function bindlistener(){
     $("#header-save").attr("onclick","send_indexs()");
     $(".icon-new-window").attr("onclick","search_linstener()");
     $("#header-username").attr("onclick","show_user_block()");
-
+    $(".set-bell").attr("onclick","show_content(this)");
     $("#logout").attr("onclick","logout()");
 
 }
@@ -255,7 +255,7 @@ function addcard(id,title,content,color){
     }
  if(($("#"+id.toString()+" .menu")).length<=0){
         $("#"+id.toString()+" .card-content-p p").text(content);
-        cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"设置提醒\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+        cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"查看\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
         $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
@@ -273,8 +273,10 @@ function addcard(id,title,content,color){
     $("#"+id.toString()+" .color-block").attr("onclick","set_card_color(this)");
     $("#"+id.toString()+" .set-class").attr("onclick","show_card_class_input(this)");
     $("#"+id.toString()+" .change-class-yes").attr("onclick","change_class_name(this)");
-    $("#"+id.toString()+".change-class-no").attr("onclick","cancel_change_class_name(this)");
-    $("#"+id.toString()+".delete").attr("onclick","remove_card(this)");
+    $("#"+id.toString()+" .change-class-no").attr("onclick","cancel_change_class_name(this)");
+    $("#"+id.toString()+" .delete").attr("onclick","remove_card(this)");
+    $("#"+id.toString()+" .set-bell").attr("onclick","show_content(this)");
+
     set_float_card_in_colum_position(cards);
     fresh_height_arr();
     //add_missing_cards();
@@ -1270,7 +1272,7 @@ function update_index(){
         dataType: "json",
         success: function(resText){
             if(resText.status==0){
-                alert("post");
+//                alert("post");
             }
         }
     });

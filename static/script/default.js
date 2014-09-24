@@ -109,3 +109,20 @@ function go_to_settings(){
         }
     });
 }
+
+function show_content(obj){
+    show_menu(obj);
+
+    var card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id.toString());
+
+    var this_content=$("#"+card.id+" .content .card-content-p");
+    var content=this_content.html();
+
+    $("#card-content-p-show p").html(content);
+    $("#content-container").css("display","block");
+}
+function hide_content(){
+    $("#card-content-p-show p").html("");
+    $("#content-container").css("display","none");
+}
