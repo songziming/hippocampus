@@ -4,14 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/static/script/default.js" line="104" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d001ff4-a4c8-40de-aa41-9d5e2737d783" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/cardfunctions.js" afterPath="$PROJECT_DIR$/static/script/cardfunctions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/script/default.js" afterPath="$PROJECT_DIR$/static/script/default.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/style/default2.css" afterPath="$PROJECT_DIR$/static/style/default2.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/user_system/default2.html" afterPath="$PROJECT_DIR$/templates/user_system/default2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="5d001ff4-a4c8-40de-aa41-9d5e2737d783" name="Default" comment="" />
     <ignored path="hippocampus.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -126,8 +119,8 @@
       <file leaf-file-name="cardfunctions.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5287234" vertical-offset="2869" max-vertical-offset="23112">
-              <caret line="187" column="66" selection-start-line="187" selection-start-column="66" selection-end-line="187" selection-end-column="66" />
+            <state vertical-scroll-proportion="3.6574469" vertical-offset="0" max-vertical-offset="23112">
+              <caret line="191" column="53" selection-start-line="191" selection-start-column="53" selection-end-line="191" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -828,8 +821,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/script/cardfunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5287234" vertical-offset="2869" max-vertical-offset="23112">
-          <caret line="187" column="66" selection-start-line="187" selection-start-column="66" selection-end-line="187" selection-end-column="66" />
+        <state vertical-scroll-proportion="3.6574469" vertical-offset="0" max-vertical-offset="23112">
+          <caret line="191" column="53" selection-start-line="191" selection-start-column="53" selection-end-line="191" selection-end-column="53" />
           <folding />
         </state>
       </provider>

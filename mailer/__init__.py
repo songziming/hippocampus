@@ -12,6 +12,7 @@ from user_system.models import User, UserProfile
 import notes.views
 import time as TIME
 
+
 def chTupleToDatetime(arg):
     return datetime.datetime(*parsedate(arg)[:6])
 
@@ -46,30 +47,30 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
 
     sender = msg.get("from")
     sender = sender[sender.find('<')+1:sender.find('>')]
-    
+
     content = "";
 
     for par in msg.walk():
-        if not par.is_multipart(): 
+        if not par.is_multipart():
             name = par.get_param("name") #如果是附件，这里就会取出附件的文件名
-            if name:
-                #有附件
-                # 下面的三行代码只是为了解码象=?gbk?Q?=CF=E0=C6=AC.rar?=这样的文件名
-                h = email.Header.Header(name)
-                dh = email.Header.decode_header(h)
-                fname = dh[0][0]
-                fname = fname.decode(charset).encode("utf-8")
-                print '附件名:', fname
-                data = par.get_payload(decode=True) #　解码出附件数据，然后存储到文件中
-                
-                try:
-                    f = open(fname, 'wb') #注意一定要用wb来打开文件，因为附件一般都是二进制文件
-                except:
-                    print '附件名有非法字符，自动换一个'
-                    f = open('aaaa', 'wb')
-                f.write(data)
-                f.close()
-            else:#不是附件，是文本内容
+            if not name:
+#                #有附件
+#                # 下面的三行代码只是为了解码象=?gbk?Q?=CF=E0=C6=AC.rar?=这样的文件名
+#                h = email.Header.Header(name)
+#                dh = email.Header.decode_header(h)
+#                fname = dh[0][0]
+#                fname = fname.decode(charset).encode("utf-8")
+#                print '附件名:', fname
+#                data = par.get_payload(decode=True) #　解码出附件数据，然后存储到文件中
+#
+#                try:
+#                    f = open(fname, 'wb') #注意一定要用wb来打开文件，因为附件一般都是二进制文件
+#                except:
+#                    print '附件名有非法字符，自动换一个'
+#                    f = open('aaaa', 'wb')
+#                f.write(data)
+#                f.close()
+#            else:#不是附件，是文本内容
                 #print "*"*60
                 #print par.get_payload(decode=True) # 解码出文本内容，直接输出来就可以了。
                 content += par.get_payload(decode=True)
@@ -87,8 +88,9 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
     return res
 
 
-def getAllMails():
-    vis = {}
+def getMails():
+    #vis = {}
+    __time__ = datetime.datetime.min
     while(1) :
         print "Receiving Mail"
         users = User.objects.all()
@@ -99,17 +101,24 @@ def getAllMails():
             print "getting mail %s with password ***" % mailaddr
             if not '@' in mailaddr:
                 continue
-            if mailaddr in vis :
-                time = vis[mailaddr]
-            else:
-                time = datetime.datetime.min
-            mail = getLastMail(mailaddr, password, time)
+            #if mailaddr in vis :
+            #    time = vis[mailaddr]
+            #else:
+            #    time = datetime.datetime.min
+            mail = getLastMail(mailaddr, password, __time__)
             if mail["status"] == 0 :
-                vis[mailaddr] = mail["date"]
+                #print
+                #vis[mailaddr] = mail["date"]
                 notes.views.__create_note__(user = u, title=mail["subject"], content=mail["content"])
         #threading.Timer(10, getAllMails, [__date__]).start()
-        TIME.sleep(5)
+        __time__ = datetime.datetime.now()
+        TIME.sleep(10)
 
-# def start():
-print "Starting mail getter"
-#getAllMails()
+def startGetMailer():
+    print 'Calling func only this time'
+
+    thread = threading.Thread(target = getMails)
+    thread.start()
+    
+    startGetMailer.func_code = (lambda:None).func_code
+
