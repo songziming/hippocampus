@@ -28,6 +28,13 @@ def __is_note_exist__(user, title):
     else:
         return True
 
+def __create_note__(user, title, category="", content):
+    note = Note(user = user)
+    note.title = title
+    note.category = category
+    note.content = content
+    note.save()
+
 def do_create_note(request):
     res = {}
     if request.user.is_authenticated() and request.user.is_active:
