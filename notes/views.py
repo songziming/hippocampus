@@ -15,6 +15,7 @@ def do_get_notes(request):
         arr = Note.objects.all().filter(user = request.user)
         res['notes'] = [];
         for e in arr:
+            print "getting note %s" % e.title
             res['notes'].append({'id': e.id, 'title': e.title, 'category': e.category, 'content': e.content, 'index': e.index, 'color': e.color});
     else:
         res['status'] = 1
@@ -29,12 +30,17 @@ def __is_note_exist__(user, title):
     else:
         return True
 
-def __create_note__(user, title, category = "", content = ""):
-    note = Note(user = user)
-    note.title = title
-    note.category = category
-    note.content = content
-    note.save()
+def __create_note__(user, title, category = "mail", content = ""):
+    try:
+        n = Note.objects.get(user=user, title=title)
+    except Note.DoesNotExist:
+        num = len(Note.objects.all().filter(user=user))
+        note = Note(user = user)
+        note.title = title
+        note.category = category
+        note.content = content
+        note.index = num + 1
+        note.save()
 
 def do_create_note(request):
     res = {}
