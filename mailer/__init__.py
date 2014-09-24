@@ -112,4 +112,4 @@ def getAllMails():
 
 # def start():
 print "Starting mail getter"
-getAllMails()
+#getAllMails()

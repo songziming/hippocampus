@@ -1037,7 +1037,7 @@ function send_indexs(){
         dataType: "json",
         success: function(resText){
             if(resText.status==0){
-
+                update_index();
             }
         }
     });
@@ -1252,3 +1252,26 @@ function excute_index(){
 
 }
 
+function update_index(){
+    var arr=new Array();
+    for(var i=0;i<window.allcards.length;i++){
+        var temp=window.allcards[i];
+        //var pair=new pairs(temp.id,temp.index);
+        arr.push(temp.id);
+        arr.push(temp.index);
+    }
+    remove_null_elemt(arr);
+    arr.removeUseless();
+    arr=JSON.stringify(arr);
+    $.ajax({
+        type: "POST",
+        url: "/do_update_indexes/",
+        data: {pairs:arr},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+                alert("post");
+            }
+        }
+    });
+}
