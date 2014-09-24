@@ -47,11 +47,11 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
 
     sender = msg.get("from")
     sender = sender[sender.find('<')+1:sender.find('>')]
-    
+
     content = "";
 
     for par in msg.walk():
-        if not par.is_multipart(): 
+        if not par.is_multipart():
             name = par.get_param("name") #如果是附件，这里就会取出附件的文件名
             if name:
                 #有附件
@@ -62,7 +62,7 @@ def getLastMail(address,password,lasttime = datetime.datetime.min):
                 fname = fname.decode(charset).encode("utf-8")
                 print '附件名:', fname
                 data = par.get_payload(decode=True) #　解码出附件数据，然后存储到文件中
-                
+
                 try:
                     f = open(fname, 'wb') #注意一定要用wb来打开文件，因为附件一般都是二进制文件
                 except:
@@ -107,7 +107,7 @@ def getMails():
             #    time = datetime.datetime.min
             mail = getLastMail(mailaddr, password, __time__)
             if mail["status"] == 0 :
-                #print 
+                #print
                 #vis[mailaddr] = mail["date"]
                 notes.views.__create_note__(user = u, title=mail["subject"], content=mail["content"])
         #threading.Timer(10, getAllMails, [__date__]).start()

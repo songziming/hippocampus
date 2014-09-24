@@ -126,7 +126,7 @@ def do_update_notes_order(request):
     return HttpResponse(json.dumps(res), content_type = "application/json")
 
 def __update_index__(request, id, index):
-    note = Note.objects.get(user = request.user, id = request.POST['id'])
+    note = Note.objects.get(user = request.user, id = id)
     note.index = index
     note.save()
 
@@ -134,14 +134,22 @@ def __update_index__(request, id, index):
 def do_update_indexes(request):
     res = {}
     if request.user.is_authenticated() and request.user.is_active and 'pairs' in request.POST:
-        try:
-            pairs = json.load(StringIO(request.POST['pairs']));
-            for e in pairs:
-                __update_index__(request, e.id, e.index)
-        except Note.DoesNotExist:
-            res['status'] = 2
-        else:
-            res['status'] = 0
+#        try:
+#            pairs = request.POST['pairs'];
+#            print pairs
+#            for e in pairs:
+#                __update_index__(request, e.id, e.index)
+#        except Note.DoesNotExist:
+#            res['status'] = 2
+#        else:
+#            res['status'] = 0
+        str = request.POST['pairs']
+        arr = json.load(StringIO(str))
+        l = len(arr) / 2
+        for i in range(0, l-1):
+            print "setting Id %d Index %d" % (arr[2*i], arr[2*i+1])
+            __update_index__(request, arr[2*i], arr[2*i+1])
+        res['status'] = 0
     else:
         res['status'] = 1
     return HttpResponse(json.dumps(res), content_type = "application/json")
