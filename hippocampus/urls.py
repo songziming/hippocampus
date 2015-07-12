@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^do_logout/$', 'user_system.views.do_logout'),
     url(r'^do_update_settings/$', 'user_system.views.do_update_settings'),
     url(r'^do_update_preferences/$', 'user_system.views.do_update_preferences'),
+    url(r'^do_check_password/$', 'user_system.views.do_check_password'),
     url(r'^do_set_password/$', 'user_system.views.do_set_password'),
 
     url(r'^do_get_notes/$', 'notes.views.do_get_notes'),
@@ -32,4 +33,5 @@ urlpatterns = patterns('',
     url(r'^do_get_notes_order/$', 'notes.views.do_get_notes_order'),
     url(r'^do_update_notes_order/$', 'notes.views.do_update_notes_order'),
     url(r'^do_update_indexes/$', 'notes.views.do_update_indexes'),
+    url(r'^do_import_notes/$', 'notes.views.do_import_notes'),
 )

@@ -53,6 +53,7 @@ def do_register(request):
             else:
                 user = User.objects.create_user(username=username, password=password)
                 profile = UserProfile(user=user)
+                profile.save()
                 res['status'] = 0
         else:
             res['status'] = 1
@@ -82,15 +83,29 @@ def do_login(request):
     return HttpResponse(json.dumps(res), content_type='application/json')
 
 def do_logout(request):
+    res = {}
     django_logout(request)
-    return HttpResponse("")
+    #return HttpResponseRedirect("/")
+    res['status'] = 0
+    return HttpResponse(json.dumps(res), content_type="application/json")
 
 def settings(request):
     return render(request, 'user_system/settings.html', {});
 
 def do_update_settings(request):
     res = {}
-    if request.method == 'POST':
+    if request.user.is_authenticated() and request.user.is_active and request.method == 'POST':
+        profile = UserProfile.objects.get(user = request.user)
+        if 'nickname' in request.POST:
+            profile.nickname = request.POST['nickname']
+        if 'email' in request.POST:
+            request.user.email = request.POST['email']
+        if 'gender' in request.POST:
+            profile.gender = request.POST['gender']
+        if 'signature' in equest.POST:
+            profile.gender = request.POST['signature']
+        request.user.save()
+        profile.save()
         res['status'] = 0
     else:
         res['status'] = 1
@@ -99,6 +114,17 @@ def do_update_settings(request):
 def do_update_preferences(request):
     res = {}
     return HttpResponse(json.dumps(res), content_type='application/json')
+
+def do_check_password(request):
+    res = {}
+    if request.user.is_authenticated() and request.user.is_active and 'password' in request.POST:
+        if request.user.check_password(request.POST['password']):
+            res["status"] = 0
+        else:
+            res["status"] = 2
+    else:
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type="application/json")
 
 def do_set_password(request):
     res = {}
@@ -109,3 +135,14 @@ def do_set_password(request):
     else:
         res['status'] = 1
     return HttpResponse(json.dumps(res), content_type="application/json")
+
+
+"""
+XXX check password
+set password
+
+
+
+get email to notes
+
+"""

@@ -15,7 +15,7 @@ function init_window_val(){
     window.old_top;
     window.container_top=80 ;
     // window.card_width=$(".card").width()+10;
-    window.card_width=250;
+    window.card_width=300;
     window.allcards=new Array();
 
     window.cards_arr=new Array();
@@ -38,6 +38,7 @@ function init_window_val(){
     window.rows_arr=new Array([0]);
     window.category_layouts=new Array();
     window.lastView;
+    window.search_word_length=0;
 
 
 }
@@ -478,6 +479,7 @@ function fresh_height_arr() {
 function exchange_up(){
 
     var target_jq=$("#"+window.target.id.toString());
+    var targetid=Math.floor(target_jq.attr("id"));
     var target_Col_No=Math.floor((window.old_left-window.container_left_edge)/window.card_width);
     var row_No=get_Row_No(window.target,target_Col_No);
     //向上移动
@@ -500,7 +502,7 @@ function exchange_up(){
     target_up_obj.css({top:(target_up_obj_new_top).toString()+"px"},1000);
 
     window.my_map[target_Col_No][row_No]=up_id;
-    window.my_map[target_Col_No][(row_No-1)]=window.target.id;
+    window.my_map[target_Col_No][(row_No-1)]=targetid;
     fresh_height_arr();
 
 
@@ -516,6 +518,7 @@ function exchange_up(){
 //向下移动
 function exchange_down(){
     var target_jq=$("#"+window.target.id.toString());
+    var targetid=Math.floor(target_jq.attr("id"));
     var target_Col_No=Math.floor((window.old_left-window.container_left_edge)/window.card_width);
     var row_No=get_Row_No(window.target,target_Col_No);
 
@@ -536,7 +539,7 @@ function exchange_down(){
     target_down_obj.css({top:(target_down_obj_new_top).toString()+"px"});
 
     window.my_map[target_Col_No][row_No]=down_id;
-    window.my_map[target_Col_No][(row_No+1)]=window.target.id;
+    window.my_map[target_Col_No][(row_No+1)]=targetid;
 
     fresh_height_arr();
 
@@ -554,6 +557,7 @@ function exchange_down(){
 //向左移动
 function exchange_left(col,mouse_y) {
     var target_jq=$("#"+window.target.id.toString());
+    var targetid=Math.floor(target_jq.attr("id"));
     var left_Col_No=col;
     var row_No=get_Row_No(window.target,col+1);
     var ex_obj;
@@ -565,7 +569,7 @@ function exchange_left(col,mouse_y) {
             obj.css({left:window.old_left+"px",top:window.old_top+"px"},200);
             window.my_map[col+1][row_No]=window.my_map[left_Col_No][i];
             ex_obj=search_arr_by_id(window.my_map[left_Col_No][i]);
-            window.my_map[left_Col_No][i]=window.target.id;
+            window.my_map[left_Col_No][i]=targetid;
             window.old_left=col*window.card_width+window.container_left_edge;
             window.old_top=obj.offset().top;
             fresh_height_arr();
@@ -586,6 +590,7 @@ function exchange_left(col,mouse_y) {
 //向右移动
 function exchange_right(col,mouse_y) {
     var target_jq=$("#"+window.target.id.toString());
+    var targetid=Math.floor(target_jq.attr("id"));
     var right_Col_No=col;
     var row_No=get_Row_No(window.target,col-1);
     var ex_obj;
@@ -598,7 +603,7 @@ function exchange_right(col,mouse_y) {
             window.my_map[col-1][row_No]=window.my_map[right_Col_No][i];
 
             ex_obj=search_arr_by_id(window.my_map[right_Col_No][i]);
-            window.my_map[right_Col_No][i]=window.target.id;
+            window.my_map[right_Col_No][i]=targetid;
             window.old_left=col*window.card_width+window.container_left_edge;
             window.old_top=obj.offset().top;
             fresh_height_arr();

@@ -145,8 +145,8 @@ function  GetValueStr(separator,dic)
 
 
 function lastView(category,indexarr){
-    var category=category;
-    var indexarr=indexarr;
+    this.category=category;
+    this.indexarr=indexarr.concat();
     return this;
 }
 
@@ -190,12 +190,19 @@ function bindlistener(){
     $(".change-class-no").attr("onclick","cancel_change_class_name(this)");
     $(".archive").attr("onclick","archive(this)");
     $(".delete").attr("onclick","remove_card(this)");
+    $("#header-save").attr("onclick","send_indexs()");
+    $(".icon-new-window").attr("onclick","search_linstener()");
+    $("#header-username").attr("onclick","show_user_block()");
+    $(".set-bell").attr("onclick","show_content(this)");
+    $("#logout").attr("onclick","logout()");
+
 }
-function addcard(id,title,content){
+function addcard(id,title,content,color){
 
     var cardnum=$("#container-main").children().length;
     var category;
-    var color="color"+(cardnum%9).toString();
+//    var color="color"+(cardnum%9).toString();
+    var color=color;
     if(window.recent_group<=1){
         //card_o=new my_card(id,title,content,window.allcards.length,color,null);
         category="默认";
@@ -248,7 +255,7 @@ function addcard(id,title,content){
     }
  if(($("#"+id.toString()+" .menu")).length<=0){
         $("#"+id.toString()+" .card-content-p p").text(content);
-        cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"设置提醒\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
+        cards.append("<div class=\"menu\"><div class=\"card-menu-icon set-bell\"><img src=\"../../static/images/bell.png\" title=\"查看\" alt=\"\"/></div><div class=\"card-menu-icon set-class\"><img src=\"../../static/images/class.png\" title=\"设置卡片组\" alt=\"\"/></div><div class=\"card-menu-icon edit\" title=\"编辑卡片\"><img src=\"../../static/images/edit.png\" alt=\"\"/></div><div class=\"card-menu-icon archive\" title=\"归档\"><img src=\"../../static/images/Archive.png\" alt=\"\"/></div><div class=\"card-menu-icon delete\" title=\"删除\"><img src=\"../../static/images/delete.png\" alt=\"\"/></div><div class=\"card-menu-icon colors\" title=\"选择颜色\"><img src=\"../../static/images/colors.png\" alt=\"\" /></div><span class=\"top-arrow\"></span> <div class=\"color-menu\"><span class=\"top-arrow\"></span><div class=\"color-block color0\"></div><div class=\"color-block color1\"></div><div class=\"color-block color2\"></div><div class=\"color-block color3\"></div><div class=\"color-block color4\"></div><div class=\"color-block color5\"></div><div class=\"color-block color6\"></div><div class=\"color-block color7\"></div><div class=\"color-block color8\"></div></div></div>");
 
         $("#"+id.toString()+" .title").append('<input'+' id=\"title-input\" placeholder=\"请输入标题\">');
 
@@ -266,8 +273,10 @@ function addcard(id,title,content){
     $("#"+id.toString()+" .color-block").attr("onclick","set_card_color(this)");
     $("#"+id.toString()+" .set-class").attr("onclick","show_card_class_input(this)");
     $("#"+id.toString()+" .change-class-yes").attr("onclick","change_class_name(this)");
-    $("#"+id.toString()+".change-class-no").attr("onclick","cancel_change_class_name(this)");
-    $("#"+id.toString()+".delete").attr("onclick","remove_card(this)");
+    $("#"+id.toString()+" .change-class-no").attr("onclick","cancel_change_class_name(this)");
+    $("#"+id.toString()+" .delete").attr("onclick","remove_card(this)");
+    $("#"+id.toString()+" .set-bell").attr("onclick","show_content(this)");
+
     set_float_card_in_colum_position(cards);
     fresh_height_arr();
     //add_missing_cards();
@@ -367,7 +376,7 @@ function create_edit_control(obj){
     var this_title=$("#"+card.id +" .title");
     var card_name_obj=$("#"+card.id +" .title .card-name");
     var this_content=$("#"+card.id+" .content .card-content-p");
-    var content=this_content.text();
+    var content=this_content.html();
     var title=card_name_obj.html();
 
 
@@ -408,8 +417,6 @@ function create_edit_control(obj){
 
 }
 
-
-
 function cancel_edit(obj){
     var card=obj.parentNode.parentNode;
     var card_jq=$("#"+card.id.toString());
@@ -440,7 +447,6 @@ function cancel_edit(obj){
     set_container_height();
 
 }
-
 
 function save_edit(obj){
     var card=obj.parentNode.parentNode;
@@ -567,6 +573,7 @@ function set_card_id(){
     return hxstr;
 
 }
+
 function show_id(){
     for(var x =0;x<window.cards_arr.length;x++){
         console.log(x.toString()+" --- "+window.cards_arr[x].id);
@@ -587,6 +594,7 @@ function search_arr_by_id(yourid){
         return false;
     }
 }
+
 function search_all_cards_by_val(yourid){
     var flag=false;
     for(var x =0;x<window.allcards.length;x++){
@@ -594,6 +602,20 @@ function search_all_cards_by_val(yourid){
 
             flag=true;
             return x;
+        }
+    }
+    if(!flag){
+        return false;
+    }
+}
+
+function search_all_cards_by_id(yourid){
+    var flag=false;
+    for(var x =0;x<window.allcards.length;x++){
+        if(window.allcards[x].id==yourid){
+
+            flag=true;
+            return window.allcards[x];
         }
     }
     if(!flag){
@@ -830,6 +852,7 @@ function load_cards(){
                 for(var i=0;i<window.card_num;i++){
                     if(window.allcards.length!=0){
                         var card=new my_card(notes[i].id,notes[i].title,notes[i].content,search_all_cards_by_val(notes[i].id),notes[i].color,notes[i].category);
+                        //var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,notes[i].color,notes[i].category);
                     }
                     else{
                         var card=new my_card(notes[i].id,notes[i].title,notes[i].content,notes[i].index,notes[i].color,notes[i].category);
@@ -870,6 +893,11 @@ function remove_null_elemt(arr){
 }
 
 function send_add_cards(){
+	var cardnum=window.card_num;
+	if(isNaN(cardnum)){
+		cardnum=0;	
+	}
+    var color="color"+((cardnum)%9).toString();
     $.ajax({
         type: "POST",
         url: "/do_create_note/",
@@ -883,14 +911,14 @@ function send_add_cards(){
                 return window.group_arr[window.recent_group];
                 //card_o=new my_card(id,title,content,window.allcards.length,color,category);
             }
-        },color:"color"+((window.card_num)%9).toString(),index:window.card_num},
+        },color:color,index:cardnum},
         dataType: "json",
         success: function(resText){
 
             if(resText.status==0){
                 window.card_num++;
                 var id=resText.id;
-                addcard(id,"请输入标题","请输入内容");
+                addcard(id,"请输入标题","请输入内容",color);
                 send_indexs();
                 show_map();
                 //save_layout();
@@ -939,7 +967,8 @@ function send_edit_change(id,card_name,card_content,color,category){
                 }
             }
         });
-        save_layout();
+        //save_layout();
+        send_indexs();
     }
 }
 
@@ -987,8 +1016,8 @@ function send_indexs(){
         var arr=new Array();
         for(var i=0;i<window.allcards.length;i++){
             var temp=window.allcards[i];
-            var pairs=new pairs(temp.id,temp.index);
-            arr.push(pairs);
+            var pair=new pairs(temp.id,temp.index);
+            arr.push(pair);
         }
         remove_null_elemt(arr);
         arr.removeUseless();
@@ -1011,7 +1040,7 @@ function send_indexs(){
         dataType: "json",
         success: function(resText){
             if(resText.status==0){
-
+                update_index();
             }
         }
     });
@@ -1026,64 +1055,70 @@ function get_indexs(){
         dataType: "json",
         success: function(resText){
             if(resText.status==0) {
-                window.category_layouts=JSON.parse(resText.notesorder.concat());
-                //alert(typeof (window.category_layouts));
-                console.log(window.category_layouts);
-                console.log(resText.notesorder);
-                if(window.category_layouts.length==1){
-                    var index_arr=new Array();
-                    index_arr=window.category_layouts[0].indexs;
-                    for(var j=0;j<index_arr.length;j++){
-                        window.allcards[(index_arr[j].index)] = index_arr[j].id;
-                    }
-                    window.lastView=new lastView("全部",index_arr);
+                if(resText.notesorder==""){
+                    load_cards();
                 }
                 else{
-                    var index_arr=new Array();
-                    index_arr=window.category_layouts[0].indexs;
-                    for(var j=0;j<index_arr.length;j++){
-                        window.allcards[(index_arr[j].index)] = index_arr[j].id;
-                    }
-
-                    index_arr=window.category_layouts[1].indexs;
-                    var last_category=window.category_layouts[1].category;
-                    if (find_category(last_category)==-1) {
-                        create_new_category(last_category);
-                    }
-                    window.lastView=new lastView(last_category,index_arr);
-                    window.recent_group=find_category(last_category);
-                }
-                /*
-                for (var i = 0; i < window.category_layouts.length; i++) {
-                    if(window.category_layouts[i].category=="全部"){
+                    window.category_layouts=JSON.parse(resText.notesorder.concat());
+                    //alert(typeof (window.category_layouts));
+                    console.log(window.category_layouts);
+                    console.log(resText.notesorder);
+                    if(window.category_layouts.length==1){
                         var index_arr=new Array();
-
-                        index_arr=window.category_layouts[i].indexs;
+                        index_arr=window.category_layouts[0].indexs;
                         for(var j=0;j<index_arr.length;j++){
-
                             window.allcards[(index_arr[j].index)] = index_arr[j].id;
-
                         }
+                        window.lastView=new lastView("全部",index_arr);
                     }
                     else{
-                        if (find_category(window.category_layouts[i].category)==-1) {
-                            create_new_category(window.category_layouts[i].category);
+                        var index_arr=new Array();
+                        index_arr=window.category_layouts[0].indexs;
+                        for(var j=0;j<index_arr.length;j++){
+                            window.allcards[(index_arr[j].index)] = index_arr[j].id;
                         }
-                        else{
-                            var index_arr=new Array();
-                            window.lastView=window.category_layouts[i].category;
-                            index_arr=window.category_layouts[i].indexs;
-                            for(var j=0;j<index_arr.length;j++){
 
-                                window.allcards[(index_arr[j].index)] = index_arr[j].id;
-
-                            }
+                        index_arr=window.category_layouts[1].indexs;
+                        var last_category=window.category_layouts[1].category;
+                        if (find_category(last_category)==-1) {
+                            create_new_category(last_category);
                         }
+                        window.lastView=new lastView(last_category,index_arr);
+                        window.recent_group=find_category(last_category);
                     }
+                    /*
+                     for (var i = 0; i < window.category_layouts.length; i++) {
+                     if(window.category_layouts[i].category=="全部"){
+                     var index_arr=new Array();
+
+                     index_arr=window.category_layouts[i].indexs;
+                     for(var j=0;j<index_arr.length;j++){
+
+                     window.allcards[(index_arr[j].index)] = index_arr[j].id;
+
+                     }
+                     }
+                     else{
+                     if (find_category(window.category_layouts[i].category)==-1) {
+                     create_new_category(window.category_layouts[i].category);
+                     }
+                     else{
+                     var index_arr=new Array();
+                     window.lastView=window.category_layouts[i].category;
+                     index_arr=window.category_layouts[i].indexs;
+                     for(var j=0;j<index_arr.length;j++){
+
+                     window.allcards[(index_arr[j].index)] = index_arr[j].id;
+
+                     }
+                     }
+                     }
+                     }
+                     */
+                    load_cards();
                 }
-                */
-                load_cards();
             }
+
         }
     });
 }
@@ -1113,7 +1148,7 @@ function load_last_view(){
         $("#container-main").children(".card").remove();
         var indexs=window.lastView.indexarr;
         for(var i=0;i<indexs.length;i++){
-            var card=search_all_cards_by_val(indexs[i].id);
+            var card=search_all_cards_by_id(indexs[i].id);
             window.cards_arr[indexs[i].index]=card;
         }
     }
@@ -1192,15 +1227,14 @@ function save_layout(){
 
 function excute_index(){
     var arr=new Array();
-    for (var j = 0; j < window.cards_arr.length; j++) {
-
-        var max_row=-1;
-        for(var x=0;x<window.col_num;x++){
-            if(window.rows_arr[x]>=max_row){
-                max_row=window.rows_arr[x];
-            }
+    var max_row=-1;
+    for(var x=0;x<window.col_num;x++){
+        if(window.rows_arr[x]>=max_row){
+            max_row=window.rows_arr[x];
         }
+    }
 
+    for (var j = 0; j < window.cards_arr.length; j++) {
         var new_index=0;
         for(var i=0;i<=max_row;i++){
             for(var k=0;k<window.col_num;k++){
@@ -1219,10 +1253,34 @@ function excute_index(){
 
         arr.push(pair);
     }
-    remove_null_elemt(arr);
+    //remove_null_elemt(arr);
     //arr.reset_index();
-    arr.removeUseless();
+    //arr.removeUseless();
+    console.log(window.my_map);
     return arr;
 
 }
 
+function update_index(){
+    var arr=new Array();
+    for(var i=0;i<window.allcards.length;i++){
+        var temp=window.allcards[i];
+        //var pair=new pairs(temp.id,temp.index);
+        arr.push(temp.id);
+        arr.push(temp.index);
+    }
+    remove_null_elemt(arr);
+    arr.removeUseless();
+    arr=JSON.stringify(arr);
+    $.ajax({
+        type: "POST",
+        url: "/do_update_indexes/",
+        data: {pairs:arr},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+//                alert("post");
+            }
+        }
+    });
+}

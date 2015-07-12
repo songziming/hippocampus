@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from notes.models import Note
-from user_system.models import UserProfile
+from user_system.models import User, UserProfile
 import json
 from StringIO import StringIO
 
@@ -14,6 +15,7 @@ def do_get_notes(request):
         arr = Note.objects.all().filter(user = request.user)
         res['notes'] = [];
         for e in arr:
+            print "getting note %s" % e.title
             res['notes'].append({'id': e.id, 'title': e.title, 'category': e.category, 'content': e.content, 'index': e.index, 'color': e.color});
     else:
         res['status'] = 1
@@ -27,6 +29,30 @@ def __is_note_exist__(user, title):
         return False
     else:
         return True
+
+def __create_note__(user, title, category = "mail", content = ""):
+    try:
+        n = Note.objects.get(user=user, title=title)
+    except Note.DoesNotExist:
+        num = len(Note.objects.all().filter(user=user))
+        note = Note(user = user)
+        note.title = title
+        note.category = category
+        note.content = content
+        note.index = num + 1
+        note.save()
+        p = UserProfile.objects.get(user=user)
+        ss = p.notesOrder
+        ods = json.load(StringIO(ss))
+        for i in xrange(len(ods)):
+            if ods[i].Category == "全部":
+                ods[i].indexs.append({"id":note.id, "index": note.index})
+                break
+        p.notesOrder = json.dumps(ods)
+        p.save()
+
+    else:
+        pass
 
 def do_create_note(request):
     res = {}
@@ -118,7 +144,7 @@ def do_update_notes_order(request):
     return HttpResponse(json.dumps(res), content_type = "application/json")
 
 def __update_index__(request, id, index):
-    note = Note.objects.get(user = request.user, id = request.POST['id'])
+    note = Note.objects.get(user = request.user, id = id)
     note.index = index
     note.save()
 
@@ -126,14 +152,43 @@ def __update_index__(request, id, index):
 def do_update_indexes(request):
     res = {}
     if request.user.is_authenticated() and request.user.is_active and 'pairs' in request.POST:
+#        try:
+#            pairs = request.POST['pairs'];
+#            print pairs
+#            for e in pairs:
+#                __update_index__(request, e.id, e.index)
+#        except Note.DoesNotExist:
+#            res['status'] = 2
+#        else:
+#            res['status'] = 0
+        str = request.POST['pairs']
+        arr = json.load(StringIO(str))
+        l = len(arr) / 2
+        for i in range(0, l-1):
+            print "setting Id %d Index %d" % (arr[2*i], arr[2*i+1])
+            __update_index__(request, arr[2*i], arr[2*i+1])
+        res['status'] = 0
+    else:
+        res['status'] = 1
+    return HttpResponse(json.dumps(res), content_type = "application/json")
+
+def do_import_notes(request):
+    res = {}
+    if request.user.is_authenticated() and request.user.is_active and 'username' in request.POST:
         try:
-            pairs = json.load(StringIO(request.POST['pairs']));
-            for e in pairs:
-                __update_index__(request, e.id, e.index)
-        except Note.DoesNotExist:
-            res['status'] = 2
-        else:
+            olduser = User.objects.get(username = request.POST['username'])
+            arr = Note.objects.all().filter(user = olduser)
+            for e in arr:
+                note = Note(user = request.user)
+                note.title = e.title
+                note.category = e.category
+                note.content = e.content
+                note.index = e.index
+                note.color = e.color
+                note.save()
             res['status'] = 0
+        except User.DoesNotExist:
+            res['status'] = 2
     else:
         res['status'] = 1
     return HttpResponse(json.dumps(res), content_type = "application/json")

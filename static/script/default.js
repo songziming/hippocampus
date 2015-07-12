@@ -2,10 +2,10 @@ function strach_header_search() {
     if($(document).width()>1080){
         $('#header-search-div').css("background-color","#fff");
         $('#header-search-div').animate({
-            width:"302px",
+            width:"302px"
         },200);
         $('#search-input').animate({
-            width:"232px",
+            width:"232px"
         },150);
         $('.icon-search').hide();
         $('.icon-new-window').show();
@@ -21,10 +21,16 @@ function strach_header_search() {
     else{
         return;
     }
-
+    $("#search-res-list").css({"display":"block"});
+    window.timer=setInterval("search_linstener()",100);
 }
 
 function zip_header_search() {
+    window.timer=clearInterval(timer);
+    $("#search-input").val("");
+    $("#search-res-list #search-status").html("暂无搜索结果");
+    $("#search-res-list .res-list").html("");
+    $("#search-res-list").css({"display":"none"});
     if ($(document).width() > 1080) {
         $('#header-search-div').css("background-color", "#3b5998");
         $('#header-search-div').animate({
@@ -62,4 +68,61 @@ function Ajax()
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
       }
     return xmlhttp;
+}
+function show_user_block(){
+    if($("#user-block").css("display")=="block"){
+        $("#user-block").css({"display":"none"});
+    }
+    else{
+        $("#user-block").css({"display":"block"});
+    }
+}
+function logout(){
+    $.ajax({
+        type: "GET",
+        url: "/do_logout/",
+        data:{},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+                //alert("post");
+                show_user_block();
+                alert("成功登出！");
+                window.location.href="/login";
+
+            }
+        }
+    });
+}
+function go_to_settings(){
+    $.ajax({
+        type: "",
+        url: "/do_logout/",
+        data:{},
+        dataType: "json",
+        success: function(resText){
+            if(resText.status==0){
+//                window.location.anchor("/login/");
+
+                show_user_block();
+            }
+        }
+    });
+}
+
+function show_content(obj){
+    show_menu(obj);
+
+    var card=obj.parentNode.parentNode;
+    var card_jq=$("#"+card.id.toString());
+
+    var this_content=$("#"+card.id+" .content .card-content-p");
+    var content=this_content.html();
+
+    $("#card-content-p-show p").html(content);
+    $("#content-container").css("display","block");
+}
+function hide_content(){
+    $("#card-content-p-show p").html("");
+    $("#content-container").css("display","none");
 }

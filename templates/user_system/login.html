@@ -16,11 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../../static/style/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../static/style/headerfooter.css">
 </head>
-<body onresize="set_bg_size()">
-    <div id="topbar" class="row">
-        <img id="bgpic" src="../../static/images/bg.jpg" alt="Hippocampus" style="position:relative;width:100%;z-index:0;" />
-    </div>
-
+<body onresize="set_signin_window()">
     <div class="row" id="signin-window">
         <div id="welcome-word">
             <span>SIGN IN</span>
@@ -39,26 +35,10 @@
 
     <script>
     $(document).ready(function(){
-    //do something
         show_signin();
-       
-
     });
-    $("#username-input").focus(function(){
-                 //if(sessionStorage.getItem("hpcp_login")){
-                $("#username-input").value=sessionStorage.getItem("<p>hpcp_login</p>");
-                //alert(sessionStorage.getItem("hpcp_login"));
-        // }
-        //else if(localStorage.getItem("hpcp_login")){
-                $("#username-input").value=localStorage.getItem("<p>hpcp_login</p>");
-                //alert(localStorage.getItem("hpcp_login"));
-        // }
-        // else{
-        //         return;
-        // }
-    });
-    	
 
     </script>
 </body>
+
 </html>
